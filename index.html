@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samsad — Visual Designer</title>
+  <meta name="description" content="Samsad is a Visual Designer based in Dhaka, crafting digital interfaces that are precise, purposeful, and polished.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="nav__inner wrap">
+      <a href="/" class="logo nav__logo-img">
+        <img src="images/logo-black.svg" alt="SR Logo" height="36" class="nav-logo--light">
+        <img src="images/logo-white.svg" alt="SR Logo" height="36" class="nav-logo--dark">
+      </a>
+      <div class="nav__right">
+        <a href="#contact" class="btn btn--outline btn--sm nav-cta">
+          <span class="nav-cta__default">Let's Talk →</span>
+          <span class="nav-cta__hover">hey@samsad.co</span>
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu__close" onclick="toggleMenu()">✕</button>
+    <nav class="mobile-menu__nav">
+      <a href="/" onclick="toggleMenu()">Home</a>
+      <a href="#works" onclick="toggleMenu()">Works</a>
+      <a href="#about" onclick="toggleMenu()">About Me</a>
+      <a href="#insights" onclick="toggleMenu()">Insights</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+  <!-- ── HERO ── -->
+  <section class="hero wrap">
+    <div class="hero__left">
+      <h1 class="hero__headline">
+        I design products.<br>
+        I also decide<br>
+        <span class="hero__headline--muted">how they should work.</span>
+      </h1>
+      <div class="hero__body">
+        <p class="hero__desc">I'm a UX designer based in Dhaka with 7+ years building digital products across fintech, microfinance, and enterprise.</p>
+        <div class="hero__socials">
+          <a href="https://www.linkedin.com/in/samsadrashid/" class="social-link" target="_blank" rel="noopener">LINKEDIN <span class="arr">↗</span></a>
+          <a href="https://www.behance.net/samsadrashid/" class="social-link" target="_blank" rel="noopener">BEHANCE <span class="arr">↗</span></a>
+          <a href="https://dribbble.com/Samsad" class="social-link" target="_blank" rel="noopener">DRIBBBLE <span class="arr">↗</span></a>
+        </div>
+        <div class="hire-cta">
+          <div class="hire-card">
+            <span class="hire-card__title">Hire Me</span>
+            <div class="hire-card__lines">
+              <div class="hire-card__line"></div>
+              <div class="hire-card__line hire-card__line--short"></div>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn--dark hire-cta__btn">Let's Talk →</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__right">
+      <div class="hero__photo">
+        <img src="images/hero-light.png" alt="Samsad Rashid" class="hero__photo--light">
+        <img src="images/hero-dark.png" alt="Samsad Rashid" class="hero__photo--dark">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORKS ── -->
+  <section class="works-section" id="works">
+    <div class="works-section__head wrap reveal">
+      <h2 class="works-section__title">Things I've designed</h2>
+    </div>
+    <div class="works-accordion">
+      <div class="works-list">
+
+        <div class="works-row works-row--1">
+          <div class="works-row__inner">
+            <span class="works-row__num">01</span>
+            <span class="works-row__name">Agami</span>
+            <span class="works-row__type">· Mobile App Design</span>
+          </div>
+          <div class="works-row__body">
+            <div class="works-row__body-wrap">
+              <img class="works-row__body-img" src="images/agami.png" alt="Agami" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="works-row works-row--2">
+          <div class="works-row__inner">
+            <span class="works-row__num">02</span>
+            <span class="works-row__name">HMS</span>
+            <span class="works-row__type">· SaaS UI UX Design</span>
+          </div>
+          <div class="works-row__body">
+            <div class="works-row__body-wrap">
+              <img class="works-row__body-img" src="images/hms.png" alt="HMS" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="works-row works-row--3">
+          <div class="works-row__inner">
+            <span class="works-row__num">03</span>
+            <span class="works-row__name">BCB Athlete Management</span>
+            <span class="works-row__type">· Enterprise App Design</span>
+          </div>
+          <div class="works-row__body">
+            <div class="works-row__body-wrap works-row__body-wrap--text">
+              <span class="works-row__body-label">BCB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="works-row works-row--4">
+          <div class="works-row__inner">
+            <span class="works-row__num">04</span>
+            <span class="works-row__name">KickCast</span>
+            <span class="works-row__type">· Web App Design</span>
+          </div>
+          <div class="works-row__body">
+            <div class="works-row__body-wrap works-row__body-wrap--text">
+              <span class="works-row__body-label">KickCast</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="works-row works-row--5">
+          <div class="works-row__inner">
+            <span class="works-row__num">05</span>
+            <span class="works-row__name">Nirbhik InsurTech</span>
+            <span class="works-row__type">· SaaS Design</span>
+          </div>
+          <div class="works-row__body">
+            <div class="works-row__body-wrap">
+              <img class="works-row__body-img" src="images/nirbhik.png" alt="Nirbhik" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="works-row works-row--6">
+          <div class="works-row__inner">
+            <span class="works-row__num">06</span>
+            <span class="works-row__name">RaktaLink</span>
+            <span class="works-row__type">· Mobile App Design</span>
+          </div>
+          <div class="works-row__body">
+            <div class="works-row__body-wrap works-row__body-wrap--text">
+              <span class="works-row__body-label">RaktaLink</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about-section" id="about">
+  <div class="about wrap">
+    <div class="about__photo reveal">
+      <img src="images/about.png" alt="Samsad, Visual Designer based in Dhaka" width="560" height="680" loading="lazy">
+    </div>
+    <div class="about__text reveal">
+      <h2 class="about__title">I don't just execute briefs. I define scope, align stakeholders, and drive direction.</h2>
+      <p class="about__desc">I'm a UX designer based in Dhaka with 7+ years building digital products across fintech, microfinance, and enterprise. Products I've worked on, like Agami, have scaled to over a million users. I work best when design has a seat at the table.</p>
+      <div class="hire-cta">
+        <div class="hire-card">
+          <span class="hire-card__title">Hire Me</span>
+          <div class="hire-card__lines">
+            <div class="hire-card__line"></div>
+            <div class="hire-card__line hire-card__line--short"></div>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn--dark hire-cta__btn">Let's Talk →</a>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ── CLIENTS ── -->
+  <section class="clients wrap">
+    <div class="clients__grid">
+      <div class="client">
+        <span class="client__name">Agami</span>
+        <p class="client__detail">UX Design</p>
+        <p class="client__detail">1M+ users</p>
+      </div>
+      <div class="client">
+        <span class="client__name">BCB</span>
+        <p class="client__detail">Enterprise Design</p>
+        <p class="client__detail">National body</p>
+      </div>
+      <div class="client">
+        <span class="client__name">Nirbhik</span>
+        <p class="client__detail">SaaS Design</p>
+        <p class="client__detail">InsurTech</p>
+      </div>
+      <div class="client">
+        <span class="client__name">HMS</span>
+        <p class="client__detail">Web App Design</p>
+        <p class="client__detail">Hospitality</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INSIGHTS ── -->
+  <section class="section wrap" id="insights">
+    <div class="section-header">
+      <h2 class="section-title">Built Perspectives</h2>
+      <div class="insights-nav">
+        <button class="insights-arrow" aria-label="Previous">←</button>
+        <button class="insights-arrow" aria-label="Next">→</button>
+      </div>
+    </div>
+    <div class="insights-grid">
+      <a class="insight insight--link reveal" href="https://medium.com/@samsadsam35/designing-predict-built-for-real-people-not-ideal-users-2e37de6ac166" target="_blank" rel="noopener">
+        <div class="insight__media">
+          <img src="images/predict.png" alt="Designing Predict article" width="560" height="360" loading="lazy">
+        </div>
+        <div class="insight__body">
+          <h3 class="insight__title">Designing Predict: Built for Real People, Not Ideal Users</h3>
+          <p class="insight__date">2026</p>
+        </div>
+      </a>
+      <article class="insight reveal">
+        <div class="insight__media">
+          <img src="https://placehold.co/560x360/e8e8e8/999?text=Coming+Soon" alt="Designing for users article" width="560" height="360" loading="lazy">
+        </div>
+        <div class="insight__body">
+          <h3 class="insight__title">Designing for users who don't look like the designer</h3>
+          <p class="insight__date">2025</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner wrap">
+
+      <!-- ── AREAS OF SPECIALISATION ── -->
+      <div class="specialisation reveal">
+        <div class="specialisation__header">
+          <h2 class="specialisation__title">Areas of Specialisation</h2>
+        </div>
+        <div class="specialisation__tags">
+          <span class="spec-tag">Requirement Analysis</span>
+          <span class="spec-tag">Problem Analysis</span>
+          <span class="spec-tag spec-tag--accent">User Research</span>
+          <span class="spec-tag">User Journey / User Flow</span>
+          <span class="spec-tag">Information Architecture</span>
+          <span class="spec-tag">Mind Mapping</span>
+          <span class="spec-tag">Sketching / Wireframe</span>
+          <span class="spec-tag">Web Design</span>
+          <span class="spec-tag">SaaS Product Design</span>
+          <span class="spec-tag">Mobile App Design</span>
+          <span class="spec-tag spec-tag--accent">Interaction Design</span>
+          <span class="spec-tag spec-tag--accent">User-Centered Design</span>
+          <span class="spec-tag">Prototyping</span>
+          <span class="spec-tag spec-tag--accent">Design System</span>
+          <span class="spec-tag">UI/UX Design</span>
+          <span class="spec-tag">A/B Testing</span>
+          <span class="spec-tag">Agile Methodologies</span>
+        </div>
+      </div>
+
+      <div class="footer__cta">
+        <p class="cta__label">GOT A PROJECT IN MIND? LET'S BUILD IT.</p>
+        <a href="mailto:hey@samsad.co" class="cta__email"><span class="cta__email--muted">hey</span><!--
+        --><span>@samsad.co</span><span class="cta__arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H3.5M9.5 2.5V8.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      </div>
+      <div class="footer__top">
+        <a href="/" class="logo footer__logo-img">
+          <img src="images/logo-white.svg" alt="SR Logo" height="40">
+        </a>
+        <nav class="footer__nav">
+          <a href="/">HOME</a>
+          <a href="#about">ABOUT ME</a>
+          <a href="#works">WORKS</a>
+          <a href="#insights">INSIGHTS</a>
+        </nav>
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/in/samsadrashid/" aria-label="LinkedIn" class="footer__icon" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+          </a>
+          <a href="https://www.behance.net/samsadrashid/" aria-label="Behance" class="footer__icon" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.513-1.914-5.513-5.517 0-3.611 2.317-5.984 5.428-5.984 3.084 0 4.839 1.739 5.139 4.233.065.528.099 1.094.088 1.89H15.19c.143 2.011 1.335 2.529 2.511 2.529 1.26 0 1.938-.649 2.156-1.151H23.726zm-5.104-3.7c-.106-1.33-.836-2.03-1.932-2.03-1.196 0-1.896.76-2.052 2.03h3.984zm-12.3-4.1c1.94 0 3.072 1.135 3.072 2.69 0 1.4-.888 2.217-1.811 2.354v.04c1.175.209 2.28 1.085 2.28 2.77C10.273 18.5 9.001 20 6.37 20H0V9.2h7.322zm-.567 3.6c.83 0 1.317-.461 1.317-1.158 0-.74-.487-1.18-1.317-1.18H2.686v2.338h2.07zm.154 4.2c.987 0 1.516-.52 1.516-1.342 0-.863-.6-1.321-1.516-1.321H2.686v2.663h2.223z"/></svg>
+          </a>
+          <a href="https://dribbble.com/Samsad" aria-label="Dribbble" class="footer__icon" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm7.369 5.833c1.31 1.585 2.098 3.614 2.127 5.826-1.562-.315-3.07-.42-4.524-.338a19.36 19.36 0 0 0-.38-.878c1.02-.434 1.959-.986 2.777-1.61zM12 2.004c2.348 0 4.506.864 6.152 2.283-.736.572-1.585 1.071-2.516 1.468-1.086-1.994-2.3-3.66-3.566-4.84.639-.076 1.3-.012 1.93.089zm-2.38.44C10.847 3.58 12.1 5.27 13.218 7.28c-2.07.621-4.368.966-6.773.966H5.2A9.99 9.99 0 0 1 9.62 2.444zm-7.577 9.59c0-.127.008-.253.012-.38h1.39c2.707 0 5.26-.394 7.576-1.103.161.34.317.683.465 1.032-3.418 1.014-6.127 3.43-7.5 6.605A9.956 9.956 0 0 1 2.043 12.034zm9.957 9.962c-2.172 0-4.176-.7-5.8-1.874 1.27-3.01 3.79-5.257 6.9-6.186.727 1.88 1.298 3.852 1.698 5.876a9.965 9.965 0 0 1-2.798.184zm4.674-1.13c-.37-1.914-.914-3.78-1.607-5.567 1.338-.075 2.724.044 4.146.367-.451 2.22-1.554 4.19-2.539 5.2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">Design thinking from Dhaka. No fluff, no templates.</p>
+        <p class="footer__copy">©2026 Samsad Rashid</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
