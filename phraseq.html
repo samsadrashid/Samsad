@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phraseq — UX Case Study · Samsad Rashid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root {
+    --pq: #4f46e5;
+    --pq-dim: rgba(79,70,229,.08);
+    --pq-border: rgba(79,70,229,.2);
+  }
+
+  body { background-image: none; }
+
+  /* ── Page nav ── */
+  .pq-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,.07);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--px); height: 60px;
+  }
+  [data-theme="dark"] .pq-nav {
+    background: rgba(17,17,17,.92);
+    border-color: rgba(255,255,255,.08);
+  }
+  .pq-nav__back {
+    font-family: var(--f-head); font-size: .82rem; font-weight: 600;
+    color: var(--gray); text-decoration: none;
+    display: flex; align-items: center; gap: .5rem;
+    transition: color .15s;
+  }
+  .pq-nav__back:hover { color: var(--black); }
+  [data-theme="dark"] .pq-nav__back:hover { color: #fff; }
+  .pq-nav__title {
+    font-family: var(--f-head); font-weight: 800; font-size: .9375rem;
+    color: var(--black); letter-spacing: -.02em;
+  }
+  [data-theme="dark"] .pq-nav__title { color: #fff; }
+  .pq-nav__cta {
+    font-family: var(--f-head); font-size: .75rem; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--white) !important; background: var(--pq);
+    padding: .45rem 1rem; border-radius: 100px;
+    text-decoration: none; transition: opacity .15s;
+  }
+  .pq-nav__cta:hover { opacity: .85; }
+
+  /* ── Progress bar ── */
+  #pq-pb {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--pq); width: 0%; z-index: 200;
+    transition: width .1s linear;
+  }
+
+  /* ── Hero ── */
+  .pq-hero {
+    width: 100%; aspect-ratio: 21/9;
+    background: var(--light); overflow: hidden;
+  }
+  [data-theme="dark"] .pq-hero { background: #1a1a1a; }
+  .pq-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pq-hero-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--f-head); font-size: .75rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--gray);
+  }
+
+  /* ── Inner content ── */
+  .pq-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 3rem var(--px) 7rem;
+  }
+
+  /* ── Section ── */
+  .cs-section { margin-bottom: 4rem; }
+  .cs-section__num {
+    display: block; font-size: .64rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: .4rem;
+  }
+  .cs-section__title {
+    font-family: var(--f-head); font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: -.025em; color: var(--black);
+    line-height: 1.2; margin-bottom: 1.25rem;
+  }
+  [data-theme="dark"] .cs-section__title { color: #fff; }
+  .cs-body {
+    font-size: 1rem; line-height: 1.8;
+    color: var(--gray-body); margin-bottom: 1rem;
+  }
+  [data-theme="dark"] .cs-body { color: rgba(255,255,255,.55); }
+  .cs-tagline {
+    font-size: 1.1rem; color: var(--gray-body);
+    line-height: 1.65; margin-bottom: 1.5rem; font-style: italic;
+  }
+  [data-theme="dark"] .cs-tagline { color: rgba(255,255,255,.5); }
+  .cs-divider {
+    border: none; border-top: 1px solid rgba(0,0,0,.07); margin: 0 0 4rem;
+  }
+  [data-theme="dark"] .cs-divider { border-color: rgba(255,255,255,.08); }
+
+  /* ── Title block ── */
+  .pq-title {
+    font-family: var(--f-head); font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 3.75rem);
+    letter-spacing: -.035em; line-height: 1.05;
+    color: var(--black); margin-bottom: 1.25rem;
+  }
+  [data-theme="dark"] .pq-title { color: #fff; }
+
+  /* ── Meta table ── */
+  .pq-meta-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+  .pq-meta-table tr { border-bottom: 1px solid rgba(0,0,0,.06); }
+  [data-theme="dark"] .pq-meta-table tr { border-bottom-color: rgba(255,255,255,.07); }
+  .pq-meta-table td { padding: .875rem 0; vertical-align: top; font-size: .9rem; color: var(--gray-body); }
+  [data-theme="dark"] .pq-meta-table td { color: rgba(255,255,255,.55); }
+  .pq-meta-table td:first-child { font-weight: 700; min-width: 160px; padding-right: 2rem; color: var(--black); }
+  [data-theme="dark"] .pq-meta-table td:first-child { color: #fff; }
+
+  /* ── Stat strip ── */
+  .pq-stat-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin: 2rem 0; }
+  .pq-stat-card {
+    border: 1px solid rgba(0,0,0,.08); border-radius: 16px;
+    padding: 1.5rem 1rem; text-align: center;
+    border-top: 3px solid var(--pq);
+  }
+  [data-theme="dark"] .pq-stat-card { border-color: rgba(255,255,255,.1); border-top-color: var(--pq); }
+  .pq-stat-num { font-size: clamp(1.5rem,3vw,2.25rem); font-weight: 800; color: var(--pq); display: block; line-height: 1.1; margin-bottom: .4rem; }
+  .pq-stat-label { font-weight: 700; font-size: .82rem; color: var(--black); display: block; margin-bottom: .2rem; }
+  [data-theme="dark"] .pq-stat-label { color: #fff; }
+  .pq-stat-sub { font-size: .72rem; color: var(--gray-body); display: block; }
+
+  /* ── Two column ── */
+  .pq-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 1.5rem; }
+
+  /* ── Highlight box ── */
+  .pq-highlight {
+    background: var(--pq-dim); border-radius: 12px;
+    padding: 1.375rem 1.5rem; margin: 1.5rem 0;
+    border-left: 3px solid var(--pq);
+  }
+  .pq-highlight p { font-size: .9rem; color: var(--gray-body); line-height: 1.7; margin: 0; }
+  [data-theme="dark"] .pq-highlight p { color: rgba(255,255,255,.6); }
+  .pq-highlight strong { color: var(--pq); }
+
+  /* ── Signal cards ── */
+  .pq-signal-stack { display: flex; flex-direction: column; gap: 1rem; }
+  .pq-signal-card {
+    background: var(--light); border-radius: 10px;
+    padding: 1.125rem 1.25rem; border-left: 3px solid #dc2626;
+  }
+  [data-theme="dark"] .pq-signal-card { background: #1a1a1a; }
+  .pq-signal-title { font-family: var(--f-head); font-size: .9rem; font-weight: 700; color: var(--black); margin-bottom: .3rem; }
+  [data-theme="dark"] .pq-signal-title { color: #fff; }
+  .pq-signal-body { font-size: .875rem; color: var(--gray-body); line-height: 1.6; }
+
+  /* ── Decision accordion ── */
+  .pq-decision-list { display: flex; flex-direction: column; gap: 2px; margin: 1.5rem 0; }
+  .pq-decision-item { border: 1px solid rgba(0,0,0,.08); border-radius: 14px; overflow: hidden; }
+  [data-theme="dark"] .pq-decision-item { border-color: rgba(255,255,255,.1); }
+  .pq-decision-item.pq-open { border-color: var(--pq-border); }
+  .pq-decision-header { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; transition: background .15s; }
+  .pq-decision-header:hover { background: var(--light); }
+  [data-theme="dark"] .pq-decision-header:hover { background: #1a1a1a; }
+  .pq-decision-num { font-family: var(--f-head); font-size: .8rem; font-weight: 700; color: var(--pq); min-width: 2rem; }
+  .pq-decision-title { font-family: var(--f-head); font-weight: 700; font-size: .9375rem; color: var(--black); flex: 1; line-height: 1.35; }
+  [data-theme="dark"] .pq-decision-title { color: #fff; }
+  .pq-decision-arrow { font-size: 1rem; color: var(--gray); transition: transform .2s; }
+  .pq-decision-item.pq-open .pq-decision-arrow { transform: rotate(180deg); }
+  .pq-decision-body { display: none; padding: 1.25rem 1.5rem 1.5rem; border-top: 1px solid rgba(0,0,0,.06); }
+  [data-theme="dark"] .pq-decision-body { border-color: rgba(255,255,255,.07); }
+  .pq-decision-item.pq-open .pq-decision-body { display: block; }
+  .pq-decision-3col { display: grid; grid-template-columns: repeat(3,1fr); gap: .875rem; margin-bottom: 1.25rem; }
+  .pq-db { padding: 1rem 1.125rem; border-radius: 10px; }
+  .pq-db--tradeoff { background: rgba(220,38,38,.06); border-left: 3px solid #dc2626; }
+  .pq-db--solution  { background: var(--pq-dim); border-left: 3px solid var(--pq); }
+  .pq-db--outcome   { background: rgba(59,130,246,.07); border-left: 3px solid #3b82f6; }
+  [data-theme="dark"] .pq-db--tradeoff { background: rgba(220,38,38,.1); }
+  [data-theme="dark"] .pq-db--solution  { background: rgba(79,70,229,.12); }
+  [data-theme="dark"] .pq-db--outcome   { background: rgba(59,130,246,.1); }
+  .pq-db-label { font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin-bottom: .5rem; }
+  .pq-db-text { font-size: .875rem; color: var(--gray-body); line-height: 1.65; }
+  [data-theme="dark"] .pq-db-text { color: rgba(255,255,255,.55); }
+
+  /* ── Feature table ── */
+  .pq-module-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+  .pq-module-table thead tr { background: var(--light); }
+  [data-theme="dark"] .pq-module-table thead tr { background: #1a1a1a; }
+  .pq-module-table thead th { font-family: var(--f-head); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); padding: .875rem 1rem; text-align: left; font-weight: 600; }
+  .pq-module-table tbody tr { border-bottom: 1px solid rgba(0,0,0,.06); transition: background .12s; }
+  [data-theme="dark"] .pq-module-table tbody tr { border-color: rgba(255,255,255,.06); }
+  .pq-module-table tbody tr:hover { background: var(--light); }
+  [data-theme="dark"] .pq-module-table tbody tr:hover { background: #1a1a1a; }
+  .pq-module-table td { padding: .875rem 1rem; font-size: .875rem; color: var(--gray-body); vertical-align: top; line-height: 1.55; }
+  [data-theme="dark"] .pq-module-table td { color: rgba(255,255,255,.55); }
+  .pq-module-table td:first-child { font-family: var(--f-head); font-weight: 700; font-size: .875rem; color: var(--black); }
+  [data-theme="dark"] .pq-module-table td:first-child { color: #fff; }
+  .pq-tag { display: inline-flex; align-items: center; padding: .2rem .7rem; border-radius: 20px; font-size: .7rem; font-weight: 600; letter-spacing: .02em; }
+  .pq-tag--core    { background: var(--pq-dim); color: var(--pq); }
+  .pq-tag--engage  { background: rgba(59,130,246,.1); color: #2563eb; }
+  [data-theme="dark"] .pq-tag--engage { color: #60a5fa; }
+
+  /* ── Tech block ── */
+  .pq-tech-block { background: var(--light); border-radius: 14px; padding: 1.5rem; font-family: monospace; font-size: .82rem; line-height: 2; }
+  [data-theme="dark"] .pq-tech-block { background: #161616; }
+  .pq-tech-key { color: var(--pq); }
+  .pq-tech-val { color: var(--gray-body); }
+  [data-theme="dark"] .pq-tech-val { color: rgba(255,255,255,.55); }
+
+  /* ── Outcome grid ── */
+  .pq-outcome-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 2rem 0; }
+  .pq-outcome-card { border: 1px solid rgba(0,0,0,.08); border-radius: 14px; padding: 1.5rem; text-align: center; border-top: 2px solid var(--pq); }
+  [data-theme="dark"] .pq-outcome-card { border-color: rgba(255,255,255,.1); border-top-color: var(--pq); }
+  .pq-outcome-num { font-family: var(--f-head); font-size: clamp(1.5rem,3vw,2.25rem); font-weight: 800; letter-spacing: -.04em; color: var(--pq); display: block; margin-bottom: .4rem; line-height: 1.1; }
+  .pq-outcome-label { font-size: .82rem; color: var(--gray-body); line-height: 1.4; }
+
+  /* ── Reflection ── */
+  .pq-reflection {
+    background: var(--pq-dim); border-radius: 16px;
+    padding: 2.5rem 3rem; position: relative; overflow: hidden;
+    margin-top: 2rem; border: 1px solid var(--pq-border);
+  }
+  [data-theme="dark"] .pq-reflection { background: rgba(79,70,229,.1); }
+  .pq-reflection::before {
+    content: '"'; position: absolute; top: -20px; left: 1.5rem;
+    font-size: 140px; font-weight: 800; color: rgba(79,70,229,.08);
+    line-height: 1; pointer-events: none;
+  }
+  .pq-reflection-text {
+    font-family: var(--f-head); font-size: clamp(1.1rem,2vw,1.4rem);
+    font-weight: 600; line-height: 1.6; color: var(--black);
+    position: relative; z-index: 1; margin-bottom: 1.25rem;
+  }
+  [data-theme="dark"] .pq-reflection-text { color: rgba(255,255,255,.9); }
+  .pq-reflection-text em { color: var(--pq); font-style: normal; }
+  .pq-reflection-author { font-size: .75rem; letter-spacing: .06em; color: var(--gray); }
+
+  /* ── Floating prev/next nav ── */
+  .pq-float-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding: 1.5rem var(--px);
+    pointer-events: none; z-index: 200;
+  }
+  .pq-float-btn {
+    pointer-events: all;
+    display: flex; align-items: center; gap: .625rem;
+    background: rgba(0,0,0,.55); color: #fff;
+    border: 1px solid rgba(255,255,255,.12); border-radius: 100px;
+    padding: .75rem 1.25rem .75rem 1rem;
+    cursor: pointer; font-family: var(--f-head);
+    text-decoration: none;
+    transition: transform .18s ease, background .18s;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+  }
+  .pq-float-btn--next { padding: .75rem 1rem .75rem 1.25rem; }
+  .pq-float-btn:hover { transform: translateY(-3px); background: rgba(0,0,0,.75); }
+  .pq-float-btn__label { font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .5; display: block; }
+  .pq-float-btn__name  { font-size: .875rem; font-weight: 700; display: block; line-height: 1.2; }
+  .pq-float-btn--prev .pq-float-btn__text { text-align: left; }
+  .pq-float-btn--next .pq-float-btn__text { text-align: right; }
+  @media (max-width: 480px) {
+    .pq-float-btn__name { font-size: .8rem; }
+    .pq-float-nav { padding: 1rem var(--px); }
+  }
+
+  /* ── Footer ── */
+  /* ── Close button ── */
+  .pq-nav__close {
+    pointer-events: all;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,.12);
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--black); transition: background .18s, border-color .18s;
+    text-decoration: none; flex-shrink: 0;
+  }
+  .pq-nav__close:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  [data-theme="dark"] .pq-nav__close {
+    background: rgba(25,25,25,.92); border-color: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+  }
+  [data-theme="dark"] .pq-nav__close:hover { background: #fff; color: var(--black); border-color: #fff; }
+
+  /* ── Responsive ── */
+  @media (max-width: 780px) {
+    .pq-two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .pq-stat-strip { grid-template-columns: repeat(2,1fr); }
+    .pq-decision-3col { grid-template-columns: 1fr; }
+    .pq-outcome-grid { grid-template-columns: repeat(2,1fr); }
+    .pq-reflection { padding: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .pq-hero { aspect-ratio: 4/3; }
+    .pq-outcome-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="pq-pb"></div>
+
+<!-- NAV -->
+<nav class="pq-nav">
+  <a href="work.html" class="pq-nav__back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Work
+  </a>
+  <span class="pq-nav__title">Phraseq</span>
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <a href="https://phraseq.vercel.app/" target="_blank" class="pq-nav__cta">Live App ↗</a>
+    <a href="work.html" class="pq-nav__close" aria-label="Close">
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="pq-hero">
+  <div class="pq-hero-placeholder">Phraseq — cover image</div>
+</div>
+
+<!-- CONTENT -->
+<div class="pq-inner">
+
+  <!-- 01 Overview -->
+  <section class="cs-section">
+    <h1 class="pq-title">Phraseq</h1>
+    <p class="cs-tagline"><em>Learn words by living them — an AI-native vocabulary app built end-to-end, solo</em></p>
+    <p class="cs-body">Phraseq teaches words through contextual usage, not definitions. Where Anki shows you a card, Phraseq shows you 25 sentences tuned to your profession and register. Where Quizlet tests recall, Sentence Lab grades your writing and explains errors in plain English. Designed, built, billed, and deployed by one person.</p>
+    <table class="pq-meta-table">
+      <tr><td>Industry / domain</td><td>Consumer EdTech · AI-native vocabulary</td></tr>
+      <tr><td>Platform</td><td>Web App — Next.js 14 · Supabase · Claude API · Stripe · Vercel</td></tr>
+      <tr><td>Timeline</td><td>2026</td></tr>
+      <tr><td>My role</td><td>Lead UX Designer &amp; Founder — Strategy, Research, UX, Visual system, Full-stack build, Stripe billing, Deployment</td></tr>
+      <tr><td>Status</td><td>Live on Vercel — phraseq.vercel.app</td></tr>
+    </table>
+    <div class="pq-stat-strip">
+      <div class="pq-stat-card">
+        <span class="pq-stat-num">6</span>
+        <span class="pq-stat-label">Feature modules</span>
+        <span class="pq-stat-sub">Word Vault · Sentence Lab · IELTS Bands · Quiz · Daily Words · Streak</span>
+      </div>
+      <div class="pq-stat-card">
+        <span class="pq-stat-num">5×5</span>
+        <span class="pq-stat-label">Context per word</span>
+        <span class="pq-stat-sub">5 sentences across 5 professional registers</span>
+      </div>
+      <div class="pq-stat-card">
+        <span class="pq-stat-num">Band 9</span>
+        <span class="pq-stat-label">IELTS engine</span>
+        <span class="pq-stat-sub">Band 5 / 7 / 9 shown simultaneously</span>
+      </div>
+      <div class="pq-stat-card">
+        <span class="pq-stat-num">BYOK</span>
+        <span class="pq-stat-label">Free tier model</span>
+        <span class="pq-stat-sub">Bring your own key — zero API cost until retention proven</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- 02 Problem -->
+  <section class="cs-section">
+    <p class="cs-section__num">02</p>
+    <h2 class="cs-section__title">You can define the word.<br>You still can't use it.</h2>
+    <p class="cs-body">Flashcard tools are optimised for recognition, not production. The gap between knowing a definition and deploying a word naturally in writing is where learners stall — and where every major vocabulary app stops helping.</p>
+    <div class="pq-two-col">
+      <div>
+        <p class="cs-body">The standard vocabulary loop — see word, see definition, see one example, flip card — teaches recognition. You learn to match "ephemeral" to "short-lived." You don't learn that "ephemeral" belongs in literary prose and sounds affected in a work email. You don't learn the register.</p>
+        <p class="cs-body">For IELTS candidates, this gap is high-stakes. Band 7 and above requires demonstrating that you can use vocabulary flexibly in context — not just accurately, but appropriately. A Band 5 response uses words correctly. A Band 9 response uses them with precision and control. No flashcard app teaches the difference between those two things.</p>
+        <div class="pq-highlight">
+          <p>The core failure: <strong>existing tools treat vocabulary as a retrieval problem. It's a production problem.</strong> Users need practice reaching for words in context, not practice recognising them on a card.</p>
+        </div>
+      </div>
+      <div class="pq-signal-stack">
+        <div class="pq-signal-card">
+          <div class="pq-signal-title">No register awareness</div>
+          <div class="pq-signal-body">Duolingo, Anki, and Quizlet show one example sentence per word — often generic dictionary text. No indication of whether a word belongs in an email, an essay, a speech, or casual conversation.</div>
+        </div>
+        <div class="pq-signal-card">
+          <div class="pq-signal-title">No profession context</div>
+          <div class="pq-signal-body">A doctor and a marketing manager use "efficacy" in completely different sentence structures. No vocabulary tool generates examples for your professional context. Every learner gets the same sentence.</div>
+        </div>
+        <div class="pq-signal-card">
+          <div class="pq-signal-title">No production feedback</div>
+          <div class="pq-signal-body">None of the major tools ask users to write with the words they're learning and give feedback on the output. Recognition and production are treated as the same skill. They are not.</div>
+        </div>
+        <div class="pq-signal-card">
+          <div class="pq-signal-title">No IELTS-specific scaffolding</div>
+          <div class="pq-signal-body">IELTS preparation apps focus on practice tests, not vocabulary building. There is no tool that shows what a sentence looks like rewritten at Band 7 versus Band 9 — the most actionable feedback an IELTS candidate can receive.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- 03 Design Decisions -->
+  <section class="cs-section">
+    <p class="cs-section__num">03</p>
+    <h2 class="cs-section__title">Four calls that defined what Phraseq is</h2>
+    <p class="cs-body">Each decision is explained through the tradeoff it resolved, what was designed, and what it produced.</p>
+
+    <div class="pq-decision-list">
+
+      <div class="pq-decision-item pq-open">
+        <div class="pq-decision-header" onclick="togglePQ(this)">
+          <span class="pq-decision-num">01</span>
+          <span class="pq-decision-title">Word Vault: profession-aware 5×5 generation vs. a single dictionary example</span>
+          <span class="pq-decision-arrow">↓</span>
+        </div>
+        <div class="pq-decision-body">
+          <div class="pq-decision-3col">
+            <div class="pq-db pq-db--tradeoff">
+              <div class="pq-db-label">Tradeoff</div>
+              <div class="pq-db-text">A single high-quality example sentence per word is simpler to generate, faster to display, and cheaper on tokens. The standard dictionary approach is familiar and requires no explanation of what a "register" is.</div>
+            </div>
+            <div class="pq-db pq-db--solution">
+              <div class="pq-db-label">What was designed</div>
+              <div class="pq-db-text">Word Vault generates 5 sentences × 5 registers (formal, academic, conversational, creative, professional) — 25 sentences per word — all tuned to the user's stated profession. A doctor gets medical-context formality. A lawyer gets legal-register precision.</div>
+            </div>
+            <div class="pq-db pq-db--outcome">
+              <div class="pq-db-label">Why it mattered</div>
+              <div class="pq-db-text">Register is the invisible knowledge that separates fluent writers from accurate-but-stiff ones. 25 examples instead of 1 gives learners the pattern recognition they need to internalise when and where a word belongs — not just what it means. This is the core product differentiation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pq-decision-item">
+        <div class="pq-decision-header" onclick="togglePQ(this)">
+          <span class="pq-decision-num">02</span>
+          <span class="pq-decision-title">IELTS Band engine: Band 5/7/9 shown simultaneously — density over minimalism</span>
+          <span class="pq-decision-arrow">↓</span>
+        </div>
+        <div class="pq-decision-body">
+          <div class="pq-decision-3col">
+            <div class="pq-db pq-db--tradeoff">
+              <div class="pq-db-label">Tradeoff</div>
+              <div class="pq-db-text">A minimal approach would show Band rewrites one at a time — the user selects a target band, gets one rewrite. Cleaner, less cognitive load. The counter-argument: learners can't understand what "Band 9" means without seeing it next to "Band 5."</div>
+            </div>
+            <div class="pq-db pq-db--solution">
+              <div class="pq-db-label">What was designed</div>
+              <div class="pq-db-text">All three band rewrites shown simultaneously in a three-column layout: Band 5 (left), Band 7 (centre), Band 9 (right). Each column highlights the specific vocabulary and structural changes that moved the score. The comparison IS the value.</div>
+            </div>
+            <div class="pq-db pq-db--outcome">
+              <div class="pq-db-label">Why it mattered</div>
+              <div class="pq-db-text">Density was the deliberate choice because the three-way comparison makes the upgrade path legible. A learner scans left-to-right and sees exactly what changes at each band level. This is the only tool that makes the Band 5→9 gap concrete and visible in a single view.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pq-decision-item">
+        <div class="pq-decision-header" onclick="togglePQ(this)">
+          <span class="pq-decision-num">03</span>
+          <span class="pq-decision-title">Sentence Lab: plain-English error explanations, no grammar jargon</span>
+          <span class="pq-decision-arrow">↓</span>
+        </div>
+        <div class="pq-decision-body">
+          <div class="pq-decision-3col">
+            <div class="pq-db pq-db--tradeoff">
+              <div class="pq-db-label">Tradeoff</div>
+              <div class="pq-db-text">Grammar correction tools traditionally use technical terminology: "dangling modifier," "passive voice," "subject-verb agreement." Precise for trained linguists. For vocabulary learners — especially non-native English speakers — it creates a comprehension barrier on top of a language barrier.</div>
+            </div>
+            <div class="pq-db pq-db--solution">
+              <div class="pq-db-label">What was designed</div>
+              <div class="pq-db-text">Sentence Lab grades submitted writing and returns feedback in plain English: "This sentence is too long and loses its point in the middle — try splitting it at 'however.'" Not: "Run-on sentence with coordinating conjunction misuse." The AI is explicitly prompted to explain errors the way a patient tutor would.</div>
+            </div>
+            <div class="pq-db pq-db--outcome">
+              <div class="pq-db-label">Why it mattered</div>
+              <div class="pq-db-text">The target user is not a linguistics student. They're a professional or student trying to write better English under exam or work conditions. Feedback they can immediately understand and apply is more valuable than technically accurate feedback they need to translate.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pq-decision-item">
+        <div class="pq-decision-header" onclick="togglePQ(this)">
+          <span class="pq-decision-num">04</span>
+          <span class="pq-decision-title">BYOK free tier: validate retention before absorbing API cost</span>
+          <span class="pq-decision-arrow">↓</span>
+        </div>
+        <div class="pq-decision-body">
+          <div class="pq-decision-3col">
+            <div class="pq-db pq-db--tradeoff">
+              <div class="pq-db-label">Tradeoff</div>
+              <div class="pq-db-text">A fully managed free tier removes all signup friction and is the standard growth model for AI consumer apps. The cost: at Claude API pricing, every active free user generates real cost before revenue is proven. Unacceptable burn rate for a solo-built product at zero retention signal.</div>
+            </div>
+            <div class="pq-db pq-db--solution">
+              <div class="pq-db-label">What was designed</div>
+              <div class="pq-db-text">BYOK (Bring Your Own Key) tier: free users provide their own Anthropic API key. The app stores it encrypted and uses it on their behalf. All features available. The paid subscription removes the key requirement — the product provides managed API access at a margin-positive price point.</div>
+            </div>
+            <div class="pq-db pq-db--outcome">
+              <div class="pq-db-label">Why it mattered</div>
+              <div class="pq-db-text">This is a business decision, not a UX compromise. BYOK filters for motivated users — a low bar compared to premium pricing, but high enough to signal intent. It identifies learners most likely to convert to paid, without burning API budget on casual browsers. Now an established low-cost launch pattern for solo AI product builders.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- 04 Features -->
+  <section class="cs-section">
+    <p class="cs-section__num">04</p>
+    <h2 class="cs-section__title">Six modules, one through-line</h2>
+    <p class="cs-body">Every feature is a different attack on the same problem: get the learner using words, not just recognising them.</p>
+    <table class="pq-module-table">
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Core job</th>
+          <th>Key UX decision</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Word Vault</td>
+          <td>Enter any word, select your profession, get 25 AI-generated sentences across 5 registers tuned to your professional context</td>
+          <td>Profession selector is required before generation — register context is structural, not optional</td>
+          <td><span class="pq-tag pq-tag--core">Core</span></td>
+        </tr>
+        <tr>
+          <td>Sentence Lab</td>
+          <td>Submit a paragraph, receive a score, plain-English error explanations, and a suggested rewrite with changes highlighted</td>
+          <td>AI prompted to explain errors as a tutor would — not as a grammar checker. Jargon-free by design</td>
+          <td><span class="pq-tag pq-tag--core">Core</span></td>
+        </tr>
+        <tr>
+          <td>IELTS Bands</td>
+          <td>Submit a sentence, get simultaneous Band 5/7/9 rewrites with per-column vocabulary and structure annotations</td>
+          <td>All three bands shown together — learners need the contrast to understand what "Band 9" means in practice</td>
+          <td><span class="pq-tag pq-tag--core">Core</span></td>
+        </tr>
+        <tr>
+          <td>Quiz Engine</td>
+          <td>Auto-generated vocabulary quizzes derived from the user's Word Vault history — tests contextual usage, not definition matching</td>
+          <td>Quizzes generate from the user's own saved words — every quiz is directly relevant to their personal vocabulary</td>
+          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+        </tr>
+        <tr>
+          <td>Daily Words</td>
+          <td>One curated word per day with full Vault-style generation — seeded from the IELTS Academic Word List</td>
+          <td>Daily word is shown before the user reaches their saved vault — creates an entry habit separate from active study</td>
+          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+        </tr>
+        <tr>
+          <td>Streak Engine</td>
+          <td>Tracks consecutive days of active learning — vault lookups, Sentence Lab submissions, or quiz completions count</td>
+          <td>Streak counts any productive action, not just logins — prevents the Duolingo failure mode of opening the app to tap one button and leave</td>
+          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- 05 Tech Ownership -->
+  <section class="cs-section">
+    <p class="cs-section__num">05</p>
+    <h2 class="cs-section__title">Strategy to deployment — no handoff</h2>
+    <p class="cs-body">Every decision in this product is a design decision made visible through code. There was no engineering team to translate intent. What shipped is what I built.</p>
+    <div class="pq-two-col">
+      <div>
+        <p class="cs-body">Phraseq is the product I point to when the "designer who can build" question comes up — not because it demonstrates technical complexity, but because every UX decision has a direct implementation consequence I owned personally.</p>
+        <p class="cs-body">The BYOK model required encrypted API key storage in Supabase with row-level security policies. The IELTS band comparison required a carefully designed prompt returning three structured outputs in one API call. The Sentence Lab's plain-English feedback required a system prompt tested across hundreds of iterations to strip jargon without losing precision. These are design-build problems, not handoff problems.</p>
+        <p class="cs-body">Stripe billing is live. Users can subscribe, see their plan, and manage billing through a Stripe-hosted portal. The subscription unlocks the managed API tier. The BYOK tier remains free indefinitely as a retention-first acquisition model.</p>
+        <div class="pq-highlight">
+          <p><strong>BYOK + managed subscription is a viable launch model for solo AI product builders</strong> who need to prove retention before absorbing AI infrastructure cost. The lesson generalises beyond Phraseq.</p>
+        </div>
+      </div>
+      <div>
+        <div class="pq-tech-block">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:.75rem;">Stack</div>
+          <div><span class="pq-tech-key">Frontend  </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">Next.js 14 · App Router</span></div>
+          <div><span class="pq-tech-key">AI        </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">Claude API (Anthropic)</span></div>
+          <div><span class="pq-tech-key">Database  </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">Supabase (PostgreSQL + RLS)</span></div>
+          <div><span class="pq-tech-key">Auth      </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">Supabase Auth</span></div>
+          <div><span class="pq-tech-key">Billing   </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">Stripe · Subscription + Portal</span></div>
+          <div><span class="pq-tech-key">API tier  </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">BYOK (free) + Managed (paid)</span></div>
+          <div><span class="pq-tech-key">Deploy    </span><span style="color:var(--gray);margin:0 .5rem;">→</span><span class="pq-tech-val">Vercel (live)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- 06 Outcome -->
+  <section class="cs-section">
+    <p class="cs-section__num">06</p>
+    <h2 class="cs-section__title">Live product. Shipped solo.</h2>
+    <p class="cs-body">What Phraseq delivered — measured by product completeness, design quality, and the patterns it proved.</p>
+    <div class="pq-outcome-grid">
+      <div class="pq-outcome-card">
+        <span class="pq-outcome-num">Live</span>
+        <span class="pq-outcome-label">In production on Vercel — working auth, billing, and AI features, not a prototype</span>
+      </div>
+      <div class="pq-outcome-card">
+        <span class="pq-outcome-num">0→1</span>
+        <span class="pq-outcome-label">Solo end-to-end: strategy, UX, code, Stripe billing, and deployment — no handoff at any stage</span>
+      </div>
+      <div class="pq-outcome-card">
+        <span class="pq-outcome-num">Unique</span>
+        <span class="pq-outcome-label">IELTS Band 5/7/9 simultaneous comparison — no other vocabulary tool shows this</span>
+      </div>
+      <div class="pq-outcome-card">
+        <span class="pq-outcome-num">BYOK</span>
+        <span class="pq-outcome-label">Validated bring-your-own-key as a low-cost AI product launch pattern</span>
+      </div>
+      <div class="pq-outcome-card">
+        <span class="pq-outcome-num">5×5</span>
+        <span class="pq-outcome-label">25 profession-aware sentences per word — highest contextual density of any vocabulary tool</span>
+      </div>
+      <div class="pq-outcome-card">
+        <span class="pq-outcome-num">Stripe</span>
+        <span class="pq-outcome-label">Live subscription billing with customer portal — a real revenue model, not just a feature list</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- 07 Retrospective -->
+  <section class="cs-section">
+    <p class="cs-section__num">07</p>
+    <h2 class="cs-section__title">What I would do differently</h2>
+    <div class="pq-two-col">
+      <div>
+        <p class="cs-body"><strong style="color:var(--black);">BYOK needs a no-auth demo moment first.</strong> New users hit an API key setup screen before they've experienced the product. The fix: let users run Word Vault once on a pre-seeded key before asking them to set up their own. Lower the first-value moment dramatically, then ask for the key. The current flow asks for commitment before delivering proof.</p>
+      </div>
+      <div>
+        <p class="cs-body"><strong style="color:var(--black);">Streak needs a social share mechanic.</strong> The streak and daily word features are retention mechanics that stay entirely inside the app. The missing piece is a one-tap export of a Word Vault result or a Band 9 rewrite that a learner can post on LinkedIn or Twitter. Retention inside the app is valuable. Retention that becomes acquisition is how a solo product grows without a marketing budget.</p>
+      </div>
+    </div>
+    <div class="pq-reflection">
+      <p class="pq-reflection-text">
+        "The vocabulary tools that exist are optimised for the test they were designed to pass — the flashcard recall test. Phraseq is optimised for the test that matters: can you write a sentence that lands? <em>The gap between those two things is where I built.</em> Designing and shipping this solo taught me that the most powerful design decisions are the ones you're also accountable for implementing."
+      </p>
+      <div class="pq-reflection-author">Samsad Rashid · Lead UX Designer &amp; Founder · Dhaka, Bangladesh · 2026</div>
+    </div>
+  </section>
+
+</div><!-- /pq-inner -->
+
+<!-- Floating prev/next nav -->
+<nav class="pq-float-nav" aria-label="Case study navigation">
+  <a href="work.html?modal=kickcast" class="pq-float-btn pq-float-btn--prev">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 14L6 9L11 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="pq-float-btn__text">
+      <span class="pq-float-btn__label">Previous</span>
+      <span class="pq-float-btn__name">KickCast</span>
+    </div>
+  </a>
+  <a href="work.html?modal=hms" class="pq-float-btn pq-float-btn--next">
+    <div class="pq-float-btn__text">
+      <span class="pq-float-btn__label">Next</span>
+      <span class="pq-float-btn__name">HMS</span>
+    </div>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</nav>
+
+
+<script>
+window.addEventListener('scroll', () => {
+  const s = window.scrollY;
+  const t = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('pq-pb').style.width = (s / t * 100) + '%';
+});
+
+function togglePQ(header) {
+  header.closest('.pq-decision-item').classList.toggle('pq-open');
+}
+</script>
+</body>
+</html>
