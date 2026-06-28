@@ -231,30 +231,102 @@
   </div>
   </section>
 
+  <!-- ── FEATURE CARDS ── -->
+  <section class="feat-cards-section">
+    <div class="wrap">
+      <h2 class="section-title">The Work I Take On</h2>
+      <div class="feat-cards">
+
+        <div class="feat-card feat-card--light">
+          <span class="feat-card__icon">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="13" height="13" rx="3" fill="#9B9B9B" opacity=".5"/>
+              <rect x="17" y="2" width="13" height="13" rx="3" fill="#9B9B9B"/>
+              <rect x="2" y="17" width="13" height="13" rx="3" fill="#9B9B9B"/>
+              <rect x="17" y="17" width="13" height="13" rx="3" fill="#9B9B9B" opacity=".5"/>
+            </svg>
+          </span>
+          <h3 class="feat-card__title">Product Design</h3>
+          <p class="feat-card__desc">End-to-end UX for complex products — flows, screens, and systems that scale</p>
+        </div>
+
+        <div class="feat-card feat-card--light">
+          <span class="feat-card__icon">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="10" width="24" height="16" rx="3" fill="#9B9B9B" opacity=".35"/>
+              <rect x="4" y="6" width="24" height="16" rx="3" fill="#9B9B9B" opacity=".6"/>
+              <rect x="4" y="2" width="24" height="16" rx="3" fill="#9B9B9B"/>
+            </svg>
+          </span>
+          <h3 class="feat-card__title">Design System</h3>
+          <p class="feat-card__desc">Token-based, component-driven systems that keep design and dev permanently in sync</p>
+        </div>
+
+        <div class="feat-card feat-card--light">
+          <span class="feat-card__icon">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="22" r="5" fill="#9B9B9B" opacity=".6"/>
+              <path d="M16 17V6" stroke="#9B9B9B" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M10 11l6-6 6 6" stroke="#9B9B9B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3 class="feat-card__title">Prototype &amp; Ship</h3>
+          <p class="feat-card__desc">Working prototypes in days — not sprints. Built to test, pitch, or launch</p>
+        </div>
+
+        <div class="feat-card feat-card--light">
+          <span class="feat-card__icon">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="13" stroke="#9B9B9B" stroke-width="2" opacity=".4"/>
+              <circle cx="16" cy="16" r="4" fill="#9B9B9B"/>
+              <path d="M16 3v4M16 25v4M3 16h4M25 16h4" stroke="#9B9B9B" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+            </svg>
+          </span>
+          <h3 class="feat-card__title">AI-Powered Design</h3>
+          <p class="feat-card__desc">Using AI to move faster without cutting corners — smarter workflows, sharper output</p>
+        </div>
+
+        <div class="feat-card feat-card--dark feat-card--wide">
+          <span class="feat-card__icon">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="20" height="24" rx="3" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+              <path d="M11 11h10M11 15h10M11 19h6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3 class="feat-card__title">Advisory &amp; UX Audits</h3>
+          <p class="feat-card__desc">Most UX problems aren't visible until users leave. I find them before that through structured audits, heuristic reviews, and strategic recommendations that translate directly into product decisions</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- ── SKILLS & TOOLS ── -->
   <section class="skills-section wrap">
     <div class="skills-row">
 
       <!-- Box 1: Areas of Specialisation -->
-      <div class="skills-box reveal">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;">
-          <span class="skills-box__label" style="margin-bottom:0;">Areas of Specialisation</span>
-          <button id="spec-reset" title="Reset bricks" style="flex-shrink:0;margin-top:4px;padding:6px;background:transparent;border:1px solid rgba(0,0,0,.15);border-radius:6px;cursor:pointer;line-height:0;color:inherit;" onmouseenter="this.style.background='rgba(0,0,0,.06)'" onmouseleave="this.style.background='transparent'">
+      <div class="skills-col">
+        <div style="display:flex;align-items:center;gap:20px;">
+          <span class="skills-box__label">Areas of Specialisation</span>
+          <button id="spec-reset" title="Reset bricks" style="flex-shrink:0;padding:6px;background:transparent;border:1px solid rgba(0,0,0,.15);border-radius:6px;cursor:pointer;line-height:0;color:inherit;" onmouseenter="this.style.background='rgba(0,0,0,.06)'" onmouseleave="this.style.background='transparent'">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
               <path d="M3 3v5h5"/>
             </svg>
           </button>
         </div>
-        <div id="spec-canvas-wrap" style="flex:1;min-height:0;border-radius:8px;overflow:hidden;">
-          <canvas id="spec-canvas" style="display:block;cursor:pointer;width:100%;"></canvas>
+        <div class="skills-box reveal">
+          <div id="spec-canvas-wrap" style="flex:1;min-height:0;border-radius:8px;overflow:hidden;">
+            <canvas id="spec-canvas" style="display:block;cursor:pointer;width:100%;"></canvas>
+          </div>
         </div>
       </div>
 
       <!-- Box 2: Tools I Use -->
-      <div class="skills-box reveal">
+      <div class="skills-col">
         <span class="skills-box__label">Tools I Use</span>
+        <div class="skills-box reveal">
         <div class="tools-grid">
 
           <!-- Figma -->
@@ -355,6 +427,7 @@
           </div>
 
         </div>
+        </div>
       </div>
 
     </div>
@@ -428,7 +501,12 @@
   </main>
 
   <!-- ── FOOTER ── -->
+  <div class="footer-wrap">
   <footer class="footer" id="contact">
+    <span class="ft-corner ft-corner--tl"></span>
+    <span class="ft-corner ft-corner--tr"></span>
+    <span class="ft-corner ft-corner--bl"></span>
+    <span class="ft-corner ft-corner--br"></span>
     <div class="footer__inner wrap">
 
       <!-- ── SOCIAL CARDS ── -->
@@ -487,6 +565,7 @@
       </div>
     </div>
   </footer>
+  </div>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -503,8 +582,9 @@
       'Agile Methodologies'
     ];
     var COLORS = [
-      '#7A9C3C', '#D4604A', '#4A7FCC', '#B89030', '#888078',
-      '#7A5FC8', '#C43A3A', '#2EA89E', '#4a7c59', '#2980b9'
+      '#3BAFF0', '#E8197E', '#4A8C85', '#0C4D40', '#7251D4',
+      '#CC00CC', '#2D3F55', '#8499A8', '#FFC107', '#CC0000',
+      '#4DB81A', '#0066CC', '#FFAA00', '#FF5733'
     ];
     var CARD_H = 38, CARD_RADIUS = 7, FONT = 'bold 12px sans-serif', STAGGER_MS = 150;
     var engine, timers = [], rafId;
