@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var rows = Array.from(document.querySelectorAll('.works-row'));
 
   if (accordion && worksList && rows.length) {
-    var STEP = 420;
+    var STEP = 520;
 
     function setAccordionHeight() {
-      accordion.style.height = (rows.length * STEP + worksList.offsetHeight) + 'px';
+      accordion.style.height = (rows.length * STEP) + 'px';
     }
 
     function activateRow(idx) {
