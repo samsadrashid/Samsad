@@ -598,12 +598,19 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(3rem, 6vw, 6rem);
-  align-items: center;
 }
 .about__photo {
   border-radius: var(--radius);
   overflow: hidden;
   order: 2;
+  height: 100%;
+}
+.about__photo video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
 }
 .about__title {
   font-family: var(--f-head);
