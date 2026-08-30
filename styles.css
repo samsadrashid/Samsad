@@ -596,7 +596,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .about {
   padding-block: 5rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 2.5fr;
   gap: clamp(3rem, 6vw, 6rem);
 }
 .about__photo {
