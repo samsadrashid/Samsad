@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var STEP = 520;
 
     function setAccordionHeight() {
-      accordion.style.height = (rows.length * STEP) + 'px';
+      accordion.style.height = (rows.length * STEP + worksList.offsetHeight) + 'px';
     }
 
     function activateRow(idx) {
