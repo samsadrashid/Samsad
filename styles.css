@@ -467,6 +467,96 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   line-height: 1.7;
 }
 
+.ai-products-section { padding: 4rem 0 0; }
+
+.ai-products-section__head {
+  padding-bottom: 1.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ai-products-grid {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.ai-product-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #F2F2F2;
+}
+
+.ai-product-card__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.ai-product-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.ai-product-card__name {
+  font-family: var(--f-head);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -.02em;
+  color: var(--black);
+}
+
+.ai-product-card__type {
+  font-family: var(--f-head);
+  font-size: .85rem;
+  font-weight: 400;
+  color: rgba(0,0,0,.55);
+  margin-bottom: .75rem;
+}
+
+.ai-product-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.store-btn {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  padding: .45rem .7rem;
+  text-decoration: none;
+  transition: opacity .2s ease;
+}
+.store-btn:hover { opacity: .8; }
+
+.store-btn__icon { width: 18px; height: 18px; flex-shrink: 0; color: #fff; }
+
+.store-btn__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  font-family: var(--f-head);
+  font-size: .8rem;
+  font-weight: 600;
+}
+.store-btn__text small {
+  font-size: .55rem;
+  font-weight: 400;
+  color: rgba(255,255,255,.75);
+  text-transform: none;
+}
+
 [data-theme="dark"] .works-section__title { color: var(--black); }
 
 .arrow-btn {
@@ -1160,6 +1250,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .works-grid { grid-template-columns: 1fr; gap: .875rem; }
   .work-card__overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.15) 60%, rgba(0,0,0,0) 100%); }
   .work-card__name { font-size: 1.1rem; }
+
+  .ai-products-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 
   .about { grid-template-columns: 1fr; gap: 2rem; }
   .about__photo { max-height: 360px; }
