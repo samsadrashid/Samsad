@@ -1,1 +1,4 @@
 .vercel
+.claude/
+config.bat
+node_modules
