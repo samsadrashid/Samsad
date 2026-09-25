@@ -403,6 +403,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .work-card__img {
@@ -486,9 +489,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 
 .ai-product-card {
+  display: block;
+}
+
+.ai-product-card__media {
   border-radius: 16px;
   overflow: hidden;
-  background: #F2F2F2;
 }
 
 .ai-product-card__img {
@@ -502,7 +508,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex;
   flex-direction: column;
   gap: .2rem;
-  padding: 1.25rem 1.5rem 1.5rem;
+  padding: 1rem 0 0;
 }
 
 .ai-product-card__name {
