@@ -657,7 +657,7 @@
       font-size: 1rem;
       line-height: 1.8;
       color: var(--gray-body);
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
     [data-theme="dark"] .cs-section__body { color: rgba(255,255,255,.55); }
     .cs-section__body p + p { margin-top: 1em; }
@@ -1000,9 +1000,9 @@
     .ag-decision-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:2rem 0; }
     .ag-decision-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem; border-top-width:4px; }
     [data-theme="dark"] .ag-decision-card { border-color:rgba(255,255,255,.1); border-top-width:4px; }
-    .ag-decision-card--tx { border-top-color:#27ae60; }
-    .ag-decision-card--biz { border-top-color:#c0392b; }
-    .ag-decision-card--err { border-top-color:#2980b9; }
+    .ag-decision-card--tx { border-top-color:#16a34a; }
+    .ag-decision-card--biz { border-top-color:#dc2626; }
+    .ag-decision-card--err { border-top-color:#2563eb; }
     .ag-decision-card--nc { border-top-color:#b8860b; }
     .ag-decision-card__layer { font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-body); margin:0 0 .625rem; }
     .ag-decision-card__title { font-size:1.05rem; font-weight:800; margin:0 0 .75rem; }
@@ -1046,6 +1046,8 @@
       .ag-learn-grid { grid-template-columns:1fr; }
       .ag-bva-grid { grid-template-columns:1fr; }
     }
+    #cs-agami .cs-body { margin-bottom: 1rem; line-height: 1.8; color: var(--gray-body); font-size: 1rem; }
+    [data-theme="dark"] #cs-agami .cs-body { color: rgba(255,255,255,.55); }
 
     /* ── KickCast Case Study ── */
     /* ── HMS Case Study ── */
@@ -1133,9 +1135,9 @@
     @media (max-width:780px) { .hms-decision-grid { grid-template-columns:1fr; } }
     .hms-decision-card { border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:1.5rem; }
     [data-theme="dark"] .hms-decision-card { border-color:rgba(255,255,255,.1); }
-    .hms-decision-card--green { border-top:3px solid #27ae60; }
-    .hms-decision-card--red   { border-top:3px solid #e74c3c; }
-    .hms-decision-card--blue  { border-top:3px solid #2980b9; }
+    .hms-decision-card--green { border-top:3px solid #16a34a; }
+    .hms-decision-card--red   { border-top:3px solid #dc2626; }
+    .hms-decision-card--blue  { border-top:3px solid #2563eb; }
     .hms-decision-card--gold  { border-top:3px solid #b8860b; }
     .hms-dc-tag { font-size:.64rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gray); display:block; margin-bottom:.5rem; }
     .hms-dc-title { font-family:var(--f-head); font-weight:700; font-size:1.1rem; color:var(--black); margin-bottom:1rem; }
@@ -1144,7 +1146,7 @@
     .hms-dc-rejected { background:var(--light); padding:.4rem .875rem; border-radius:100px; color:var(--gray-body); flex:1; text-align:center; }
     [data-theme="dark"] .hms-dc-rejected { background:#1e1e1e; }
     .hms-dc-vs-label { font-size:.75rem; color:var(--gray); flex-shrink:0; font-weight:600; }
-    .hms-dc-chosen { background:rgba(39,174,96,.1); color:#27ae60; padding:.4rem .875rem; border-radius:100px; flex:1; text-align:center; font-weight:600; }
+    .hms-dc-chosen { background:rgba(22,163,74,.1); color:#16a34a; padding:.4rem .875rem; border-radius:100px; flex:1; text-align:center; font-weight:600; }
     [data-theme="dark"] .hms-dc-chosen { background:rgba(39,174,96,.15); }
     .hms-dc-body { font-size:.875rem; color:var(--gray-body); line-height:1.7; }
 
@@ -1155,8 +1157,8 @@
     .hms-tension-box--red { background:rgba(231,76,60,.06); border:1px solid rgba(231,76,60,.2); }
     .hms-tension-box--green { background:rgba(39,174,96,.06); border:1px solid rgba(39,174,96,.2); }
     .hms-tension-label { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.75rem; display:block; }
-    .hms-tension-box--red .hms-tension-label { color:#e74c3c; }
-    .hms-tension-box--green .hms-tension-label { color:#27ae60; }
+    .hms-tension-box--red .hms-tension-label { color:#dc2626; }
+    .hms-tension-box--green .hms-tension-label { color:#16a34a; }
     .hms-tension-body { font-size:.9rem; color:var(--gray-body); line-height:1.7; }
     .hms-stakeholder-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
     @media (max-width:780px) { .hms-stakeholder-grid { grid-template-columns:1fr; } }
@@ -1426,7 +1428,7 @@
     .bcb-status-pills { display:flex; flex-wrap:wrap; gap:.75rem; margin:1.5rem 0; }
     .bcb-pill { padding:.4rem 1rem; border-radius:100px; font-size:.8rem; font-weight:600; border:1px solid; }
     .bcb-pill--fit { background:#e8f5ee; color:#16a34a; border-color:#a8cbb6; }
-    .bcb-pill--injured { background:#fdecea; color:#c0392b; border-color:#e8b4b0; }
+    .bcb-pill--injured { background:#fdecea; color:#dc2626; border-color:#e8b4b0; }
     .bcb-pill--obs { background:#fdf3e4; color:#c8963e; border-color:#e8cc9a; }
     .bcb-pill--restricted { background:#f0f0ff; color:#5555cc; border-color:#b8b8ee; }
     .bcb-pill--unavail { background:#f5f5f5; color:#666; border-color:#ccc; }
@@ -3295,7 +3297,7 @@
             <div><span class="kc-tech-key">Data API</span> →&nbsp; <span class="kc-tech-val">API-Football (server-side)</span></div>
             <div><span class="kc-tech-key">Crawler</span> &nbsp;→&nbsp; <span class="kc-tech-val">Node.js · Railway</span></div>
             <div><span class="kc-tech-key">Deploy</span> &nbsp;&nbsp;→&nbsp; <span class="kc-tech-val">Vercel (live)</span></div>
-            <div style="margin-top:.875rem;font-size:.75rem;color:var(--gray);line-height:1.7;">API caching strategy: 60–90s server-side cache<br>per endpoint — one call serves all users</div>
+            <div class="cs-img-caption">API caching strategy: 60–90s server-side cache<br>per endpoint — one call serves all users</div>
           </div>
         </div>
       </section>
