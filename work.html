@@ -987,13 +987,13 @@
     .ag-stat-sub { font-size:.72rem; color:var(--gray-body); margin-top:.25rem; display:block; }
     .ag-problem-statement { font-size:clamp(1.5rem,3.5vw,2.5rem); font-weight:800; line-height:1.15; margin:2rem 0 1.5rem; }
     .ag-pain-list { display:flex; flex-direction:column; gap:1.25rem; margin:1.5rem 0; }
-    .ag-pain-item h4 { font-size:1rem; font-weight:700; margin:0 0 .25rem; }
+    .ag-pain-item h4 { font-family:var(--f-head); letter-spacing:-.02em; font-size:1rem; font-weight:700; margin:0 0 .25rem; }
     .ag-pain-item p { font-size:.9rem; color:var(--gray-body); margin:0; }
     .ag-strat-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2rem 0; }
     .ag-strat-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem; position:relative; overflow:hidden; }
     [data-theme="dark"] .ag-strat-card { border-color:rgba(255,255,255,.1); }
     .ag-strat-card__layer { font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ag-pink); margin:0 0 .5rem; }
-    .ag-strat-card__title { font-size:1.05rem; font-weight:800; margin:0 0 1rem; }
+    .ag-strat-card__title { font-family:var(--f-head); letter-spacing:-.02em; font-size:1.05rem; font-weight:800; margin:0 0 1rem; }
     .ag-strat-card__num { position:absolute; bottom:.5rem; right:1rem; font-size:4.5rem; font-weight:900; color:var(--ag-pink); opacity:.07; line-height:1; pointer-events:none; }
     .ag-strat-card ul { margin:0; padding-left:1.25rem; }
     .ag-strat-card li { font-size:.85rem; margin-bottom:.35rem; }
@@ -1005,7 +1005,7 @@
     .ag-decision-card--err { border-top-color:#2563eb; }
     .ag-decision-card--nc { border-top-color:#b8860b; }
     .ag-decision-card__layer { font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-body); margin:0 0 .625rem; }
-    .ag-decision-card__title { font-size:1.05rem; font-weight:800; margin:0 0 .75rem; }
+    .ag-decision-card__title { font-family:var(--f-head); letter-spacing:-.02em; font-size:1.05rem; font-weight:800; margin:0 0 .75rem; }
     .ag-decision-card__body { font-size:.875rem; color:var(--gray-body); margin:0; line-height:1.55; }
     .ag-hub-wrap { position:relative; width:100%; max-width:640px; margin:2.5rem auto; }
     .ag-hub-svg { width:100%; height:auto; display:block; }
@@ -1033,7 +1033,7 @@
     .ag-learn-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:2rem 0; }
     .ag-learn-card { background:var(--light); border-radius:16px; padding:1.5rem; }
     [data-theme="dark"] .ag-learn-card { background:rgba(255,255,255,.04); }
-    .ag-learn-card h4 { font-size:.95rem; font-weight:800; margin:0 0 .625rem; }
+    .ag-learn-card h4 { font-family:var(--f-head); letter-spacing:-.02em; font-size:.95rem; font-weight:800; margin:0 0 .625rem; }
     .ag-learn-card p { font-size:.85rem; color:var(--gray-body); margin:0; line-height:1.55; }
     .ag-transform-list { margin:0; padding-left:1.25rem; }
     .ag-transform-list li { font-size:.875rem; margin-bottom:.5rem; }
@@ -1079,7 +1079,7 @@
     [data-theme="dark"] .hms-problem-headline { color:#fff; }
     .hms-pain-list { display:flex; flex-direction:column; gap:1.25rem; margin:1.5rem 0; }
     .hms-pain-item { border-left:2.5px solid var(--hms-pink); padding:.875rem 1rem .875rem 1.25rem; }
-    .hms-pain-item h4 { font-size:1rem; font-weight:700; margin:0 0 .3rem; color:var(--black); }
+    .hms-pain-item h4 { font-family:var(--f-head); letter-spacing:-.02em; font-size:1rem; font-weight:700; margin:0 0 .3rem; color:var(--black); }
     [data-theme="dark"] .hms-pain-item h4 { color:#fff; }
     .hms-pain-item p { font-size:.9rem; color:var(--gray-body); line-height:1.6; margin:0; }
 
@@ -1157,6 +1157,9 @@
     .hms-tension-box--red { background:rgba(231,76,60,.06); border:1px solid rgba(231,76,60,.2); }
     .hms-tension-box--green { background:rgba(39,174,96,.06); border:1px solid rgba(39,174,96,.2); }
     .hms-tension-label { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.75rem; display:block; }
+    .hms-feature-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:1rem; margin-top:.5rem; }
+    .hms-feature-list li { display:flex; gap:.75rem; align-items:flex-start; }
+    .hms-feature-list__dot { color:var(--hms-pink); font-size:1.1rem; flex-shrink:0; }
     .hms-tension-box--red .hms-tension-label { color:#dc2626; }
     .hms-tension-box--green .hms-tension-label { color:#16a34a; }
     .hms-tension-body { font-size:.9rem; color:var(--gray-body); line-height:1.7; }
@@ -2384,7 +2387,7 @@
           </div>
         </div>
 
-        <div class="cs-outcomes" style="margin-bottom:2.5rem">
+        <div class="cs-outcomes">
           <div class="cs-outcome-stat">
             <span class="cs-outcome-num">~1%</span>
             <strong class="cs-outcome-label cs-outcome-label--title">Penetration rate</strong>
@@ -2402,7 +2405,7 @@
           </div>
         </div>
 
-        <div class="cs-comp-table-wrap" style="margin-bottom:1.75rem">
+        <div class="cs-comp-table-wrap">
           <table class="cs-comp-table cs-user-table">
             <thead>
               <tr>
@@ -2926,7 +2929,7 @@
             <span class="cs-outcome-label">Embedded motorbike insurance concept in BD context</span>
           </div>
         </div>
-        <div class="cs-comp-table-wrap" style="margin:2rem 0">
+        <div class="cs-comp-table-wrap">
           <table class="cs-comp-table cs-strat-table">
             <thead>
               <tr>
@@ -3811,11 +3814,11 @@
         <div class="cs-biz-layout">
           <div class="cs-img-wrap"><div class="cs-img-placeholder" style="min-height:320px">HMS Booking List — MacBook mockup</div></div>
           <div>
-            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:1rem;margin-top:.5rem;">
-              <li style="display:flex;gap:.75rem;align-items:flex-start;"><span style="color:var(--hms-pink);font-size:1.1rem;flex-shrink:0;">●</span><span class="cs-body" style="margin:0">Live availability across venues</span></li>
-              <li style="display:flex;gap:.75rem;align-items:flex-start;"><span style="color:var(--hms-pink);font-size:1.1rem;flex-shrink:0;">●</span><span class="cs-body" style="margin:0">Visual booking lifecycle states</span></li>
-              <li style="display:flex;gap:.75rem;align-items:flex-start;"><span style="color:var(--hms-pink);font-size:1.1rem;flex-shrink:0;">●</span><span class="cs-body" style="margin:0">Built-in conflict prevention logic</span></li>
-              <li style="display:flex;gap:.75rem;align-items:flex-start;"><span style="color:var(--hms-pink);font-size:1.1rem;flex-shrink:0;">●</span><span class="cs-body" style="margin:0">Role-based clarity across teams</span></li>
+            <ul class="hms-feature-list">
+              <li><span class="hms-feature-list__dot">●</span><span class="cs-body" style="margin:0">Live availability across venues</span></li>
+              <li><span class="hms-feature-list__dot">●</span><span class="cs-body" style="margin:0">Visual booking lifecycle states</span></li>
+              <li><span class="hms-feature-list__dot">●</span><span class="cs-body" style="margin:0">Built-in conflict prevention logic</span></li>
+              <li><span class="hms-feature-list__dot">●</span><span class="cs-body" style="margin:0">Role-based clarity across teams</span></li>
             </ul>
           </div>
         </div>
