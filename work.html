@@ -982,8 +982,8 @@
     .ag-stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin:2rem 0; }
     .ag-stat-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem; text-align:center; }
     [data-theme="dark"] .ag-stat-card { border-color:rgba(255,255,255,.1); }
-    .ag-stat-num { font-size:clamp(1.1rem,2.5vw,1.75rem); font-weight:800; color:var(--ag-pink); display:block; line-height:1.1; margin-bottom:.5rem; }
-    .ag-stat-label { font-weight:700; font-size:.875rem; display:block; }
+    .ag-stat-num { font-family:var(--f-head); font-size:clamp(1.1rem,2.5vw,1.75rem); font-weight:800; letter-spacing:-.04em; color:var(--ag-pink); display:block; line-height:1.1; margin-bottom:.5rem; }
+    .ag-stat-label { font-weight:700; font-size:.82rem; color:var(--black); display:block; }
     .ag-stat-sub { font-size:.72rem; color:var(--gray-body); margin-top:.25rem; display:block; }
     .ag-problem-statement { font-size:clamp(1.5rem,3.5vw,2.5rem); font-weight:800; line-height:1.15; margin:2rem 0 1.5rem; }
     .ag-pain-list { display:flex; flex-direction:column; gap:1.25rem; margin:1.5rem 0; }
@@ -1067,7 +1067,7 @@
     .hms-stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin:2rem 0; }
     .hms-stat-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem 1rem; text-align:center; border-top:3px solid var(--hms-pink); }
     [data-theme="dark"] .hms-stat-card { border-color:rgba(255,255,255,.1); border-top-color:var(--hms-pink); }
-    .hms-stat-num { font-size:clamp(1.5rem,3vw,2.5rem); font-weight:800; color:var(--hms-pink); display:block; line-height:1.1; margin-bottom:.4rem; }
+    .hms-stat-num { font-family:var(--f-head); font-size:clamp(1.5rem,3vw,2.5rem); font-weight:800; letter-spacing:-.04em; color:var(--hms-pink); display:block; line-height:1.1; margin-bottom:.4rem; }
     .hms-stat-label { font-weight:700; font-size:.82rem; color:var(--black); display:block; margin-bottom:.2rem; }
     [data-theme="dark"] .hms-stat-label { color:#fff; }
     .hms-stat-sub { font-size:.72rem; color:var(--gray-body); display:block; }
@@ -1224,7 +1224,7 @@
     .kc-stat-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin:2rem 0; }
     .kc-stat-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem 1rem; text-align:center; border-top:3px solid var(--kc-green); }
     [data-theme="dark"] .kc-stat-card { border-color:rgba(255,255,255,.1); border-top-color:var(--kc-green); }
-    .kc-stat-num { font-size:clamp(1.5rem,3vw,2.25rem); font-weight:800; color:var(--kc-green); display:block; line-height:1.1; margin-bottom:.4rem; }
+    .kc-stat-num { font-family:var(--f-head); font-size:clamp(1.5rem,3vw,2.25rem); font-weight:800; letter-spacing:-.04em; color:var(--kc-green); display:block; line-height:1.1; margin-bottom:.4rem; }
     .kc-stat-label { font-weight:700; font-size:.82rem; color:var(--black); display:block; margin-bottom:.2rem; }
     [data-theme="dark"] .kc-stat-label { color:#fff; }
     .kc-stat-sub { font-size:.72rem; color:var(--gray-body); display:block; }
@@ -2047,7 +2047,7 @@
         <p class="cs-body">The complete solution connected three feature areas into one platform: transaction capability, digital acquisition, and research-backed product iteration.</p>
         <div class="ag-platform-layout">
           <div>
-            <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 1rem">What Agami became</h3>
+            <h3 class="cs-sub-heading" style="margin:0 0 1rem">What Agami became</h3>
             <ul class="ag-platform-became">
               <li>Full transaction capability through Amar Hishab</li>
               <li>Digital product discovery and membership request for non-clients</li>
@@ -2067,7 +2067,7 @@
         <p class="cs-section__num">07</p>
         <h2 class="cs-section__title">Amar Hishab — Feature Deep Dive</h2>
         <p class="cs-body">Amar Hishab changed Agami from a passive dashboard into an active financial tool. The user just wanted to send money; the system had to make sure every dependency agreed.</p>
-        <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem">Transfer flow</h4>
+        <h4 class="cs-sub-heading" style="margin:2rem 0 .875rem">Transfer flow</h4>
         <div class="ag-flow-pills">
           <div class="ag-flow-step"><div class="ag-flow-pill ag-flow-pill--num">1</div><span class="ag-flow-label">Enter amount</span></div>
           <div class="ag-flow-connector"></div>
@@ -2099,7 +2099,7 @@
         <p class="cs-section__num">08</p>
         <h2 class="cs-section__title">Non-Client Section — Feature Deep Dive</h2>
         <p class="cs-body">The Non-Client Section turned Agami from a servicing app into a digital acquisition channel for prospective BRAC Microfinance members.</p>
-        <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem">Acquisition funnel</h4>
+        <h4 class="cs-sub-heading" style="margin:2rem 0 .875rem">Acquisition funnel</h4>
         <div class="ag-flow-pills">
           <div class="ag-flow-step"><div class="ag-flow-pill">Discover</div><span class="ag-flow-label">App downloads, referrals</span></div>
           <div class="ag-flow-connector"></div>
@@ -2111,7 +2111,7 @@
           <div class="ag-flow-connector"></div>
           <div class="ag-flow-step"><div class="ag-flow-pill">Activate</div><span class="ag-flow-label">Branch confirms client</span></div>
         </div>
-        <h4 style="font-size:.875rem;font-weight:700;margin:1.5rem 0 .5rem">Core insight</h4>
+        <h4 class="cs-sub-heading" style="margin:1.5rem 0 .5rem">Core insight</h4>
         <p class="cs-body">Before this feature, a prospective user had to physically visit a branch to begin a BRAC Microfinance relationship. After the redesign, users could explore products and submit a membership request from anywhere in Bangladesh.</p>
         <ul class="ag-transform-list">
           <li>Reduced branch dependency</li>
@@ -2126,7 +2126,7 @@
         <p class="cs-section__num">09</p>
         <h2 class="cs-section__title">Operational / System Logic Detail</h2>
         <p class="cs-body">The PRD was a design artifact. Writing system logic was part of the UX job because backend constraints directly affected user trust.</p>
-        <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem">Transfer system flow</h4>
+        <h4 class="cs-sub-heading" style="margin:2rem 0 .875rem">Transfer system flow</h4>
         <div class="ag-flow-pills">
           <div class="ag-flow-step"><div class="ag-flow-pill">Input validation</div></div>
           <div class="ag-flow-connector"></div>
@@ -2180,7 +2180,7 @@
         </div>
         <div class="ag-bva-grid">
           <div>
-            <h4 style="font-size:.875rem;font-weight:700;margin:0 0 1rem">Before vs After</h4>
+            <h4 class="cs-sub-heading" style="margin:0 0 1rem">Before vs After</h4>
             <table class="cs-strat-table">
               <thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead>
               <tbody>
@@ -2191,7 +2191,7 @@
             </table>
           </div>
           <div>
-            <h4 style="font-size:.875rem;font-weight:700;margin:0 0 1rem">Transformation signal</h4>
+            <h4 class="cs-sub-heading" style="margin:0 0 1rem">Transformation signal</h4>
             <ul class="ag-transform-list">
               <li>Passive dashboard became a transactional platform.</li>
               <li>Servicing app became an acquisition channel.</li>
@@ -2200,7 +2200,7 @@
             </ul>
           </div>
         </div>
-        <h3 style="font-size:1.1rem;font-weight:800;margin:2.5rem 0 1.25rem">What Changed After Launch</h3>
+        <h3 class="cs-sub-heading" style="margin:2.5rem 0 1.25rem">What Changed After Launch</h3>
         <div class="ag-learn-grid">
           <div class="ag-learn-card">
             <h4>System design before screen design</h4>
@@ -2267,7 +2267,7 @@
       <!-- Title -->
       <div class="cs-title-block">
         <span class="cs-eyebrow">Case Study · InsurTech · 2025</span>
-        <h2 class="cs-title">Nirbhik</h2>
+        <h1 class="cs-title">Nirbhik</h1>
         <div class="cs-tags">
           <span class="cs-tag">InsurTech</span>
           <span class="cs-tag">Responsive</span>
@@ -2307,7 +2307,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">01 — Overview</span>
-          <h3 class="cs-section__title">Making insurance feel less like insurance</h3>
+          <h2 class="cs-section__title">Making insurance feel less like insurance</h2>
         </div>
         <div class="cs-section__body">
           <p>Nirbhik is Bangladesh's first insurance marketplace — a B2B2C platform where users can discover, compare, and purchase policies across Life, Health, Accident, Travel, Vehicle, Electronics, and Fire insurance from multiple providers in a single unified experience.</p>
@@ -2325,7 +2325,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">02 — Business Context</span>
-          <h3 class="cs-section__title">Business Context</h3>
+          <h2 class="cs-section__title">Business Context</h2>
         </div>
         <div class="cs-section__body" style="margin-bottom:1.75rem">
           <p>Insurance adoption in Bangladesh is limited by low trust, low awareness, complex policy language, and manual sales-led distribution. At the same time, young digital users, business employees, gig workers, and partner-brand customers are increasingly exposed to risk through mobility, travel, electronics, health needs, and work-related activities.</p>
@@ -2369,7 +2369,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">03 — Problem</span>
-          <h3 class="cs-section__title">Why Bangladesh needs this now</h3>
+          <h2 class="cs-section__title">Why Bangladesh needs this now</h2>
         </div>
 
         <p class="cs-section__body">Insurance in Bangladesh is difficult to access, difficult to understand, and difficult to trust. Users often do not know what is covered, how to buy, what documents are needed, or whether claims will be settled fairly.</p>
@@ -2445,7 +2445,7 @@
 
         <div class="cs-pain-img-layout">
           <div>
-            <h4 class="cs-sub-heading" style="margin-top:0">Key user pain points</h4>
+            <h3 class="cs-sub-heading" style="margin-top:0">Key user pain points</h3>
             <div class="cs-pain-points">
               <div class="cs-pain-point">
                 <strong>Complexity overload</strong>
@@ -2474,7 +2474,7 @@
           <p>If insurance is surfaced at the exact moment of risk creation — buying a bike, traveling, launching a business — conversion increases, trust builds naturally, and coverage becomes a product feature, not a separate admin task.</p>
         </div>
 
-        <h4 class="cs-sub-heading">Where the gap lives</h4>
+        <h3 class="cs-sub-heading">Where the gap lives</h3>
         <div class="cs-comp-table-wrap">
           <table class="cs-comp-table">
             <thead>
@@ -2590,7 +2590,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">04 — Strategic Framing</span>
-          <h3 class="cs-section__title">Strategic framing</h3>
+          <h2 class="cs-section__title">Strategic framing</h2>
         </div>
         <p class="cs-section__body">Most insurance platforms sell policies as a separate product. Nirbhik's strategy was different: make insurance appear at the exact moment of relevance.</p>
         <div class="cs-comp-table-wrap">
@@ -2639,7 +2639,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">05 — Research &amp; Discovery</span>
-          <h3 class="cs-section__title">Research &amp; Discovery</h3>
+          <h2 class="cs-section__title">Research &amp; Discovery</h2>
         </div>
         <p class="cs-section__body">The product direction was shaped through stakeholder inputs, competitor benchmarking, journey mapping, MVP scoping, and early Figma screens. The goal was to move beyond isolated screens and define the system logic behind a multi-sided insurance platform.</p>
         <div class="cs-comp-table-wrap">
@@ -2691,7 +2691,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">06 — Platform Architecture</span>
-          <h3 class="cs-section__title">Three-sided platform</h3>
+          <h2 class="cs-section__title">Three-sided platform</h2>
         </div>
         <p class="cs-section__body">The system centers on Nirbhik as a platform layer that connects product catalogues, policy rules, claims workflows, partner APIs, payments, reporting, and notifications.</p>
 
@@ -2774,7 +2774,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">07 — Process</span>
-          <h3 class="cs-section__title">Confidence as the design north star</h3>
+          <h2 class="cs-section__title">Confidence as the design north star</h2>
         </div>
         <div class="cs-section__body">
           <p>The breakthrough insight came from a question users kept asking during research sessions: <em>"Am I covered enough?"</em> Not "What does this policy cover?" — but a more fundamental anxiety about adequacy.</p>
@@ -2793,12 +2793,12 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">09 — Design Decisions</span>
-          <h3 class="cs-section__title">Key design decisions, challenges &amp; resolutions</h3>
+          <h2 class="cs-section__title">Key design decisions, challenges &amp; resolutions</h2>
         </div>
 
         <div class="cs-dd-layout">
           <div>
-            <h4 class="cs-sub-heading" style="margin-top:0">Decisions</h4>
+            <h3 class="cs-sub-heading" style="margin-top:0">Decisions</h3>
             <div class="cs-decisions">
           <div class="cs-decision">
             <span class="cs-decision__num">01</span>
@@ -2837,7 +2837,7 @@
           </div>
         </div>
 
-            <h4 class="cs-sub-heading">Challenges &amp; resolutions</h4>
+            <h3 class="cs-sub-heading">Challenges &amp; resolutions</h3>
             <div class="cs-challenge-grid cs-challenge-grid--sm">
           <div class="cs-challenge-card">
             <div class="cs-challenge-card__top">
@@ -2903,7 +2903,7 @@
       <section class="cs-section">
         <div class="cs-section__header">
           <span class="cs-section__num">10 — Outcome</span>
-          <h3 class="cs-section__title">Impact &amp; Outcomes</h3>
+          <h2 class="cs-section__title">Impact &amp; Outcomes</h2>
         </div>
         <p class="cs-section__body">Because Nirbhik is an early-stage product, the strongest outcome is not only visual design. The value is in the system foundation: a scalable structure that can support marketplace journeys, embedded insurance, B2B partner programs, insurer distribution, and internal operations.</p>
         <div class="cs-outcomes">
@@ -3287,7 +3287,7 @@
             <p class="cs-body">API-Football polls server-side at 60–90s intervals → Node.js crawler on Railway → Supabase. Supabase Auth enables a real leaderboard with prediction accuracy tracked across the tournament. The frontend never calls the sports API directly, protecting rate limits and keeping client code clean.</p>
           </div>
           <div class="kc-tech-block">
-            <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:.75rem;">Stack</div>
+            <div class="cs-eyebrow">Stack</div>
             <div><span class="kc-tech-key">Frontend</span> &nbsp;→&nbsp; <span class="kc-tech-val">Next.js 14 · App Router</span></div>
             <div><span class="kc-tech-key">Styling</span> &nbsp;&nbsp;→&nbsp; <span class="kc-tech-val">Tailwind CSS · CSS Variables</span></div>
             <div><span class="kc-tech-key">Database</span> →&nbsp; <span class="kc-tech-val">Supabase (PostgreSQL)</span></div>
