@@ -1089,8 +1089,7 @@
       .ag-strat-cards { grid-template-columns:1fr; }
       .ag-decision-grid { grid-template-columns:1fr; }
       .ag-platform-layout { grid-template-columns:1fr; }
-      .ag-flow-pills { flex-wrap:wrap; gap:1rem 1.25rem; }
-      .ag-flow-connector { display:none; }
+
       .ag-learn-grid { grid-template-columns:1fr; }
       .ag-bva-grid { grid-template-columns:1fr; }
     }
@@ -1517,9 +1516,74 @@
     .bcb-compare-table td.bcb-td-after { color:#16a34a; }
     [data-theme="dark"] .bcb-compare-table td.bcb-td-before { color:#f87171; }
     [data-theme="dark"] .bcb-compare-table td.bcb-td-after { color:#4ade80; }
+
+    /* ── Case-study system: legibility + icon consistency ── */
+    .cs-comp-card__badge, .cs-platform-center span, .cs-challenge-grid--sm .cs-challenge-card__res-label,
+    .cs-nav-btn__label, .ag-strat-card__layer, .ag-decision-card__layer, .ag-hub-node__sub,
+    .hms-dc-tag, .hms-tension-label, .kc-db-label, .bcb-dc-num, .cs-eyebrow, .cs-meta__label, .cs-challenge-card__label, .cs-challenge-grid--sm .cs-challenge-card__label,
+    .work-toc__year, .work-page-label, .project__num, .project__meta-label, .project__challenge-label { font-size: .72rem; }
+    .bcb-arch-icon { color: var(--bcb-green); line-height: 0; }
+    .kc-persona-icon { color: #014e46; line-height: 0; }
+    .kc-persona-icon svg { width: 28px; height: 28px; }
+    [data-theme="dark"] .bcb-arch-icon { color: #4fb3bc; }
+    [data-theme="dark"] .kc-persona-icon { color: #5fc4a8; }
+
+    @media (max-width:1024px) {
+      .ag-flow-pills { flex-wrap:wrap; gap:1rem 1.25rem; }
+      .ag-flow-connector { display:none; }
+    }
+    /* ── Agami growth chart (indexed small bars) ── */
+    .ag-growth { margin: 0; --ag-mark: #d81b8a; }
+    [data-theme="dark"] .ag-growth { --ag-mark: #e64b99; }
+    .ag-growth__title { font-family: var(--f-head); font-size: 1rem; font-weight: 700; margin: 0 0 .35rem; color: var(--black); }
+    .ag-growth__sub { font-size: .85rem; line-height: 1.55; color: var(--gray-body); margin: 0 0 1.5rem; max-width: 52ch; }
+    .ag-growth__plot { position: relative; padding-top: 1.6rem; }
+    .ag-growth__grid { position: absolute; inset: 0 0 0 9.5rem; pointer-events: none; }
+    .ag-growth__grid span { position: absolute; top: 0; bottom: 0; border-left: 1px solid rgba(0,0,0,.07); font-size: .72rem; color: var(--gray); padding-left: .3rem; line-height: 1; }
+    [data-theme="dark"] .ag-growth__grid span { border-left-color: rgba(255,255,255,.08); }
+    .ag-growth__base { position: absolute; top: 1.2rem; bottom: 0; border-left: 1px solid var(--gray); opacity: .6; }
+    .ag-growth__row { position: relative; display: grid; grid-template-columns: 9.5rem 1fr; align-items: center; min-height: 3.25rem; outline: none; }
+    .ag-growth__row:focus-visible { box-shadow: inset 0 0 0 2px var(--ag-mark); border-radius: 8px; }
+    .ag-growth__label { font-size: .85rem; font-weight: 600; color: var(--black); line-height: 1.25; padding-right: .75rem; }
+    .ag-growth__label small { display: block; font-weight: 400; font-size: .75rem; color: var(--gray-body); margin-top: .15rem; }
+    .ag-growth__track { position: relative; height: 22px; }
+    .ag-growth__bar { position: absolute; left: 0; top: 0; height: 22px; background: var(--ag-mark); border-radius: 0 4px 4px 0; }
+    .ag-growth__value { position: absolute; top: 50%; transform: translateY(-50%); margin-left: .5rem; font-family: var(--f-head); font-size: .85rem; font-weight: 700; color: var(--black); white-space: nowrap; }
+    .ag-growth__tip { position: absolute; bottom: calc(100% + 8px); left: 0; z-index: 3; white-space: nowrap; font-size: .75rem; padding: .4rem .6rem; border-radius: 6px; background: var(--black); color: var(--white); opacity: 0; pointer-events: none; transition: opacity .12s; }
+    .ag-growth__row:hover .ag-growth__tip, .ag-growth__row:focus-visible .ag-growth__tip { opacity: 1; }
+    .ag-growth__row:hover .ag-growth__bar { filter: brightness(1.08); }
+    .ag-growth__table { margin-top: 1.25rem; }
+    .ag-growth__table summary { cursor: pointer; font-size: .8rem; font-weight: 600; color: var(--gray-body); }
+    .ag-growth__table .cs-comp-table-wrap { margin: .75rem 0 0; }
+    [data-theme="dark"] .ag-growth__title, [data-theme="dark"] .ag-growth__label, [data-theme="dark"] .ag-growth__value { color: #fff; }
+    @media (max-width: 600px) {
+      .ag-growth__grid { left: 0; right: 3rem; }
+      .ag-growth__row { grid-template-columns: 1fr; gap: .4rem; padding: .5rem 0; }
+      .ag-growth__label { display: flex; align-items: baseline; gap: .5rem; padding: 0; }
+      .ag-growth__label small { margin: 0; }
+      .ag-growth__track { margin-right: 3rem; }
+    }
+
+    /* ── AMS navigation specimen ── */
+    .bcb-nav { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 2rem; align-items: center; margin: 2rem 0 0; padding: clamp(1.25rem,3vw,2.25rem); border-radius: 20px; background: var(--light); }
+    [data-theme="dark"] .bcb-nav { background: #1a1a1a; }
+    .bcb-nav__label { display: block; font-family: var(--f-head); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--bcb-green); margin-bottom: .6rem; }
+    [data-theme="dark"] .bcb-nav__label { color: #4fb3bc; }
+    .bcb-nav__cap p { margin: 0; font-size: .95rem; line-height: 1.65; color: var(--gray-body); max-width: 40ch; }
+    .bcb-nav__list { list-style: none; margin: 0; padding: .75rem; counter-reset: nav; background: var(--white); border-radius: 14px; border: 1px solid rgba(0,0,0,.07); }
+    [data-theme="dark"] .bcb-nav__list { background: #111; border-color: rgba(255,255,255,.08); }
+    .bcb-nav__list li { display: flex; align-items: center; gap: .7rem; padding: .6rem .8rem; border-radius: 8px; font-size: .9rem; color: var(--gray-body); }
+    .bcb-nav__list li::after { counter-increment: nav; content: counter(nav, decimal-leading-zero); margin-left: auto; font-size: .72rem; color: var(--gray); }
+    .bcb-nav__dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; opacity: .5; flex: none; }
+    .bcb-nav__list li.is-hub { background: rgba(0,107,117,.1); color: var(--black); font-weight: 700; }
+    .bcb-nav__list li.is-hub .bcb-nav__dot { background: var(--bcb-green); border-color: var(--bcb-green); opacity: 1; }
+    [data-theme="dark"] .bcb-nav__list li.is-hub { background: rgba(79,179,188,.14); color: #fff; }
+    [data-theme="dark"] .bcb-nav__list li.is-hub .bcb-nav__dot { background: #4fb3bc; border-color: #4fb3bc; }
+    @media (max-width: 780px) { .bcb-nav { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to case studies</a>
 
   <!-- ── TOP NAV ── -->
   <nav class="nav">
@@ -1622,7 +1686,7 @@
     </nav>
 
     <!-- RIGHT: project cards -->
-    <main class="work-main">
+    <main class="work-main" id="main">
 
       <header class="work-page-header">
         <span class="work-page-label">Selected work · 2019–2026</span>
@@ -1667,7 +1731,7 @@
           <p class="project__challenge-text">Scaled a microfinance platform serving rural field officers and borrowers — redesigning core flows across Survey, Guidance, Digital Passbook, QR Code, and Instant DPS to reduce training time and increase daily active usage across a low-digital-literacy user base.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1707,7 +1771,7 @@
           <p class="project__challenge-text">Designed an end-to-end healthcare experience — connecting patients with specialists through booking, teleconsultation, and prescription management in a single unified flow.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1748,7 +1812,7 @@
           <p class="project__challenge-text">Designed the full product and investor pitch materials for a fintech startup — translating complex financial flows into a consumer-friendly interface built for fundraising.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1792,7 +1856,7 @@
           <p class="project__challenge-text">Bangladesh's first insurance marketplace — a B2B2C platform to discover, compare, and buy policies across Life, Health, Accident, Travel, Vehicle, Electronics, and Fire insurance, in a market where less than 1% of people hold any policy.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1832,7 +1896,7 @@
           <p class="project__challenge-text">Designed a performance and availability platform for Bangladesh Cricket Board — centralising athlete readiness, bowling workload, injury management, and squad planning into one shared source of truth.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1872,7 +1936,7 @@
           <p class="project__challenge-text">Designed a centralized, role-based hospitality platform replacing manual spreadsheets — enabling BRAC to manage room bookings, corporate events, food services, and facilities across multiple venues without double-booking conflicts.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1912,7 +1976,7 @@
           <p class="project__challenge-text">Designed a football companion platform with live scores, match predictions, and fixture tracking — blending real-time data with a clean, content-first layout.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -1961,7 +2025,7 @@
           <p class="project__challenge-text">Designed and built an AI-native vocabulary app that teaches words through contextual usage, not definitions — featuring profession-aware sentence generation, an IELTS Band 5/7/9 rewrite engine, and a BYOK free tier model validated as a low-cost AI product launch pattern.</p>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Read Now</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -2014,7 +2078,7 @@
 
       <!-- 02 The Problem -->
       <section class="cs-section">
-        <p class="cs-section__num">02</p>
+        <p class="cs-section__num">02<span class="cs-section__chapter"> — Problem</span></p>
         <p class="ag-problem-statement">Users could see their finances.<br>They just could not act on them.</p>
         <p class="cs-body">Before the transformation, Agami was mainly a dashboard for existing BRAC Microfinance clients. The product had value, but limited utility and limited growth potential.</p>
         <div class="ag-pain-showcase" data-pain-showcase>
@@ -2104,7 +2168,7 @@
 
       <!-- 03 Transformation Strategy -->
       <section class="cs-section">
-        <p class="cs-section__num">03</p>
+        <p class="cs-section__num">03<span class="cs-section__chapter"> — Strategy</span></p>
         <h2 class="cs-section__title">Transformation Strategy</h2>
         <p class="cs-body">I approached Agami as a platform transformation, not a screen refresh. The work focused on three connected pillars: transactions, acquisition, and evidence-based iteration.</p>
         <div class="ag-strat-cards">
@@ -2116,13 +2180,13 @@
           </div>
           <div class="ag-strat-card">
             <p class="ag-strat-card__layer">Acquisition Layer</p>
-            <h3 class="ag-strat-card__title">Design as conflict mediation</h3>
+            <h3 class="ag-strat-card__title">Non-Client Section</h3>
             <ul><li>Explore products without login</li><li>Digital membership request</li><li>Reduced branch dependency</li><li>Ekota lead generation</li></ul>
             <span class="ag-strat-card__num">02</span>
           </div>
           <div class="ag-strat-card">
             <p class="ag-strat-card__layer">Iteration Layer</p>
-            <h3 class="ag-strat-card__title">Plan for mid-stream pivots</h3>
+            <h3 class="ag-strat-card__title">Research-led iteration</h3>
             <ul><li>Structured surveys</li><li>Homepage discoverability</li><li>Cognitive load reduction</li><li>Feature validation loops</li></ul>
             <span class="ag-strat-card__num">03</span>
           </div>
@@ -2142,7 +2206,7 @@
 
       <!-- 04 Key Design Decisions -->
       <section class="cs-section">
-        <p class="cs-section__num">04</p>
+        <p class="cs-section__num">04<span class="cs-section__chapter"> — Design decisions</span></p>
         <h2 class="cs-section__title">Key Design Decisions</h2>
         <p class="cs-body">These were the hardest calls, where UX had to meet financial risk, system logic, and product growth.</p>
         <div class="ag-decision-grid">
@@ -2171,7 +2235,7 @@
 
       <!-- 05 Stakeholder Collaboration -->
       <section class="cs-section">
-        <p class="cs-section__num">05</p>
+        <p class="cs-section__num">05<span class="cs-section__chapter"> — Collaboration</span></p>
         <h2 class="cs-section__title">Stakeholder Collaboration</h2>
         <p class="cs-body">The project required alignment across engineering, product, finance, and leadership. Cross-team coordination on ERP logic and business-date reconciliation was central to the work.</p>
         <div class="ag-hub-wrap">
@@ -2222,7 +2286,7 @@
 
       <!-- 06 Unified Agami Platform -->
       <section class="cs-section">
-        <p class="cs-section__num">06</p>
+        <p class="cs-section__num">06<span class="cs-section__chapter"> — Solution</span></p>
         <h2 class="cs-section__title">Unified Agami Platform</h2>
         <p class="cs-body">The complete solution connected three feature areas into one platform: transaction capability, digital acquisition, and research-backed product iteration.</p>
         <div class="ag-platform-layout">
@@ -2244,7 +2308,7 @@
 
       <!-- 07 Amar Hishab — Feature Deep Dive -->
       <section class="cs-section">
-        <p class="cs-section__num">07</p>
+        <p class="cs-section__num">07<span class="cs-section__chapter"> — Deep dive · Transfers</span></p>
         <h2 class="cs-section__title">Amar Hishab — Feature Deep Dive</h2>
         <p class="cs-body">Amar Hishab changed Agami from a passive dashboard into an active financial tool. The user just wanted to send money; the system had to make sure every dependency agreed.</p>
         <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem;text-align:center">Transfer flow</h4>
@@ -2282,7 +2346,7 @@
 
       <!-- 08 Non-Client Section — Feature Deep Dive -->
       <section class="cs-section">
-        <p class="cs-section__num">08</p>
+        <p class="cs-section__num">08<span class="cs-section__chapter"> — Deep dive · Acquisition</span></p>
         <h2 class="cs-section__title">Non-Client Section — Feature Deep Dive</h2>
         <p class="cs-body">The Non-Client Section turned Agami from a servicing app into a digital acquisition channel for prospective BRAC Microfinance members.</p>
         <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem">Acquisition funnel</h4>
@@ -2313,7 +2377,7 @@
 
       <!-- 09 Operational / System Logic Detail -->
       <section class="cs-section">
-        <p class="cs-section__num">09</p>
+        <p class="cs-section__num">09<span class="cs-section__chapter"> — System logic</span></p>
         <h2 class="cs-section__title">Operational / System Logic Detail</h2>
         <p class="cs-body">The PRD was a design artifact. Writing system logic was part of the UX job because backend constraints directly affected user trust.</p>
         <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem">Transfer system flow</h4>
@@ -2355,7 +2419,7 @@
 
       <!-- 10 Measurable Product Impact -->
       <section class="cs-section">
-        <p class="cs-section__num">10</p>
+        <p class="cs-section__num">10<span class="cs-section__chapter"> — Impact &amp; lessons</span></p>
         <h2 class="cs-section__title">Measurable Product Impact</h2>
         <p class="cs-body">Rather than measuring the work as a UI refresh, Agami was evaluated by adoption, engagement, transaction readiness, and acquisition expansion.</p>
         <div class="ag-stat-cards">
@@ -2382,7 +2446,28 @@
         </div>
         <div class="ag-bva-grid">
           <div>
-            <h4 style="font-size:.875rem;font-weight:700;margin:0 0 1rem">Before vs After</h4>
+            <figure class="ag-growth">
+              <figcaption class="ag-growth__head">
+                <h4 class="ag-growth__title">Growth multiple after the transformation</h4>
+                <p class="ag-growth__sub">Each metric indexed to its own starting point (1×). Daily active users grew faster than the user base itself.</p>
+              </figcaption>
+              <div class="ag-growth__plot" aria-hidden="false">
+                <div class="ag-growth__grid" aria-hidden="true"><span style="left:0.0%">0×</span><span style="left:20.0%">2×</span><span style="left:40.0%">4×</span><span style="left:60.0%">6×</span><span style="left:80.0%">8×</span></div>
+              <div class="ag-growth__row" tabindex="0" aria-label="Daily active users: 5K to 38K, 7.6 times">
+                <span class="ag-growth__label">Daily active users<small>5K → 38K</small></span>
+                <span class="ag-growth__track"><span class="ag-growth__bar" style="width:76.00%"></span><span class="ag-growth__value" style="left:76.00%">7.6×</span><span class="ag-growth__tip" role="tooltip">Daily active users: 5K → 38K · 7.6×</span></span>
+              </div>
+              <div class="ag-growth__row" tabindex="0" aria-label="Monthly active users: 40K to 180K, 4.5 times">
+                <span class="ag-growth__label">Monthly active users<small>40K → 180K</small></span>
+                <span class="ag-growth__track"><span class="ag-growth__bar" style="width:45.00%"></span><span class="ag-growth__value" style="left:45.00%">4.5×</span><span class="ag-growth__tip" role="tooltip">Monthly active users: 40K → 180K · 4.5×</span></span>
+              </div>
+              <div class="ag-growth__row" tabindex="0" aria-label="Total users: 300K to 1.2M, 4.0 times">
+                <span class="ag-growth__label">Total users<small>300K → 1.2M</small></span>
+                <span class="ag-growth__track"><span class="ag-growth__bar" style="width:40.00%"></span><span class="ag-growth__value" style="left:40.00%">4.0×</span><span class="ag-growth__tip" role="tooltip">Total users: 300K → 1.2M · 4.0×</span></span>
+              </div>
+              </div>
+              <details class="ag-growth__table">
+                <summary>View as table</summary>
             <div class="cs-comp-table-wrap">
               <table class="cs-comp-table cs-strat-table">
                 <thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead>
@@ -2393,6 +2478,8 @@
                 </tbody>
               </table>
             </div>
+              </details>
+            </figure>
           </div>
           <div>
             <h4 style="font-size:.875rem;font-weight:700;margin:0 0 1rem">Transformation signal</h4>
@@ -2987,10 +3074,10 @@
 
       <hr class="cs-divider">
 
-      <!-- 09 Design Decisions -->
+      <!-- 08 Design Decisions -->
       <section class="cs-section">
         <div class="cs-section__header">
-          <span class="cs-section__num">09 — Design Decisions</span>
+          <span class="cs-section__num">08 — Design Decisions</span>
           <h3 class="cs-section__title">Key design decisions, challenges &amp; resolutions</h3>
         </div>
 
@@ -3100,7 +3187,7 @@
       <!-- 10 Outcome -->
       <section class="cs-section">
         <div class="cs-section__header">
-          <span class="cs-section__num">10 — Outcome</span>
+          <span class="cs-section__num">09 — Outcome</span>
           <h3 class="cs-section__title">Impact &amp; Outcomes</h3>
         </div>
         <p class="cs-section__body">Because Nirbhik is an early-stage product, the strongest outcome is not only visual design. The value is in the system foundation: a scalable structure that can support marketplace journeys, embedded insurance, B2B partner programs, insurer distribution, and internal operations.</p>
@@ -3231,7 +3318,7 @@
 
       <!-- 02 Problem Space -->
       <section class="cs-section">
-        <p class="cs-section__num">02</p>
+        <p class="cs-section__num">02<span class="cs-section__chapter"> — Problem</span></p>
         <h2 class="cs-section__title">The World Cup got bigger. Fan tools didn't.</h2>
         <p class="cs-body">The 2022 edition had 32 teams and 64 matches. The 2026 edition has 48 teams and 104 matches — spread across three host nations and 16 venues. Yet the tools fans reach for weren't redesigned for this complexity.</p>
         <div class="kc-two-col">
@@ -3264,26 +3351,26 @@
 
       <!-- 03 Research & Archetypes -->
       <section class="cs-section">
-        <p class="cs-section__num">03</p>
+        <p class="cs-section__num">03<span class="cs-section__chapter"> — Research · Audiences</span></p>
         <h2 class="cs-section__title">Not every fan wants the same thing</h2>
         <p class="cs-body">Three archetypes mapped from community patterns and direct observation — each with a distinct relationship to tournament data.</p>
         <div class="kc-persona-grid">
           <div class="kc-persona-card">
-            <span class="kc-persona-icon">⚽</span>
+            <span class="kc-persona-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7l4 3-1.5 4.5h-5L8 10z"/><path d="M12 3v4M16 10l4-1M14.5 14.5 17 18M9.5 14.5 7 18M8 10 4 9"/></svg></span>
             <div class="kc-persona-name">The Follower</div>
             <span class="kc-persona-role">Casual · Score-checker</span>
             <p class="kc-persona-desc">Watches 2–3 big matches. Checks scores after the fact. Uses WhatsApp groups to discuss results. Wants fast, frictionless access.</p>
             <div class="kc-persona-pain">"I just want to quickly see scores and know who's through to the next round. Everything else is noise."</div>
           </div>
           <div class="kc-persona-card">
-            <span class="kc-persona-icon">📊</span>
+            <span class="kc-persona-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M6 17v-5M11 17V7M16 17v-8M20 17v-3"/><path d="M5 9l5-4 5 3 5-4"/></svg></span>
             <div class="kc-persona-name">The Analyst</div>
             <span class="kc-persona-role">Engaged · Prediction-builder</span>
             <p class="kc-persona-desc">Watches most matches. Tracks group tables obsessively. Has opinions on every team's chances. Wants prediction history and bracket state.</p>
             <div class="kc-persona-pain">"I want to build my bracket, lock in my predictions, and be proved right — or at least have the receipts when I am."</div>
           </div>
           <div class="kc-persona-card">
-            <span class="kc-persona-icon">🌍</span>
+            <span class="kc-persona-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span>
             <div class="kc-persona-name">The Explorer</div>
             <span class="kc-persona-role">Curious · Team-discoverer</span>
             <p class="kc-persona-desc">Neutral or multi-team fan. Excited by the 48-team expansion. Wants to know about unfamiliar nations before watching their matches.</p>
@@ -3297,7 +3384,7 @@
 
       <!-- 04 Feature Architecture -->
       <section class="cs-section">
-        <p class="cs-section__num">04</p>
+        <p class="cs-section__num">04<span class="cs-section__chapter"> — Solution</span></p>
         <h2 class="cs-section__title">Every module with a single job</h2>
         <p class="cs-body">Six feature modules, each scoped tightly so the app never becomes a dashboard that does everything and nothing well.</p>
         <div class="cs-comp-table-wrap">
@@ -3375,7 +3462,7 @@
 
       <!-- 05 Design Decisions -->
       <section class="cs-section">
-        <p class="cs-section__num">05</p>
+        <p class="cs-section__num">05<span class="cs-section__chapter"> — Design decisions</span></p>
         <h2 class="cs-section__title">Six calls that shaped the product</h2>
         <p class="cs-body">Each decision is explained through the tradeoff it resolved, what was designed, and what it produced.</p>
 
@@ -3480,7 +3567,7 @@
 
       <!-- 06 Technical Architecture -->
       <section class="cs-section">
-        <p class="cs-section__num">06</p>
+        <p class="cs-section__num">06<span class="cs-section__chapter"> — Architecture</span></p>
         <h2 class="cs-section__title">Built to scale from prototype to production</h2>
         <p class="cs-body">The stack was chosen so Phase 1 (static/in-memory) and Phase 2 (real-time/database) share the same component architecture — zero migration cost when going live.</p>
         <div class="kc-two-col">
@@ -3510,7 +3597,7 @@
 
       <!-- 07 Outcome -->
       <section class="cs-section">
-        <p class="cs-section__num">07</p>
+        <p class="cs-section__num">07<span class="cs-section__chapter"> — Outcome</span></p>
         <h2 class="cs-section__title">A complete product, shipped solo</h2>
         <p class="cs-body">Measured by completeness, design quality, and the standards it set for a portfolio-level build.</p>
         <div class="kc-outcome-grid">
@@ -3547,7 +3634,7 @@
 
       <!-- 08 Reflection -->
       <section class="cs-section">
-        <p class="cs-section__num">08</p>
+        <p class="cs-section__num">08<span class="cs-section__chapter"> — Reflection</span></p>
         <h2 class="cs-section__title">Designing for the party</h2>
         <div class="kc-reflection">
           <p class="kc-reflection-text">"The World Cup is the most-watched event on the planet. The design question isn't <em>how do we show match data</em> — it's how do we make someone feel the electricity of 104 matches, 48 nations, and a billion simultaneous opinions, <em>every time they open their phone.</em> KickCast taught me that the most effective sports products aren't dashboards. They're companions."</p>
@@ -3605,7 +3692,7 @@
 
       <!-- 02 Impact -->
       <section class="cs-section">
-        <p class="cs-section__num">02</p>
+        <p class="cs-section__num">02<span class="cs-section__chapter"> — Impact</span></p>
         <h2 class="cs-section__title">Measurable Operational Impact</h2>
         <p class="cs-body">Rather than focusing on features, the success of HMS was measured through operational stabilization, risk reduction, and cross-functional alignment. The following outcomes reflect structural improvements observed after centralizing booking, availability, and billing workflows into a governed system.</p>
         <div class="hms-stat-cards">
@@ -3626,12 +3713,12 @@
             <span class="hms-stat-label">Reduction in double bookings</span>
           </div>
         </div>
-        <p class="hms-stat-note">Note: Metrics based on operational observations and workflow analysis during system implementation.</p>
+        <p class="hms-stat-note">Note: Metrics are stakeholder-reported workflow observations from the 8-week rollout period. Directional signal, not instrumented analytics.</p>
       </section>
 
       <!-- 03 Problem -->
       <section class="cs-section">
-        <p class="cs-section__num">03</p>
+        <p class="cs-section__num">03<span class="cs-section__chapter"> — Problem</span></p>
         <p class="hms-problem-headline">The system was a spreadsheet.<br>A very large one.</p>
         <p class="cs-body">BRAC's venues managed all bookings across disconnected spreadsheets, phone calls, and WhatsApp threads, creating a fragile, error-prone operation at scale.</p>
         <div class="ag-pain-showcase" data-pain-showcase>
@@ -3707,7 +3794,7 @@
 
       <!-- 04 Process -->
       <section class="cs-section">
-        <p class="cs-section__num">04</p>
+        <p class="cs-section__num">04<span class="cs-section__chapter"> — Process</span></p>
         <h2 class="cs-section__title">9 months. Four phases. One system.</h2>
         <p class="cs-body">Rather than jumping to screens, I started by mapping how bookings actually flowed across four teams and precisely where that flow broke down.</p>
         <div class="hms-process-diamond">
@@ -3752,7 +3839,7 @@
 
       <!-- 05 Journey Map -->
       <section class="cs-section">
-        <p class="cs-section__num">05</p>
+        <p class="cs-section__num">05<span class="cs-section__chapter"> — Research · Journey map</span></p>
         <h2 class="cs-section__title">Customer Journey Map — Room Booking for Guests</h2>
         <p class="cs-body">Mapped across two user types — New User and Existing User — against six phases of the booking workflow. The emotional curve revealed where friction peaks and where UX opportunities were highest.</p>
         <div class="hms-journey-wrap">
@@ -3871,7 +3958,7 @@
 
       <!-- 06 Design Decisions -->
       <section class="cs-section">
-        <p class="cs-section__num">06</p>
+        <p class="cs-section__num">06<span class="cs-section__chapter"> — Design decisions</span></p>
         <h2 class="cs-section__title">The choices that shaped the system</h2>
         <p class="cs-body">These weren't the only decisions but they were the moments where I had to push back, rethink, or take a non-obvious direction.</p>
         <div class="hms-decision-grid">
@@ -3920,7 +4007,7 @@
 
       <!-- 07 Stakeholder Collaboration -->
       <section class="cs-section">
-        <p class="cs-section__num">07</p>
+        <p class="cs-section__num">07<span class="cs-section__chapter"> — Collaboration</span></p>
         <h2 class="cs-section__title">How I worked with stakeholders across 9 months</h2>
         <p class="cs-body">An enterprise system with four stakeholder groups means design is as much a facilitation problem as it is a craft problem.</p>
         <div class="hms-tension-row">
@@ -3955,7 +4042,7 @@
 
       <!-- 08 Modular Architecture -->
       <section class="cs-section">
-        <p class="cs-section__num">08</p>
+        <p class="cs-section__num">08<span class="cs-section__chapter"> — Architecture</span></p>
         <h2 class="cs-section__title">HMS Modular Architecture</h2>
         <p class="cs-body">HMS was designed as a modular, domain-driven system to replace disconnected and dependency-heavy workflows. Instead of structuring around UI pages, the platform is organized into independent operational modules, each aligned with a core business function.</p>
         <div class="hms-arch-grid">
@@ -4040,7 +4127,7 @@
 
       <!-- 09 Wireframes -->
       <section class="cs-section">
-        <p class="cs-section__num">09</p>
+        <p class="cs-section__num">09<span class="cs-section__chapter"> — Wireframes</span></p>
         <h2 class="cs-section__title">Wireframe</h2>
         <p class="cs-body">To transform fragmented workflows into a scalable system, HMS was designed as a modular, role-based platform. Instead of organizing around UI pages, the structure was built around core operational domains — bookings, front desk, services, inventory, guest management, and finance.</p>
         <div class="cs-img-2col">
@@ -4057,7 +4144,7 @@
 
       <!-- 10 Unified Platform -->
       <section class="cs-section">
-        <p class="cs-section__num">10</p>
+        <p class="cs-section__num">10<span class="cs-section__chapter"> — Solution</span></p>
         <h2 class="cs-section__title">Unified HMS Platform</h2>
         <div class="cs-biz-layout">
           <figure class="cs-img-slot" style="--ratio:4/3">
@@ -4077,7 +4164,7 @@
 
       <!-- 11 Screen Deep Dives -->
       <section class="cs-section">
-        <p class="cs-section__num">11</p>
+        <p class="cs-section__num">11<span class="cs-section__chapter"> — Key screens</span></p>
         <h2 class="cs-section__title">Key Screens</h2>
         <p class="cs-body">Each screen was annotated with interaction states, component purpose, and role-specific visibility — ensuring engineering and stakeholders shared a single reference during build.</p>
 
@@ -4111,9 +4198,8 @@
 
       <!-- 12 Outcome + Learnings -->
       <section class="cs-section">
-        <p class="cs-section__num">12</p>
+        <p class="cs-section__num">12<span class="cs-section__chapter"> — Lessons</span></p>
         <h2 class="cs-section__title">What changed after launch</h2>
-        <p class="cs-body">Metrics are stakeholder-reported workflow observations from the 8-week rollout period. Directional signal, not instrumented analytics.</p>
         <div class="hms-reflection-grid">
           <div class="hms-reflection-card">
             <div class="hms-reflection-title">System design before screen design</div>
@@ -4181,7 +4267,7 @@
 
       <!-- 02 Impact -->
       <section class="cs-section">
-        <p class="cs-section__num">02</p>
+        <p class="cs-section__num">02<span class="cs-section__chapter"> — Impact</span></p>
         <h2 class="cs-section__title">From manual tracking to performance visibility</h2>
         <p class="cs-body">The success of the platform is framed around decision quality, operational visibility, injury-risk awareness, and faster coordination between cricket operations teams.</p>
         <div class="cs-comp-table-wrap">
@@ -4226,7 +4312,7 @@
 
       <!-- 03 Problem -->
       <section class="cs-section">
-        <p class="cs-section__num">03</p>
+        <p class="cs-section__num">03<span class="cs-section__chapter"> — Problem</span></p>
         <h2 class="cs-section__title">Player readiness lived in people's heads</h2>
         <p class="cs-body">Before the platform, athlete information was distributed across spreadsheets, trainer notes, physio updates, WhatsApp messages, and verbal communication. Each stakeholder had part of the truth — but no single system showed the complete readiness picture.</p>
         <div class="bcb-pain-list">
@@ -4240,7 +4326,7 @@
 
       <!-- 04 Strategy -->
       <section class="cs-section">
-        <p class="cs-section__num">04</p>
+        <p class="cs-section__num">04<span class="cs-section__chapter"> — Strategy</span></p>
         <h2 class="cs-section__title">One platform. Multiple stakeholders. One readiness model.</h2>
         <p class="cs-body">Instead of designing screens first, I mapped how player decisions actually happen: who checks fitness, who updates injury status, who monitors bowling load, who creates squads, and where decisions break down.</p>
         <div class="cs-comp-table-wrap">
@@ -4285,7 +4371,7 @@
 
       <!-- 05 Journey Map -->
       <section class="cs-section">
-        <p class="cs-section__num">05</p>
+        <p class="cs-section__num">05<span class="cs-section__chapter"> — User journey</span></p>
         <h2 class="cs-section__title">Creating a squad with player readiness context</h2>
         <p class="cs-body">Mapped around the most critical workflow: a selector building a squad while relying on inputs from physio, trainer, and coach teams.</p>
         <div class="cs-comp-table-wrap">
@@ -4353,7 +4439,7 @@
 
       <!-- 06 Design Decisions -->
       <section class="cs-section">
-        <p class="cs-section__num">06</p>
+        <p class="cs-section__num">06<span class="cs-section__chapter"> — Design decisions</span></p>
         <h2 class="cs-section__title">The choices that shaped the platform</h2>
         <div class="bcb-decision-grid">
           <div class="bcb-decision-card">
@@ -4381,7 +4467,7 @@
 
       <!-- 07 Stakeholder Collaboration -->
       <section class="cs-section">
-        <p class="cs-section__num">07</p>
+        <p class="cs-section__num">07<span class="cs-section__chapter"> — Collaboration</span></p>
         <h2 class="cs-section__title">Aligning coaches, physios, trainers, selectors, admins, and engineering</h2>
         <p class="cs-body">The main challenge was not only designing screens. It was aligning different stakeholder mental models and turning them into one safe operating model.</p>
         <div class="cs-comp-table-wrap">
@@ -4431,47 +4517,47 @@
 
       <!-- 08 Architecture -->
       <section class="cs-section">
-        <p class="cs-section__num">08</p>
+        <p class="cs-section__num">08<span class="cs-section__chapter"> — Solution</span></p>
         <h2 class="cs-section__title">A performance operations ecosystem</h2>
         <p class="cs-body">Six interconnected modules — each serving a distinct function, all feeding into one shared decision layer.</p>
         <div class="bcb-arch-grid">
           <div class="bcb-arch-card">
-            <span class="bcb-arch-icon">👤</span>
+            <span class="bcb-arch-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
             <div>
               <div class="bcb-arch-name">Player Management</div>
               <p class="bcb-arch-desc">Central profiles, role, team, playing type, fitness condition, and history</p>
             </div>
           </div>
           <div class="bcb-arch-card">
-            <span class="bcb-arch-icon">📊</span>
+            <span class="bcb-arch-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M6 17V11M11 17V6M16 17v-4M20 17V9"/></svg></span>
             <div>
               <div class="bcb-arch-name">Bowling Load Management</div>
               <p class="bcb-arch-desc">Date-wise workload tracking and bowler-specific overload monitoring</p>
             </div>
           </div>
           <div class="bcb-arch-card">
-            <span class="bcb-arch-icon">🩺</span>
+            <span class="bcb-arch-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a5 5 0 0 0 10 0V3"/><path d="M11 14v2a4 4 0 0 0 8 0v-1"/><circle cx="19" cy="13" r="2"/></svg></span>
             <div>
               <div class="bcb-arch-name">Physio Management</div>
               <p class="bcb-arch-desc">Injury notes, recovery status, treatment updates, and restrictions</p>
             </div>
           </div>
           <div class="bcb-arch-card">
-            <span class="bcb-arch-icon">🏏</span>
+            <span class="bcb-arch-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><circle cx="12" cy="8" r="3"/><path d="M9.5 10.5 8 14M14.5 10.5 16 14"/></svg></span>
             <div>
               <div class="bcb-arch-name">Squad Management</div>
               <p class="bcb-arch-desc">Create squads, assign players, review availability, and manage squad status</p>
             </div>
           </div>
           <div class="bcb-arch-card">
-            <span class="bcb-arch-icon">🔐</span>
+            <span class="bcb-arch-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1.2"/></svg></span>
             <div>
               <div class="bcb-arch-name">User &amp; Role Management</div>
               <p class="bcb-arch-desc">Admin control over coaches, physios, trainers, selectors, and system users</p>
             </div>
           </div>
           <div class="bcb-arch-card">
-            <span class="bcb-arch-icon">📋</span>
+            <span class="bcb-arch-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg></span>
             <div>
               <div class="bcb-arch-name">Dashboard &amp; Reporting</div>
               <p class="bcb-arch-desc">High-level view of readiness, injury count, workload alerts, and availability</p>
@@ -4486,7 +4572,7 @@
 
       <!-- 09 IA & Wireframes -->
       <section class="cs-section">
-        <p class="cs-section__num">09</p>
+        <p class="cs-section__num">09<span class="cs-section__chapter"> — Information architecture</span></p>
         <h2 class="cs-section__title">Structure before screens</h2>
         <p class="cs-body">The information architecture was designed around user intent, not department structure. Player profile became the centre of the system because every major workflow connects back to the player.</p>
         <div class="cs-comp-table-wrap">
@@ -4521,7 +4607,13 @@
             </tbody>
           </table>
         </div>
-        <p class="cs-body" style="margin-top:1.5rem;">Main navigation: Dashboard · Players · Bowling Load · Physio · Squads · Reports · User Management · Settings</p>
+        <figure class="bcb-nav">
+          <figcaption class="bcb-nav__cap">
+            <span class="bcb-nav__label">Main navigation</span>
+            <p>Eight top-level destinations. The player profile is the centre of the system — every major workflow connects back to it.</p>
+          </figcaption>
+          <ol class="bcb-nav__list"><li><span class="bcb-nav__dot" aria-hidden="true"></span>Dashboard</li><li class="is-hub"><span class="bcb-nav__dot" aria-hidden="true"></span>Players</li><li><span class="bcb-nav__dot" aria-hidden="true"></span>Bowling Load</li><li><span class="bcb-nav__dot" aria-hidden="true"></span>Physio</li><li><span class="bcb-nav__dot" aria-hidden="true"></span>Squads</li><li><span class="bcb-nav__dot" aria-hidden="true"></span>Reports</li><li><span class="bcb-nav__dot" aria-hidden="true"></span>User Management</li><li><span class="bcb-nav__dot" aria-hidden="true"></span>Settings</li></ol>
+        </figure>
         <figure class="cs-img-slot" style="--ratio:2/1">
           <img src="images/ams-sitemap.png" alt="Information architecture / sitemap diagram" onload="this.parentNode.classList.add('is-loaded')" onerror="this.parentNode.classList.add('is-empty');this.remove()">
           <figcaption class="cs-img-slot__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg><strong>Information architecture / sitemap diagram</strong><span>2000 × 1000 px</span><code>images/ams-sitemap.png</code></figcaption>
@@ -4530,7 +4622,7 @@
 
       <!-- 10 Design System -->
       <section class="cs-section">
-        <p class="cs-section__num">10</p>
+        <p class="cs-section__num">10<span class="cs-section__chapter"> — Design system</span></p>
         <h2 class="cs-section__title">Components built for clarity, speed, and risk awareness</h2>
         <p class="cs-body">The component system was built around one idea: make player condition immediately readable at a glance. Status should never require interpretation.</p>
         <div class="bcb-status-pills">
@@ -4554,7 +4646,7 @@
 
       <!-- 11 Final Solution -->
       <section class="cs-section">
-        <p class="cs-section__num">11</p>
+        <p class="cs-section__num">11<span class="cs-section__chapter"> — Outcome</span></p>
         <h2 class="cs-section__title">From manual athlete records to a performance decision platform</h2>
         <p class="cs-body">The final platform helped AMS move from fragmented athlete tracking to a structured system where teams could understand player readiness before taking action.</p>
         <div class="bcb-pain-list" style="margin-top:1.5rem;">
@@ -4569,7 +4661,7 @@
 
       <!-- 12 Learnings -->
       <section class="cs-section">
-        <p class="cs-section__num">12</p>
+        <p class="cs-section__num">12<span class="cs-section__chapter"> — Lessons</span></p>
         <h2 class="cs-section__title">Shared decision confidence, not just another dashboard</h2>
         <div class="bcb-learnings">
           <div class="bcb-learning-item">

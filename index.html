@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body id="top">
+  <a class="skip-link" href="#works">Skip to work</a>
 
   <!-- ── NAV ── -->
   <nav class="nav">
@@ -72,7 +73,7 @@
           <a href="https://medium.com/@samsadsam35" class="social-link" target="_blank" rel="noopener">MEDIUM <span class="arr">↗</span></a>
         </div>
         <div class="hire-cta">
-          <div class="hire-card">
+          <div class="hire-card" aria-hidden="true">
             <span class="hire-card__title">Hire Me</span>
             <div class="hire-card__lines">
               <div class="hire-card__line"></div>
@@ -126,7 +127,7 @@
     <div class="works-section__head wrap reveal">
       <h2 class="works-section__title">Things I've designed</h2>
       <div class="hire-cta">
-        <div class="hire-card">
+        <div class="hire-card" aria-hidden="true">
           <span class="hire-card__title">View All</span>
           <div class="hire-card__lines">
             <div class="hire-card__line"></div>
@@ -231,13 +232,13 @@
   <section class="about-section" id="about">
   <div class="about wrap">
     <div class="about__photo reveal">
-      <video src="images/animo-showcase.mp4" autoplay loop muted playsinline></video>
+      <video src="images/animo-showcase.mp4" autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
     </div>
     <div class="about__text reveal">
       <h2 class="about__title">I don't just execute briefs. I define scope, align stakeholders, and drive direction.</h2>
       <p class="about__desc">I've worked across fintech, microfinance, and enterprise, scaling platforms like Agami from 300K to 1.2M users.</p>
       <div class="hire-cta">
-        <div class="hire-card">
+        <div class="hire-card" aria-hidden="true">
           <span class="hire-card__title">Hire Me</span>
           <div class="hire-card__lines">
             <div class="hire-card__line"></div>

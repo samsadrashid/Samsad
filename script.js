@@ -21,12 +21,22 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Theme toggle ──
   const toggle = document.getElementById('themeToggle');
   if (toggle) {
+    const syncPressed = function () {
+      toggle.setAttribute('aria-pressed', document.documentElement.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
+    };
+    syncPressed();
     toggle.addEventListener('click', function () {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const next = isDark ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      syncPressed();
     });
+  }
+
+  // Decorative autoplay video stays still for reduced-motion visitors
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
   }
 
   // Animation libraries load from CDNs. If any is missing, or the visitor
