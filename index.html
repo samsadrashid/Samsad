@@ -700,9 +700,10 @@
       // Lane A: the gap between the intro text and the badge.
       // Lane B: the empty strip under the badge, out to the hero's right edge.
       var left = body.getBoundingClientRect().right - hr.left + 16;
-      var badgeL = pr.left - hr.left - 16;
-      var badgeB = pr.bottom - hr.top + 14;
-      var edgeR = (rightCol ? rightCol.getBoundingClientRect().right : hr.right) - hr.left;
+      // Badge block sits exactly on the visible badge so bricks touch it, not empty air
+      var badgeL = pr.left - hr.left + 2;
+      var badgeB = pr.bottom - hr.top - 2;
+      var edgeR = Math.min((rightCol ? rightCol.getBoundingClientRect().right : hr.right) - hr.left, hr.width) - 12;
       var laneA = badgeL - left, laneBH = floor - badgeB;
       var useB = laneBH >= CARD_H * 2;
       var right = useB ? edgeR : badgeL;
@@ -721,11 +722,22 @@
       var ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // Same bricks and physics as the Areas of Specialisation box
-      ctx.font = FONT;
-      var cards = SKILLS.map(function (label, i) {
-        return { label: label, color: COLORS[i % COLORS.length], w: Math.min(laneA - 8, Math.ceil(ctx.measureText(label).width) + 36) };
-      });
+      // Same bricks and physics as the Areas of Specialisation box. If the space is
+      // tight, use slimmer bricks, then show only as many skills as fit below the headline.
+      var head = document.querySelector('.hero__headline');
+      var topLimit = head ? head.getBoundingClientRect().bottom - hr.top + 24 : 0;
+      var areaFree = laneA * (floor - topLimit) + (useB ? (edgeR - badgeL) * laneBH : 0);
+      function makeCards(ch, font, pad) {
+        ctx.font = font;
+        return SKILLS.map(function (label, i) {
+          return { label: label, color: COLORS[i % COLORS.length], ch: ch, font: font,
+                   w: Math.min(laneA - 8, Math.ceil(ctx.measureText(label).width) + pad) };
+        });
+      }
+      function areaOf(list) { return list.reduce(function (t, c) { return t + c.w * c.ch; }, 0) / 0.42; }
+      var cards = makeCards(CARD_H, FONT, 36);
+      if (areaOf(cards) > areaFree) cards = makeCards(30, 'bold 11px sans-serif', 24);
+      while (cards.length > 8 && areaOf(cards) > areaFree) cards.pop();
 
       heroEngine = Matter.Engine.create({ gravity: { x: 0, y: 2 } });
       heroEngine.positionIterations = 12;
@@ -746,7 +758,7 @@
       var widthA = laneA, widthB = useB ? edgeR - badgeL : 0;
       var order = cards.map(function (c, i) { return i; }).sort(function () { return Math.random() - 0.5; });
       var quotaB = useB ? Math.round(cards.length * widthB / (widthA + widthB)) : 0;
-      var laneOf = {}, capB = widthB * Math.max(1, Math.floor(laneBH / CARD_H) - 1) * 0.8, usedB = 0;
+      var laneOf = {}, capB = widthB * Math.max(1, Math.floor(laneBH / cards[0].ch) - 1) * 0.8, usedB = 0;
       order.forEach(function (ci) {
         var w = cards[ci].w;
         if (quotaB > 0 && w <= widthB - 16 && usedB + w <= capB) { laneOf[ci] = 'B'; quotaB--; usedB += w; } else laneOf[ci] = 'A';
@@ -755,9 +767,11 @@
         var card = cards[ci], inB = laneOf[ci] === 'B';
         return setTimeout(function () {
           var lo = inB ? badgeL : left, hi = inB ? edgeR : badgeL;
-          var minX = lo + card.w / 2 + 8, maxX = hi - card.w / 2 - 8;
-          var y0 = inB ? badgeB + CARD_H * 0.6 : -CARD_H / 2 - Math.random() * 40;
-          var b = Bodies.rectangle(minX + Math.random() * Math.max(0, maxX - minX), y0, card.w, CARD_H,
+          // Keep spawns clear of the invisible side walls so bricks don't prop up against nothing
+          var inset = Math.min(48, Math.max(8, (hi - lo - card.w) / 4));
+          var minX = lo + card.w / 2 + inset, maxX = hi - card.w / 2 - inset;
+          var y0 = inB ? badgeB + card.ch * 0.6 : -card.ch / 2 - Math.random() * 40;
+          var b = Bodies.rectangle(minX + Math.random() * Math.max(0, maxX - minX), y0, card.w, card.ch,
             { restitution: 0.08, friction: 0.85, frictionAir: 0.01, density: 0.003 });
           b._meta = card;
           Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.1);
@@ -775,8 +789,8 @@
           var m = b._meta;
           ctx.save();
           ctx.translate(b.position.x, b.position.y); ctx.rotate(b.angle);
-          drawRoundedRect(ctx, -m.w / 2, -CARD_H / 2, m.w, CARD_H, CARD_RADIUS, m.color);
-          ctx.fillStyle = '#fff'; ctx.font = FONT;
+          drawRoundedRect(ctx, -m.w / 2, -m.ch / 2, m.w, m.ch, CARD_RADIUS, m.color);
+          ctx.fillStyle = '#fff'; ctx.font = m.font;
           ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
           ctx.fillText(m.label, 0, 0);
           ctx.restore();
@@ -794,7 +808,7 @@
         if (b.isStatic || !b._meta) return;
         var cos = Math.cos(-b.angle), sin = Math.sin(-b.angle);
         var dx = mx - b.position.x, dy = my - b.position.y;
-        if (Math.abs(dx * cos - dy * sin) < b._meta.w / 2 && Math.abs(dx * sin + dy * cos) < CARD_H / 2) hit = b;
+        if (Math.abs(dx * cos - dy * sin) < b._meta.w / 2 && Math.abs(dx * sin + dy * cos) < b._meta.ch / 2) hit = b;
       });
       return hit;
     }
