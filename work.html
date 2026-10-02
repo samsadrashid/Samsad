@@ -981,9 +981,69 @@
     .ag-stat-label { font-weight:700; font-size:.875rem; display:block; }
     .ag-stat-sub { font-size:.72rem; color:var(--gray-body); margin-top:.25rem; display:block; }
     .ag-problem-statement { font-size:clamp(1.5rem,3.5vw,2.5rem); font-weight:800; line-height:1.15; margin:2rem 0 1.5rem; }
-    .ag-pain-list { display:flex; flex-direction:column; gap:1.25rem; margin:1.5rem 0; }
-    .ag-pain-item h4 { font-size:1rem; font-weight:700; margin:0 0 .25rem; }
-    .ag-pain-item p { font-size:.9rem; color:var(--gray-body); margin:0; }
+    /* Pain points: accordion + synced carousel */
+    .ag-pain-showcase { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:2rem; align-items:center; background:#f3f3f5; border-radius:28px; padding:clamp(1.25rem,4vw,3.5rem); margin:2rem 0; }
+    [data-theme="dark"] .ag-pain-showcase { background:#1a1a1a; }
+    .ag-pain-acc { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; align-items:flex-start; gap:.75rem; }
+    .ag-pain-acc__item { border:1px solid rgba(0,0,0,.14); border-radius:999px; transition:border-radius .35s ease, background .35s ease, border-color .35s ease, box-shadow .35s ease; max-width:100%; }
+    [data-theme="dark"] .ag-pain-acc__item { border-color:rgba(255,255,255,.16); }
+    .ag-pain-acc__btn { all:unset; box-sizing:border-box; cursor:pointer; display:flex; align-items:center; gap:.75rem; padding:.7rem 1.4rem .7rem .8rem; font-family:var(--f-body); font-size:1.05rem; font-weight:500; color:var(--black); width:100%; }
+    .ag-pain-acc__btn:focus-visible { outline:2px solid var(--ag-pink); outline-offset:3px; border-radius:999px; }
+    .ag-pain-acc__icon { position:relative; width:26px; height:26px; flex:none; border:1.5px solid currentColor; border-radius:50%; opacity:.7; transition:width .3s, opacity .3s, margin .3s; }
+    .ag-pain-acc__icon::before, .ag-pain-acc__icon::after { content:""; position:absolute; left:50%; top:50%; width:11px; height:1.5px; background:currentColor; transform:translate(-50%,-50%); }
+    .ag-pain-acc__icon::after { transform:translate(-50%,-50%) rotate(90deg); }
+    .ag-pain-acc__panel { display:grid; grid-template-rows:0fr; contain:inline-size; transition:grid-template-rows .4s ease; }
+    .ag-pain-acc__panel > p { overflow:hidden; margin:0; padding:0 1.6rem; font-size:.95rem; line-height:1.55; color:var(--gray-body); }
+    .ag-pain-acc__item.is-active { border-radius:22px; border-color:transparent; background:#fff; box-shadow:0 6px 24px rgba(0,0,0,.05); width:min(100%,460px); }
+    [data-theme="dark"] .ag-pain-acc__item.is-active { background:#242424; }
+    .ag-pain-acc__item.is-active .ag-pain-acc__btn { padding:1.4rem 1.6rem .4rem; cursor:default; }
+    .ag-pain-acc__item.is-active .ag-pain-acc__icon { width:0; margin-right:-.75rem; opacity:0; border-width:0; }
+    .ag-pain-acc__item.is-active .ag-pain-acc__panel { grid-template-rows:1fr; }
+    .ag-pain-acc__item.is-active .ag-pain-acc__panel > p { padding-bottom:1.4rem; }
+    .ag-pain-carousel { position:relative; padding-bottom:2.5rem; }
+    .ag-pain-carousel__viewport { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 82%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 82%,transparent 100%); }
+    .ag-pain-carousel__track { display:flex; gap:1.25rem; transition:transform .6s cubic-bezier(.22,.8,.24,1); will-change:transform; }
+    .ag-pain-card { flex:0 0 68%; box-sizing:border-box; background:#fff; border-radius:24px; padding:.6rem .6rem 1.25rem; opacity:.35; transform:scale(.9); transition:opacity .5s ease, transform .5s ease; }
+    [data-theme="dark"] .ag-pain-card { background:#242424; }
+    .ag-pain-card.is-active { opacity:1; transform:scale(1); }
+    .ag-pain-card__visual { position:relative; aspect-ratio:16/11; border-radius:18px; overflow:hidden; display:flex; align-items:center; justify-content:center; color:var(--ag-pink); background:radial-gradient(120% 90% at 50% 20%, rgba(216,27,138,.16), rgba(216,27,138,.03) 60%, transparent), #f5f5f7; }
+    [data-theme="dark"] .ag-pain-card__visual { background:radial-gradient(120% 90% at 50% 20%, rgba(216,27,138,.25), rgba(216,27,138,.05) 60%, transparent), #1c1c1c; }
+    .ag-pain-card__visual svg { width:38%; height:auto; margin-bottom:12%; }
+    .ag-pain-card__num { position:absolute; top:.9rem; left:1.1rem; font-size:.75rem; font-weight:800; letter-spacing:.08em; color:var(--gray); }
+    .ag-pain-card__chip { position:absolute; left:6%; right:6%; bottom:7%; display:flex; align-items:center; gap:.6rem; padding:.6rem .9rem; border-radius:999px; background:rgba(255,255,255,.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); font-size:.85rem; font-weight:500; color:#222; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    [data-theme="dark"] .ag-pain-card__chip { background:rgba(40,40,40,.75); color:#eee; }
+    .ag-pain-card__chip-dot { flex:none; width:22px; height:22px; border-radius:50%; background:var(--ag-pink); box-shadow:0 0 0 4px rgba(216,27,138,.18); }
+    .ag-pain-card__layer { margin:1.1rem .6rem .25rem; font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ag-pink); }
+    .ag-pain-card__title { margin:0 .6rem .4rem; font-size:1.3rem; font-weight:600; line-height:1.2; }
+    .ag-pain-card__desc { margin:0 .6rem 1rem; font-size:.9rem; line-height:1.55; color:var(--gray-body); min-height:2.8em; }
+    .ag-pain-card__foot { display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin:0 .6rem; }
+    .ag-pain-card__tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+    .ag-pain-card__tags span { font-size:.7rem; font-weight:600; padding:.3rem .6rem; border-radius:999px; background:rgba(0,0,0,.05); }
+    [data-theme="dark"] .ag-pain-card__tags span { background:rgba(255,255,255,.08); }
+    .ag-pain-card__count { flex:none; font-size:.8rem; font-weight:600; padding:.45rem .9rem; border:1px solid currentColor; border-radius:999px; }
+    .ag-pain-nav { position:absolute; top:38%; z-index:2; width:40px; height:40px; border-radius:50%; border:0; display:flex; align-items:center; justify-content:center; cursor:pointer; background:rgba(255,255,255,.85); color:#111; box-shadow:0 4px 14px rgba(0,0,0,.1); transition:transform .2s; }
+    .ag-pain-nav:hover { transform:scale(1.08); }
+    [data-theme="dark"] .ag-pain-nav { background:rgba(50,50,50,.9); color:#eee; }
+    .ag-pain-nav--prev { left:8%; } .ag-pain-nav--next { right:8%; }
+    .ag-pain-dots { position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:center; gap:.4rem; }
+    .ag-pain-dot { width:8px; height:8px; padding:0; border:0; border-radius:50%; background:rgba(0,0,0,.18); cursor:pointer; transition:background .3s, width .3s; }
+    [data-theme="dark"] .ag-pain-dot { background:rgba(255,255,255,.2); }
+    .ag-pain-dot.is-active { background:var(--black); }
+    @media (max-width: 900px) {
+      .ag-pain-showcase { grid-template-columns:minmax(0,1fr); }
+      .ag-pain-acc__item.is-active { width:100%; }
+      .ag-pain-card { flex-basis:80%; }
+      .ag-pain-nav--prev { left:2%; } .ag-pain-nav--next { right:2%; }
+    }
+    @media (max-width: 480px) {
+      .ag-pain-card { flex-basis:88%; }
+      .ag-pain-card__foot { flex-direction:column; align-items:flex-start; }
+      .ag-pain-nav { display:none; }
+      .ag-pain-card__chip { font-size:.75rem; padding:.5rem .7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ag-pain-carousel__track, .ag-pain-card, .ag-pain-acc__item, .ag-pain-acc__panel { transition:none; }
+    }
     .ag-strat-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2rem 0; }
     .ag-strat-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem; position:relative; overflow:hidden; }
     [data-theme="dark"] .ag-strat-card { border-color:rgba(255,255,255,.1); }
@@ -1910,12 +1970,108 @@
         <p class="cs-section__num">02</p>
         <p class="ag-problem-statement">Users could see their finances.<br>They just could not act on them.</p>
         <p class="cs-body">Before the transformation, Agami was mainly a dashboard for existing BRAC Microfinance clients. The product had value, but limited utility and limited growth potential.</p>
-        <div class="ag-pain-list">
-          <div class="ag-pain-item"><h4>No transaction capability</h4><p>Users could read balance data, but could not transfer, pay, or complete financial actions.</p></div>
-          <div class="ag-pain-item"><h4>Branch dependency</h4><p>Most meaningful journeys still required physical branch visits.</p></div>
-          <div class="ag-pain-item"><h4>Closed to non-clients</h4><p>Prospective users had no useful way to explore products digitally.</p></div>
-          <div class="ag-pain-item"><h4>Limited engagement depth</h4><p>The app was helpful, but not essential for daily financial behavior.</p></div>
-          <div class="ag-pain-item"><h4>No scalable acquisition channel</h4><p>Growth depended heavily on offline processes and branch teams.</p></div>
+        <div class="ag-pain-showcase" data-pain-showcase>
+          <ul class="ag-pain-acc">
+            <li class="ag-pain-acc__item is-active" data-index="0">
+              <button type="button" class="ag-pain-acc__btn" aria-expanded="true">
+                <span class="ag-pain-acc__icon" aria-hidden="true"></span>
+                <span class="ag-pain-acc__title">No transaction capability</span>
+              </button>
+              <div class="ag-pain-acc__panel"><p>Users could read balance data, but could not transfer, pay, or complete financial actions.</p></div>
+            </li>
+            <li class="ag-pain-acc__item" data-index="1">
+              <button type="button" class="ag-pain-acc__btn" aria-expanded="false">
+                <span class="ag-pain-acc__icon" aria-hidden="true"></span>
+                <span class="ag-pain-acc__title">Branch dependency</span>
+              </button>
+              <div class="ag-pain-acc__panel"><p>Most meaningful journeys still required physical branch visits.</p></div>
+            </li>
+            <li class="ag-pain-acc__item" data-index="2">
+              <button type="button" class="ag-pain-acc__btn" aria-expanded="false">
+                <span class="ag-pain-acc__icon" aria-hidden="true"></span>
+                <span class="ag-pain-acc__title">Closed to non-clients</span>
+              </button>
+              <div class="ag-pain-acc__panel"><p>Prospective users had no useful way to explore products digitally.</p></div>
+            </li>
+            <li class="ag-pain-acc__item" data-index="3">
+              <button type="button" class="ag-pain-acc__btn" aria-expanded="false">
+                <span class="ag-pain-acc__icon" aria-hidden="true"></span>
+                <span class="ag-pain-acc__title">Limited engagement depth</span>
+              </button>
+              <div class="ag-pain-acc__panel"><p>The app was helpful, but not essential for daily financial behavior.</p></div>
+            </li>
+            <li class="ag-pain-acc__item" data-index="4">
+              <button type="button" class="ag-pain-acc__btn" aria-expanded="false">
+                <span class="ag-pain-acc__icon" aria-hidden="true"></span>
+                <span class="ag-pain-acc__title">No scalable acquisition channel</span>
+              </button>
+              <div class="ag-pain-acc__panel"><p>Growth depended heavily on offline processes and branch teams.</p></div>
+            </li>
+          </ul>
+          <div class="ag-pain-carousel">
+            <div class="ag-pain-carousel__viewport">
+              <div class="ag-pain-carousel__track">
+              <article class="ag-pain-card is-active" data-index="0">
+                <div class="ag-pain-card__visual">
+                  <span class="ag-pain-card__num">01</span>
+                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="16" width="44" height="32" rx="6"/><path d="M10 26h44"/><path d="M20 38h10"/><circle cx="46" cy="40" r="8" fill="currentColor" opacity=".12" stroke="none"/><path d="M42 36l8 8M50 36l-8 8"/></svg>
+                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>0 in-app transfers possible</div>
+                </div>
+                <p class="ag-pain-card__layer">Read-only</p>
+                <h4 class="ag-pain-card__title">No transaction capability</h4>
+                <p class="ag-pain-card__desc">Users could read balance data, but could not transfer, pay, or complete financial actions.</p>
+                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>View balance</span><span>No transfer</span><span>No payment</span></div><span class="ag-pain-card__count">01 / 05</span></div>
+              </article>
+              <article class="ag-pain-card" data-index="1">
+                <div class="ag-pain-card__visual">
+                  <span class="ag-pain-card__num">02</span>
+                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 28L32 14l22 14"/><path d="M14 28v20h36V28"/><path d="M22 48V34M32 48V34M42 48V34"/><path d="M8 52h48"/></svg>
+                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Every key journey ends at a branch</div>
+                </div>
+                <p class="ag-pain-card__layer">Offline</p>
+                <h4 class="ag-pain-card__title">Branch dependency</h4>
+                <p class="ag-pain-card__desc">Most meaningful journeys still required physical branch visits.</p>
+                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Branch visit</span><span>Paper forms</span><span>Queues</span></div><span class="ag-pain-card__count">02 / 05</span></div>
+              </article>
+              <article class="ag-pain-card" data-index="2">
+                <div class="ag-pain-card__visual">
+                  <span class="ag-pain-card__num">03</span>
+                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="28" width="32" height="24" rx="5"/><path d="M22 28v-6a10 10 0 0120 0v6"/><circle cx="32" cy="40" r="3"/><path d="M32 43v4"/></svg>
+                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Prospects locked out at login</div>
+                </div>
+                <p class="ag-pain-card__layer">Access</p>
+                <h4 class="ag-pain-card__title">Closed to non-clients</h4>
+                <p class="ag-pain-card__desc">Prospective users had no useful way to explore products digitally.</p>
+                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Clients only</span><span>No discovery</span><span>No sign-up</span></div><span class="ag-pain-card__count">03 / 05</span></div>
+              </article>
+              <article class="ag-pain-card" data-index="3">
+                <div class="ag-pain-card__visual">
+                  <span class="ag-pain-card__num">04</span>
+                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 50h44"/><path d="M14 44l10-6 8 4 10-10 8 2"/><circle cx="24" cy="38" r="2"/><circle cx="32" cy="42" r="2"/><circle cx="42" cy="32" r="2"/></svg>
+                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Opened only to check, then closed</div>
+                </div>
+                <p class="ag-pain-card__layer">Engagement</p>
+                <h4 class="ag-pain-card__title">Limited engagement depth</h4>
+                <p class="ag-pain-card__desc">The app was helpful, but not essential for daily financial behavior.</p>
+                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Occasional use</span><span>Low habit</span><span>Shallow sessions</span></div><span class="ag-pain-card__count">04 / 05</span></div>
+              </article>
+              <article class="ag-pain-card" data-index="4">
+                <div class="ag-pain-card__visual">
+                  <span class="ag-pain-card__num">05</span>
+                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="22" cy="24" r="6"/><circle cx="42" cy="24" r="6"/><path d="M12 46c0-6 4-10 10-10s10 4 10 10M32 46c0-6 4-10 10-10s10 4 10 10"/><path d="M32 14v-4M52 30h4M8 30h4"/></svg>
+                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Growth capped by field-team capacity</div>
+                </div>
+                <p class="ag-pain-card__layer">Growth</p>
+                <h4 class="ag-pain-card__title">No scalable acquisition channel</h4>
+                <p class="ag-pain-card__desc">Growth depended heavily on offline processes and branch teams.</p>
+                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Field teams</span><span>Manual onboarding</span><span>Slow reach</span></div><span class="ag-pain-card__count">05 / 05</span></div>
+              </article>
+              </div>
+            </div>
+            <button type="button" class="ag-pain-nav ag-pain-nav--prev" aria-label="Previous pain point"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button type="button" class="ag-pain-nav ag-pain-nav--next" aria-label="Next pain point"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            <div class="ag-pain-dots"><button type="button" class="ag-pain-dot is-active" data-index="0" aria-label="Show pain point 1"></button><button type="button" class="ag-pain-dot" data-index="1" aria-label="Show pain point 2"></button><button type="button" class="ag-pain-dot" data-index="2" aria-label="Show pain point 3"></button><button type="button" class="ag-pain-dot" data-index="3" aria-label="Show pain point 4"></button><button type="button" class="ag-pain-dot" data-index="4" aria-label="Show pain point 5"></button></div>
+          </div>
         </div>
       </section>
 
@@ -4494,6 +4650,54 @@
         modal.addEventListener('wheel', function (e) { e.stopPropagation(); }, { passive: false });
         modal.addEventListener('touchstart', function (e) { e.stopPropagation(); }, { passive: true });
         modal.addEventListener('touchmove', function (e) { e.stopPropagation(); }, { passive: false });
+      });
+    })();
+  </script>
+  <script>
+    /* ── Agami pain points: accordion + carousel ── */
+    (function () {
+      document.querySelectorAll('[data-pain-showcase]').forEach(function (root) {
+        var items = root.querySelectorAll('.ag-pain-acc__item');
+        var cards = root.querySelectorAll('.ag-pain-card');
+        var dots  = root.querySelectorAll('.ag-pain-dot');
+        var track = root.querySelector('.ag-pain-carousel__track');
+        var viewport = root.querySelector('.ag-pain-carousel__viewport');
+        var n = cards.length, current = 0;
+
+        function position() {
+          var card = cards[current];
+          var offset = card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2;
+          track.style.transform = 'translateX(' + (-offset) + 'px)';
+        }
+        function go(i) {
+          current = (i + n) % n;
+          [items, cards, dots].forEach(function (list) {
+            list.forEach(function (el, k) { el.classList.toggle('is-active', k === current); });
+          });
+          items.forEach(function (el, k) {
+            el.querySelector('.ag-pain-acc__btn').setAttribute('aria-expanded', k === current ? 'true' : 'false');
+          });
+          position();
+        }
+
+        items.forEach(function (el, k) { el.querySelector('.ag-pain-acc__btn').addEventListener('click', function () { go(k); }); });
+        dots.forEach(function (el, k) { el.addEventListener('click', function () { go(k); }); });
+        cards.forEach(function (el, k) { el.addEventListener('click', function () { if (k !== current) go(k); }); });
+        root.querySelector('.ag-pain-nav--prev').addEventListener('click', function () { go(current - 1); });
+        root.querySelector('.ag-pain-nav--next').addEventListener('click', function () { go(current + 1); });
+
+        var startX = null;
+        viewport.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+        viewport.addEventListener('touchend', function (e) {
+          if (startX === null) return;
+          var dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 40) go(current + (dx < 0 ? 1 : -1));
+          startX = null;
+        });
+
+        window.addEventListener('resize', position);
+        if ('ResizeObserver' in window) new ResizeObserver(position).observe(viewport);
+        go(0);
       });
     })();
   </script>
