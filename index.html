@@ -662,32 +662,38 @@
       });
       if (btn) btn.addEventListener('click', initBricks);
       initBricks();
-      initHeroDrop();
     });
 
     /* ── Hero experiment: skill bricks drop into the space between the
-       intro text and the photo badge, landing on the ticker. Replays on
-       every page load. Desktop only; skipped for reduced motion. ── */
-    var heroEngine, heroRaf, heroTimers = [], heroResizeT;
+       intro text and the photo badge and settle on top of the ticker.
+       Replays on every page load. Desktop only; skipped for reduced motion. ── */
+    var heroEngine, heroRaf, heroTimers = [], heroResizeT, heroLastW = 0;
+    function stopHeroDrop() {
+      cancelAnimationFrame(heroRaf);
+      heroTimers.forEach(clearTimeout);
+      heroTimers = [];
+      if (heroEngine) { Matter.World.clear(heroEngine.world); Matter.Engine.clear(heroEngine); heroEngine = null; }
+    }
     function initHeroDrop() {
       var hero = document.querySelector('.hero');
       var body = document.querySelector('.hero__body');
       var photo = document.querySelector('.hero__photo');
+      var ticker = document.querySelector('.ticker');
       if (!hero || !body || !photo || !window.Matter) return;
-
-      cancelAnimationFrame(heroRaf);
-      heroTimers.forEach(clearTimeout);
-      if (heroEngine) { Matter.World.clear(heroEngine.world); Matter.Engine.clear(heroEngine); heroEngine = null; }
+      stopHeroDrop();
       var canvas = hero.querySelector('.hero-drop');
       if (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         if (canvas) canvas.remove();
         return;
       }
 
+      // Measure after layout settles: the gap between text and badge, floor = top of the ticker
       var hr = hero.getBoundingClientRect();
-      var left = body.getBoundingClientRect().right - hr.left + 32;
-      var right = photo.getBoundingClientRect().left - hr.left - 32;
-      if (right - left < 260) { if (canvas) canvas.remove(); return; }
+      var left = body.getBoundingClientRect().right - hr.left + 28;
+      var right = photo.getBoundingClientRect().left - hr.left - 28;
+      var floor = (ticker ? ticker.getBoundingClientRect().top : hr.bottom) - hr.top;
+      var regionW = right - left;
+      if (regionW < 260) { if (canvas) canvas.remove(); return; }
 
       if (!canvas) {
         canvas = document.createElement('canvas');
@@ -696,36 +702,59 @@
         hero.insertBefore(canvas, hero.firstChild);
       }
       var dpr = window.devicePixelRatio || 1;
-      var W = hr.width, H = hr.height;
+      var W = hr.width, H = floor;
       canvas.width = W * dpr; canvas.height = H * dpr;
       canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
       var ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = FONT;
-      var maxW = right - left - 16;
-      var cards = SKILLS.map(function (label, i) {
-        return { label: label, color: COLORS[i % COLORS.length], w: Math.min(maxW, Math.ceil(ctx.measureText(label).width) + 36) };
-      });
 
-      heroEngine = Matter.Engine.create({ gravity: { x: 0, y: 2 } });
-      heroEngine.positionIterations = 12;
-      heroEngine.velocityIterations = 10;
+      // Brick size scales with the gap so the pile spans it in ~4 rows
+      var scale = Math.max(0.75, Math.min(1.25, regionW / 560));
+      var BH = Math.round(38 * scale), BR = Math.round(8 * scale), PAD = Math.round(30 * scale);
+      var font = '700 ' + Math.max(11, Math.round(13 * scale)) + 'px "Barlow", sans-serif';
+      ctx.font = font;
+      var cards = SKILLS.map(function (label, i) {
+        return { label: label, color: COLORS[i % COLORS.length], w: Math.min(regionW - 8, Math.ceil(ctx.measureText(label).width) + PAD) };
+      });
+      // Longest first gives a stable base, then shuffle the rest lightly for variety
+      cards.sort(function (a, b) { return b.w - a.w; });
+
+      heroEngine = Matter.Engine.create({ gravity: { x: 0, y: 1.6 } });
+      heroEngine.positionIterations = 14;
+      heroEngine.velocityIterations = 12;
       var Bodies = Matter.Bodies, Composite = Matter.Composite, Body = Matter.Body;
       Composite.add(heroEngine.world, [
-        Bodies.rectangle((left + right) / 2, H + 25, W * 2, 50, { isStatic: true }),
-        Bodies.rectangle(left - 25, H / 2, 50, H * 4, { isStatic: true }),
-        Bodies.rectangle(right + 25, H / 2, 50, H * 4, { isStatic: true })
+        Bodies.rectangle(W / 2, H + 50, W * 2, 100, { isStatic: true, friction: 1 }),
+        Bodies.rectangle(left - 50, H / 2, 100, H * 4, { isStatic: true }),
+        Bodies.rectangle(right + 50, H / 2, 100, H * 4, { isStatic: true })
       ]);
 
+      // Skyline packing: drop each brick over the lowest stretch of the pile
+      var COLS = Math.max(8, Math.floor(regionW / 12));
+      var colW = regionW / COLS, sky = new Array(COLS).fill(0);
+      function placeX(w) {
+        var span = Math.min(COLS, Math.ceil(w / colW)), best = 0, bestH = Infinity;
+        for (var c = 0; c + span <= COLS; c++) {
+          var h = 0; for (var k = c; k < c + span; k++) h = Math.max(h, sky[k]);
+          if (h < bestH - 0.5 || (Math.abs(h - bestH) <= 0.5 && Math.random() < 0.35)) { bestH = h; best = c; }
+        }
+        for (var k2 = best; k2 < best + span; k2++) sky[k2] = bestH + BH;
+        return left + (best + span / 2) * colW;
+      }
+
       heroTimers = cards.map(function (card, i) {
+        var x = placeX(card.w);
         return setTimeout(function () {
-          var minX = left + card.w / 2 + 6, maxX = right - card.w / 2 - 6;
-          var b = Bodies.rectangle(minX + Math.random() * Math.max(0, maxX - minX), -CARD_H - Math.random() * 60, card.w, CARD_H,
-            { restitution: 0.08, friction: 0.85, frictionAir: 0.01, density: 0.003 });
+          var tilt = Math.random() < 0.2 ? (Math.random() - 0.5) * 0.3 : (Math.random() - 0.5) * 0.04;
+          var b = Bodies.rectangle(x, -BH - Math.random() * 40, card.w, BH, {
+            chamfer: { radius: BR }, angle: tilt,
+            restitution: 0.02, friction: 0.9, frictionStatic: 1, frictionAir: 0.012, density: 0.004
+          });
+          // Heavier rotational inertia: bricks settle flat instead of standing on end
+          Body.setInertia(b, b.inertia * 8);
           b._meta = card;
-          Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.1);
           Composite.add(heroEngine.world, b);
-        }, 500 + i * 120);
+        }, 200 + i * 110);
       });
 
       var last = performance.now();
@@ -738,18 +767,43 @@
           var m = b._meta;
           ctx.save();
           ctx.translate(b.position.x, b.position.y); ctx.rotate(b.angle);
-          drawRoundedRect(ctx, -m.w / 2, -CARD_H / 2, m.w, CARD_H, CARD_RADIUS, m.color);
-          ctx.fillStyle = '#fff'; ctx.font = FONT;
+          ctx.shadowColor = 'rgba(0,0,0,.12)'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 2;
+          drawRoundedRect(ctx, -m.w / 2, -BH / 2, m.w, BH, BR, m.color);
+          ctx.shadowColor = 'transparent';
+          ctx.fillStyle = '#fff'; ctx.font = font;
           ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-          ctx.fillText(m.label, 0, 0);
+          ctx.fillText(m.label, 0, 1);
           ctx.restore();
         });
         heroRaf = requestAnimationFrame(loop);
       })(last);
     }
+    function startHeroDrop() {
+      heroLastW = window.innerWidth;
+      initHeroDrop();
+    }
+    // Wait for the web font and images so the hero has its final height before measuring
+    var heroStarted = false, fontsDone = false, pageDone = document.readyState === 'complete';
+    function kickHero() { if (heroStarted) return; heroStarted = true; startHeroDrop(); }
+    function maybeKick() { if (fontsDone && pageDone) requestAnimationFrame(kickHero); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fontsDone = true; maybeKick(); });
+    else fontsDone = true;
+    if (!pageDone) window.addEventListener('load', function () { pageDone = true; maybeKick(); });
+    maybeKick();
+    setTimeout(kickHero, 3000);
+    // If the hero's height changes later (late font/image), re-measure so bricks stay on the ticker
+    if ('ResizeObserver' in window) {
+      var heroH = 0;
+      new ResizeObserver(function (entries) {
+        var h = entries[0].contentRect.height;
+        if (heroStarted && heroH && Math.abs(h - heroH) > 4) { clearTimeout(heroResizeT); heroResizeT = setTimeout(startHeroDrop, 200); }
+        heroH = h;
+      }).observe(document.querySelector('.hero'));
+    }
     window.addEventListener('resize', function () {
+      if (!heroStarted || window.innerWidth === heroLastW) return;
       clearTimeout(heroResizeT);
-      heroResizeT = setTimeout(initHeroDrop, 300);
+      heroResizeT = setTimeout(startHeroDrop, 300);
     });
   })();
   </script>
