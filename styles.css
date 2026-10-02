@@ -1703,3 +1703,15 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 [data-theme="dark"] .tool-chip { background: #f4f4f4; border-color: transparent; }
 .tool-chip img { width: 58%; height: 58%; object-fit: contain; display: block; }
 .tool-chip--text span[aria-hidden] { font-family: var(--f-head); font-weight: 800; font-size: 1rem; color: #555; letter-spacing: -.02em; }
+
+/* ── Hero experiment: falling skill bricks ── */
+.hero { position: relative; }
+.hero > :not(.hero-drop) { position: relative; z-index: 1; }
+.hero-drop { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; }
+
+/* Room for all specialisation bricks */
+.skills-col:first-child .skills-box { min-height: 440px; }
+@media (max-width: 900px) { .skills-col:first-child .skills-box { min-height: 520px; } }
+/* Bricks fall in front of the badge so every drop is visible */
+.hero-drop { z-index: 2; }
+.skills-section[hidden] { display: none !important; }
