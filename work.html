@@ -1008,19 +1008,9 @@
     .ag-pain-card.is-active { opacity:1; transform:scale(1); }
     .ag-pain-card__visual { position:relative; aspect-ratio:16/11; border-radius:18px; overflow:hidden; display:flex; align-items:center; justify-content:center; color:var(--ag-pink); background:radial-gradient(120% 90% at 50% 20%, rgba(216,27,138,.16), rgba(216,27,138,.03) 60%, transparent), #f5f5f7; }
     [data-theme="dark"] .ag-pain-card__visual { background:radial-gradient(120% 90% at 50% 20%, rgba(216,27,138,.25), rgba(216,27,138,.05) 60%, transparent), #1c1c1c; }
-    .ag-pain-card__visual svg { width:38%; height:auto; margin-bottom:12%; }
-    .ag-pain-card__num { position:absolute; top:.9rem; left:1.1rem; font-size:.75rem; font-weight:800; letter-spacing:.08em; color:var(--gray); }
-    .ag-pain-card__chip { position:absolute; left:6%; right:6%; bottom:7%; display:flex; align-items:center; gap:.6rem; padding:.6rem .9rem; border-radius:999px; background:rgba(255,255,255,.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); font-size:.85rem; font-weight:500; color:#222; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    [data-theme="dark"] .ag-pain-card__chip { background:rgba(40,40,40,.75); color:#eee; }
-    .ag-pain-card__chip-dot { flex:none; width:22px; height:22px; border-radius:50%; background:var(--ag-pink); box-shadow:0 0 0 4px rgba(216,27,138,.18); }
-    .ag-pain-card__layer { margin:1.1rem .6rem .25rem; font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ag-pink); }
-    .ag-pain-card__title { margin:0 .6rem .4rem; font-size:1.3rem; font-weight:600; line-height:1.2; }
-    .ag-pain-card__desc { margin:0 .6rem 1rem; font-size:.9rem; line-height:1.55; color:var(--gray-body); min-height:2.8em; }
-    .ag-pain-card__foot { display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin:0 .6rem; }
-    .ag-pain-card__tags { display:flex; flex-wrap:wrap; gap:.35rem; }
-    .ag-pain-card__tags span { font-size:.7rem; font-weight:600; padding:.3rem .6rem; border-radius:999px; background:rgba(0,0,0,.05); }
-    [data-theme="dark"] .ag-pain-card__tags span { background:rgba(255,255,255,.08); }
-    .ag-pain-card__count { flex:none; font-size:.8rem; font-weight:600; padding:.45rem .9rem; border:1px solid currentColor; border-radius:999px; }
+    .ag-pain-card__visual svg { width:34%; height:auto; }
+    .ag-pain-card__title { margin:1.1rem .6rem .4rem; font-size:1.3rem; font-weight:600; line-height:1.2; }
+    .ag-pain-card__desc { margin:0 .6rem .4rem; font-size:.9rem; line-height:1.55; color:var(--gray-body); min-height:2.8em; }
     .ag-pain-nav { position:absolute; top:38%; z-index:2; width:40px; height:40px; border-radius:50%; border:0; display:flex; align-items:center; justify-content:center; cursor:pointer; background:rgba(255,255,255,.85); color:#111; box-shadow:0 4px 14px rgba(0,0,0,.1); transition:transform .2s; }
     .ag-pain-nav:hover { transform:scale(1.08); }
     [data-theme="dark"] .ag-pain-nav { background:rgba(50,50,50,.9); color:#eee; }
@@ -1037,9 +1027,8 @@
     }
     @media (max-width: 480px) {
       .ag-pain-card { flex-basis:88%; }
-      .ag-pain-card__foot { flex-direction:column; align-items:flex-start; }
       .ag-pain-nav { display:none; }
-      .ag-pain-card__chip { font-size:.75rem; padding:.5rem .7rem; }
+      .ag-pain-carousel__viewport { -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
     }
     @media (prefers-reduced-motion: reduce) {
       .ag-pain-carousel__track, .ag-pain-card, .ag-pain-acc__item, .ag-pain-acc__panel { transition:none; }
@@ -2013,58 +2002,38 @@
               <div class="ag-pain-carousel__track">
               <article class="ag-pain-card is-active" data-index="0">
                 <div class="ag-pain-card__visual">
-                  <span class="ag-pain-card__num">01</span>
                   <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="16" width="44" height="32" rx="6"/><path d="M10 26h44"/><path d="M20 38h10"/><circle cx="46" cy="40" r="8" fill="currentColor" opacity=".12" stroke="none"/><path d="M42 36l8 8M50 36l-8 8"/></svg>
-                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>0 in-app transfers possible</div>
                 </div>
-                <p class="ag-pain-card__layer">Read-only</p>
                 <h4 class="ag-pain-card__title">No transaction capability</h4>
                 <p class="ag-pain-card__desc">Users could read balance data, but could not transfer, pay, or complete financial actions.</p>
-                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>View balance</span><span>No transfer</span><span>No payment</span></div><span class="ag-pain-card__count">01 / 05</span></div>
               </article>
               <article class="ag-pain-card" data-index="1">
                 <div class="ag-pain-card__visual">
-                  <span class="ag-pain-card__num">02</span>
                   <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 28L32 14l22 14"/><path d="M14 28v20h36V28"/><path d="M22 48V34M32 48V34M42 48V34"/><path d="M8 52h48"/></svg>
-                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Every key journey ends at a branch</div>
                 </div>
-                <p class="ag-pain-card__layer">Offline</p>
                 <h4 class="ag-pain-card__title">Branch dependency</h4>
                 <p class="ag-pain-card__desc">Most meaningful journeys still required physical branch visits.</p>
-                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Branch visit</span><span>Paper forms</span><span>Queues</span></div><span class="ag-pain-card__count">02 / 05</span></div>
               </article>
               <article class="ag-pain-card" data-index="2">
                 <div class="ag-pain-card__visual">
-                  <span class="ag-pain-card__num">03</span>
                   <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="28" width="32" height="24" rx="5"/><path d="M22 28v-6a10 10 0 0120 0v6"/><circle cx="32" cy="40" r="3"/><path d="M32 43v4"/></svg>
-                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Prospects locked out at login</div>
                 </div>
-                <p class="ag-pain-card__layer">Access</p>
                 <h4 class="ag-pain-card__title">Closed to non-clients</h4>
                 <p class="ag-pain-card__desc">Prospective users had no useful way to explore products digitally.</p>
-                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Clients only</span><span>No discovery</span><span>No sign-up</span></div><span class="ag-pain-card__count">03 / 05</span></div>
               </article>
               <article class="ag-pain-card" data-index="3">
                 <div class="ag-pain-card__visual">
-                  <span class="ag-pain-card__num">04</span>
                   <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 50h44"/><path d="M14 44l10-6 8 4 10-10 8 2"/><circle cx="24" cy="38" r="2"/><circle cx="32" cy="42" r="2"/><circle cx="42" cy="32" r="2"/></svg>
-                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Opened only to check, then closed</div>
                 </div>
-                <p class="ag-pain-card__layer">Engagement</p>
                 <h4 class="ag-pain-card__title">Limited engagement depth</h4>
                 <p class="ag-pain-card__desc">The app was helpful, but not essential for daily financial behavior.</p>
-                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Occasional use</span><span>Low habit</span><span>Shallow sessions</span></div><span class="ag-pain-card__count">04 / 05</span></div>
               </article>
               <article class="ag-pain-card" data-index="4">
                 <div class="ag-pain-card__visual">
-                  <span class="ag-pain-card__num">05</span>
                   <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="22" cy="24" r="6"/><circle cx="42" cy="24" r="6"/><path d="M12 46c0-6 4-10 10-10s10 4 10 10M32 46c0-6 4-10 10-10s10 4 10 10"/><path d="M32 14v-4M52 30h4M8 30h4"/></svg>
-                  <div class="ag-pain-card__chip"><span class="ag-pain-card__chip-dot"></span>Growth capped by field-team capacity</div>
                 </div>
-                <p class="ag-pain-card__layer">Growth</p>
                 <h4 class="ag-pain-card__title">No scalable acquisition channel</h4>
                 <p class="ag-pain-card__desc">Growth depended heavily on offline processes and branch teams.</p>
-                <div class="ag-pain-card__foot"><div class="ag-pain-card__tags"><span>Field teams</span><span>Manual onboarding</span><span>Slow reach</span></div><span class="ag-pain-card__count">05 / 05</span></div>
               </article>
               </div>
             </div>
