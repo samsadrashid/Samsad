@@ -1044,10 +1044,10 @@
     .ag-decision-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:2rem 0; }
     .ag-decision-card { border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:1.5rem; border-top-width:4px; }
     [data-theme="dark"] .ag-decision-card { border-color:rgba(255,255,255,.1); border-top-width:4px; }
-    .ag-decision-card--tx { border-top-color:#27ae60; }
-    .ag-decision-card--biz { border-top-color:#c0392b; }
-    .ag-decision-card--err { border-top-color:#2980b9; }
-    .ag-decision-card--nc { border-top-color:#b8860b; }
+    .ag-decision-card--tx { border-top-color:var(--ag-pink); }
+    .ag-decision-card--biz { border-top-color:var(--ag-pink); }
+    .ag-decision-card--err { border-top-color:var(--ag-pink); }
+    .ag-decision-card--nc { border-top-color:var(--ag-pink); }
     .ag-decision-card__layer { font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-body); margin:0 0 .625rem; }
     .ag-decision-card__title { font-size:1.05rem; font-weight:800; margin:0 0 .75rem; }
     .ag-decision-card__body { font-size:.875rem; color:var(--gray-body); margin:0; line-height:1.55; }
@@ -1098,6 +1098,12 @@
     /* ── KickCast Case Study ── */
     /* ── HMS Case Study ── */
     :root { --hms-pink: #e91e8c; }
+    #cs-agami .cs-section__num { margin-bottom: .75rem; }
+    #cs-agami .cs-section__title { margin-bottom: 1.25rem; }
+    #cs-agami .cs-body { margin-bottom: 1rem; line-height: 1.8; color: var(--gray-body); font-size: 1rem; }
+    [data-theme="dark"] #cs-agami .cs-body { color: rgba(255,255,255,.55); }
+    #cs-agami .cs-tagline { font-size: 1.1rem; color: var(--gray-body); line-height: 1.65; margin-bottom: 1.5rem; font-style: italic; }
+    [data-theme="dark"] #cs-agami .cs-tagline { color: rgba(255,255,255,.5); }
     #cs-hms.open ~ #cs-nav-hms { display: flex; }
     #cs-hms .cs-section__num { margin-bottom: .75rem; }
     #cs-hms .cs-section__title { margin-bottom: 1.25rem; }
@@ -1129,6 +1135,7 @@
     .hms-diamond-phase span { font-family:var(--f-head); font-weight:700; font-size:.875rem; color:var(--hms-pink); display:block; }
     .hms-diamond-phase small { font-size:.7rem; color:var(--gray-body); }
     .hms-diamond-arrow { color:var(--hms-pink); font-size:1.1rem; margin:0 2px; }
+    @media (max-width:780px) { .hms-process-diamond { flex-direction:column; align-items:stretch; gap:.25rem; } .hms-diamond-phase { margin:0; } .hms-diamond-arrow { align-self:center; transform:rotate(90deg); } }
 
     .hms-process-table { width:100%; border-collapse:collapse; margin:2rem 0; }
     .hms-process-table thead tr { background:var(--light); }
@@ -1176,10 +1183,10 @@
     @media (max-width:780px) { .hms-decision-grid { grid-template-columns:1fr; } }
     .hms-decision-card { border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:1.5rem; }
     [data-theme="dark"] .hms-decision-card { border-color:rgba(255,255,255,.1); }
-    .hms-decision-card--green { border-top:3px solid #27ae60; }
-    .hms-decision-card--red   { border-top:3px solid #e74c3c; }
-    .hms-decision-card--blue  { border-top:3px solid #2980b9; }
-    .hms-decision-card--gold  { border-top:3px solid #b8860b; }
+    .hms-decision-card--green { border-top:3px solid var(--hms-pink); }
+    .hms-decision-card--red   { border-top:3px solid var(--hms-pink); }
+    .hms-decision-card--blue  { border-top:3px solid var(--hms-pink); }
+    .hms-decision-card--gold  { border-top:3px solid var(--hms-pink); }
     .hms-dc-tag { font-size:.64rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gray); display:block; margin-bottom:.5rem; }
     .hms-dc-title { font-family:var(--f-head); font-weight:700; font-size:1.1rem; color:var(--black); margin-bottom:1rem; }
     [data-theme="dark"] .hms-dc-title { color:#fff; }
@@ -1236,7 +1243,7 @@
     .hms-outcome-num { font-family:var(--f-head); font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-.04em; color:var(--hms-pink); display:block; line-height:1; margin-bottom:.5rem; }
     .hms-outcome-label { font-size:.82rem; color:var(--gray-body); line-height:1.4; }
     .hms-reflection-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:2rem; }
-    @media (max-width:780px) { .hms-reflection-grid { grid-template-columns:1fr; } .hms-stat-cards,.hms-decision-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:780px) { .hms-reflection-grid { grid-template-columns:1fr; } .hms-stat-cards { grid-template-columns:repeat(2,1fr); } }
     .hms-reflection-card { border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:1.5rem; }
     [data-theme="dark"] .hms-reflection-card { border-color:rgba(255,255,255,.1); }
     .hms-reflection-title { font-family:var(--f-head); font-weight:700; font-size:1rem; color:var(--black); margin-bottom:.625rem; }
@@ -1362,7 +1369,7 @@
 
     .kc-reflection { background:rgba(1,78,70,.06); border-radius:16px; padding:2.5rem 3rem; position:relative; overflow:hidden; margin-top:2rem; border:1px solid rgba(1,78,70,.15); }
     [data-theme="dark"] .kc-reflection { background:rgba(1,78,70,.08); }
-    .kc-reflection::before { content:'"'; position:absolute; top:-20px; left:1.5rem; font-size:140px; font-weight:800; color:rgba(1,78,70,.08); line-height:1; pointer-events:none; }
+    .kc-reflection::before { content:'"'; position:absolute; top:.25rem; left:1.5rem; font-size:140px; font-weight:800; color:rgba(1,78,70,.08); line-height:1; pointer-events:none; }
     .kc-reflection-text { font-family:var(--f-head); font-size:clamp(1.1rem,2vw,1.4rem); font-weight:600; line-height:1.6; color:var(--black); position:relative; z-index:1; margin-bottom:1.25rem; }
     [data-theme="dark"] .kc-reflection-text { color:rgba(255,255,255,.9); }
     .kc-reflection-text em { color:var(--kc-green); font-style:normal; }
@@ -1485,11 +1492,31 @@
 
     .bcb-quote { background:rgba(0,107,117,.06); border-radius:16px; padding:2.5rem 3rem; position:relative; overflow:hidden; margin-top:2rem; border:1px solid rgba(0,107,117,.15); }
     [data-theme="dark"] .bcb-quote { background:rgba(0,107,117,.08); }
-    .bcb-quote::before { content:'"'; position:absolute; top:-20px; left:1.5rem; font-size:140px; font-weight:800; color:rgba(0,107,117,.08); line-height:1; pointer-events:none; }
+    .bcb-quote::before { content:'"'; position:absolute; top:.25rem; left:1.5rem; font-size:140px; font-weight:800; color:rgba(0,107,117,.08); line-height:1; pointer-events:none; }
     .bcb-quote-text { font-family:var(--f-head); font-size:clamp(1.1rem,2vw,1.4rem); font-weight:600; line-height:1.6; color:var(--black); position:relative; z-index:1; margin-bottom:1rem; }
     [data-theme="dark"] .bcb-quote-text { color:rgba(255,255,255,.9); }
     .bcb-quote-attr { font-size:.75rem; letter-spacing:.06em; color:var(--gray); }
     @media (max-width:600px) { .bcb-quote { padding:1.5rem; } }
+
+    /* ── Shared case-study table style ── */
+    .cs-comp-table-wrap { margin:1.5rem 0; }
+    .cs-comp-table,.kc-module-table,.hms-process-table,.hms-journey-table,.bcb-compare-table,.bcb-strategy-table,.bcb-journey-table,.bcb-stakeholder-table,.bcb-ia-table { width:100%; margin:0; border-collapse:collapse; font-size:.875rem; }
+    .cs-comp-table thead tr,.kc-module-table thead tr,.hms-process-table thead tr,.hms-journey-table thead tr,.bcb-compare-table thead tr,.bcb-strategy-table thead tr,.bcb-journey-table thead tr,.bcb-stakeholder-table thead tr,.bcb-ia-table thead tr { background:var(--light); }
+    .cs-comp-table thead th,.kc-module-table thead th,.hms-process-table thead th,.hms-journey-table thead th,.bcb-compare-table thead th,.bcb-strategy-table thead th,.bcb-journey-table thead th,.bcb-stakeholder-table thead th,.bcb-ia-table thead th { background:var(--light); color:var(--black); font-family:var(--f-head); font-size:.75rem; font-weight:700; letter-spacing:0; text-transform:none; text-align:left; padding:.875rem 1rem; border:0; white-space:nowrap; }
+    [data-theme="dark"] .cs-comp-table thead tr,[data-theme="dark"] .kc-module-table thead tr,[data-theme="dark"] .hms-process-table thead tr,[data-theme="dark"] .hms-journey-table thead tr,[data-theme="dark"] .bcb-compare-table thead tr,[data-theme="dark"] .bcb-strategy-table thead tr,[data-theme="dark"] .bcb-journey-table thead tr,[data-theme="dark"] .bcb-stakeholder-table thead tr,[data-theme="dark"] .bcb-ia-table thead tr,[data-theme="dark"] .cs-comp-table thead th,[data-theme="dark"] .kc-module-table thead th,[data-theme="dark"] .hms-process-table thead th,[data-theme="dark"] .hms-journey-table thead th,[data-theme="dark"] .bcb-compare-table thead th,[data-theme="dark"] .bcb-strategy-table thead th,[data-theme="dark"] .bcb-journey-table thead th,[data-theme="dark"] .bcb-stakeholder-table thead th,[data-theme="dark"] .bcb-ia-table thead th { background:#1a1a1a; color:#fff; }
+    .cs-comp-table td,.kc-module-table td,.hms-process-table td,.hms-journey-table td,.bcb-compare-table td,.bcb-strategy-table td,.bcb-journey-table td,.bcb-stakeholder-table td,.bcb-ia-table td { padding:.875rem 1rem; font-size:.875rem; line-height:1.55; vertical-align:top; color:var(--gray-body); border:0; border-top:1px solid rgba(0,0,0,.06); white-space:normal; }
+    [data-theme="dark"] .cs-comp-table td,[data-theme="dark"] .kc-module-table td,[data-theme="dark"] .hms-process-table td,[data-theme="dark"] .hms-journey-table td,[data-theme="dark"] .bcb-compare-table td,[data-theme="dark"] .bcb-strategy-table td,[data-theme="dark"] .bcb-journey-table td,[data-theme="dark"] .bcb-stakeholder-table td,[data-theme="dark"] .bcb-ia-table td { border-top-color:rgba(255,255,255,.06); }
+    .cs-comp-table tbody tr,.kc-module-table tbody tr,.hms-process-table tbody tr,.hms-journey-table tbody tr,.bcb-compare-table tbody tr,.bcb-strategy-table tbody tr,.bcb-journey-table tbody tr,.bcb-stakeholder-table tbody tr,.bcb-ia-table tbody tr { border:0; }
+    .cs-comp-table td:first-child,.kc-module-table td:first-child,.hms-process-table td:first-child,.hms-journey-table td:first-child,.bcb-compare-table td:first-child,.bcb-strategy-table td:first-child,.bcb-journey-table td:first-child,.bcb-stakeholder-table td:first-child,.bcb-ia-table td:first-child { font-family:var(--f-head); font-weight:600; color:var(--black); }
+    [data-theme="dark"] .cs-comp-table td:first-child,[data-theme="dark"] .kc-module-table td:first-child,[data-theme="dark"] .hms-process-table td:first-child,[data-theme="dark"] .hms-journey-table td:first-child,[data-theme="dark"] .bcb-compare-table td:first-child,[data-theme="dark"] .bcb-strategy-table td:first-child,[data-theme="dark"] .bcb-journey-table td:first-child,[data-theme="dark"] .bcb-stakeholder-table td:first-child,[data-theme="dark"] .bcb-ia-table td:first-child { color:#fff; }
+    .hms-journey-table td:first-child { background:var(--light); white-space:nowrap; }
+    .hms-journey-table thead th:not(:first-child) { background:var(--light); color:var(--black); border:0; }
+    [data-theme="dark"] .hms-journey-table thead th:not(:first-child) { background:#1a1a1a; color:#fff; }
+    [data-theme="dark"] .hms-journey-table td:first-child { background:#1a1a1a; }
+    .bcb-compare-table td.bcb-td-before { color:#dc2626; }
+    .bcb-compare-table td.bcb-td-after { color:#16a34a; }
+    [data-theme="dark"] .bcb-compare-table td.bcb-td-before { color:#f87171; }
+    [data-theme="dark"] .bcb-compare-table td.bcb-td-after { color:#4ade80; }
   </style>
 </head>
 <body>
@@ -3469,11 +3496,11 @@
         <p class="cs-section__num">08</p>
         <h2 class="cs-section__title">Designing for the party</h2>
         <div class="kc-reflection">
-          <p class="kc-reflection-text">"The World Cup is the most-watched event on the planet. The design question isn't <em>how do we show match data</em> — it's how do we make someone feel the electricity of 104 matches, 48 nations, and a billion simultaneous opinions, <em>every time they open their phone.</em> Kickcast taught me that the most effective sports products aren't dashboards. They're companions."</p>
+          <p class="kc-reflection-text">"The World Cup is the most-watched event on the planet. The design question isn't <em>how do we show match data</em> — it's how do we make someone feel the electricity of 104 matches, 48 nations, and a billion simultaneous opinions, <em>every time they open their phone.</em> KickCast taught me that the most effective sports products aren't dashboards. They're companions."</p>
           <div class="kc-reflection-author">Samsad Rashid · Lead UX Designer</div>
         </div>
         <p class="cs-body" style="margin-top:2rem;">The biggest gap left is a notification layer. The data pipeline is already fully automated — but there's no push or email trigger telling users a match they predicted is about to kick off. That's the feature most likely to drive return visits, and the Supabase auth + preferences table is already in place to support it.</p>
-        <p class="cs-body">I'd also add social proof to predictions — letting users see what percentage of Kickcast fans predicted the same scoreline, not just who won the poll. That kind of social proof creates conversation, and conversation is what keeps a sports app alive between matches.</p>
+        <p class="cs-body">I'd also add social proof to predictions — letting users see what percentage of KickCast fans predicted the same scoreline, not just who won the poll. That kind of social proof creates conversation, and conversation is what keeps a sports app alive between matches.</p>
       </section>
 
     </div><!-- /.cs-modal__inner -->
@@ -3717,7 +3744,7 @@
               </ul>
             </div>
           </div>
-          <div class="hms-journey-table-wrap">
+          <div class="hms-journey-table-wrap cs-comp-table-wrap">
             <table class="hms-journey-table">
               <thead>
                 <tr>
@@ -4027,24 +4054,6 @@
         <p class="cs-section__num">12</p>
         <h2 class="cs-section__title">What changed after launch</h2>
         <p class="cs-body">Metrics are stakeholder-reported workflow observations from the 8-week rollout period. Directional signal, not instrumented analytics.</p>
-        <div class="hms-outcome-stats">
-          <div class="hms-outcome-stat">
-            <span class="hms-outcome-num">100%</span>
-            <span class="hms-outcome-label">Manual availability checks eliminated</span>
-          </div>
-          <div class="hms-outcome-stat">
-            <span class="hms-outcome-num">80%</span>
-            <span class="hms-outcome-label">Booking creation time reduced</span>
-          </div>
-          <div class="hms-outcome-stat">
-            <span class="hms-outcome-num">70%</span>
-            <span class="hms-outcome-label">Less cross-team coordination messages</span>
-          </div>
-          <div class="hms-outcome-stat">
-            <span class="hms-outcome-num">0</span>
-            <span class="hms-outcome-label">Double bookings in first 60 days</span>
-          </div>
-        </div>
         <div class="hms-reflection-grid">
           <div class="hms-reflection-card">
             <div class="hms-reflection-title">System design before screen design</div>
@@ -4124,42 +4133,44 @@
         <p class="cs-section__num">02</p>
         <h2 class="cs-section__title">From manual tracking to performance visibility</h2>
         <p class="cs-body">The success of the platform is framed around decision quality, operational visibility, injury-risk awareness, and faster coordination between cricket operations teams.</p>
-        <table class="bcb-compare-table">
-          <thead>
-            <tr>
-              <th>Impact Area</th>
-              <th>Before</th>
-              <th>After</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Player condition visibility</td>
-              <td class="bcb-td-before">Scattered across reports and people</td>
-              <td class="bcb-td-after">Centralised player readiness view</td>
-            </tr>
-            <tr>
-              <td>Bowling workload tracking</td>
-              <td class="bcb-td-before">Manual updates and hard comparisons</td>
-              <td class="bcb-td-after">Structured monitoring by player and date</td>
-            </tr>
-            <tr>
-              <td>Squad availability</td>
-              <td class="bcb-td-before">Calls and messages between teams</td>
-              <td class="bcb-td-after">Availability visible before squad creation</td>
-            </tr>
-            <tr>
-              <td>Physio reporting</td>
-              <td class="bcb-td-before">Separate injury notes and updates</td>
-              <td class="bcb-td-after">Player-linked physio history</td>
-            </tr>
-            <tr>
-              <td>Decision coordination</td>
-              <td class="bcb-td-before">Teams worked separately</td>
-              <td class="bcb-td-after">Shared role-based workflow</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="bcb-compare-table">
+            <thead>
+              <tr>
+                <th>Impact Area</th>
+                <th>Before</th>
+                <th>After</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Player condition visibility</td>
+                <td class="bcb-td-before">Scattered across reports and people</td>
+                <td class="bcb-td-after">Centralised player readiness view</td>
+              </tr>
+              <tr>
+                <td>Bowling workload tracking</td>
+                <td class="bcb-td-before">Manual updates and hard comparisons</td>
+                <td class="bcb-td-after">Structured monitoring by player and date</td>
+              </tr>
+              <tr>
+                <td>Squad availability</td>
+                <td class="bcb-td-before">Calls and messages between teams</td>
+                <td class="bcb-td-after">Availability visible before squad creation</td>
+              </tr>
+              <tr>
+                <td>Physio reporting</td>
+                <td class="bcb-td-before">Separate injury notes and updates</td>
+                <td class="bcb-td-after">Player-linked physio history</td>
+              </tr>
+              <tr>
+                <td>Decision coordination</td>
+                <td class="bcb-td-before">Teams worked separately</td>
+                <td class="bcb-td-after">Shared role-based workflow</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- 03 Problem -->
@@ -4181,42 +4192,44 @@
         <p class="cs-section__num">04</p>
         <h2 class="cs-section__title">One platform. Multiple stakeholders. One readiness model.</h2>
         <p class="cs-body">Instead of designing screens first, I mapped how player decisions actually happen: who checks fitness, who updates injury status, who monitors bowling load, who creates squads, and where decisions break down.</p>
-        <table class="bcb-strategy-table">
-          <thead>
-            <tr>
-              <th>Challenge</th>
-              <th>What I Found</th>
-              <th>What I Designed</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Fragmented player data</td>
-              <td>Fitness, injury, workload, and availability lived separately</td>
-              <td>Centralised player profile with readiness indicators</td>
-            </tr>
-            <tr>
-              <td>Bowling workload risk</td>
-              <td>Bowlers required special monitoring</td>
-              <td>Bowling load module with date-wise records and warning states</td>
-            </tr>
-            <tr>
-              <td>Physio dependency</td>
-              <td>Medical context was not always visible to coaches and selectors</td>
-              <td>Physio flow linked to player profile and availability</td>
-            </tr>
-            <tr>
-              <td>Squad blind spots</td>
-              <td>Teams could be created without full readiness context</td>
-              <td>Squad creation with availability and restriction indicators</td>
-            </tr>
-            <tr>
-              <td>Role complexity</td>
-              <td>Different users needed different actions</td>
-              <td>Role-based structure with shared data and controlled permissions</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="bcb-strategy-table">
+            <thead>
+              <tr>
+                <th>Challenge</th>
+                <th>What I Found</th>
+                <th>What I Designed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fragmented player data</td>
+                <td>Fitness, injury, workload, and availability lived separately</td>
+                <td>Centralised player profile with readiness indicators</td>
+              </tr>
+              <tr>
+                <td>Bowling workload risk</td>
+                <td>Bowlers required special monitoring</td>
+                <td>Bowling load module with date-wise records and warning states</td>
+              </tr>
+              <tr>
+                <td>Physio dependency</td>
+                <td>Medical context was not always visible to coaches and selectors</td>
+                <td>Physio flow linked to player profile and availability</td>
+              </tr>
+              <tr>
+                <td>Squad blind spots</td>
+                <td>Teams could be created without full readiness context</td>
+                <td>Squad creation with availability and restriction indicators</td>
+              </tr>
+              <tr>
+                <td>Role complexity</td>
+                <td>Different users needed different actions</td>
+                <td>Role-based structure with shared data and controlled permissions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- 05 Journey Map -->
@@ -4224,7 +4237,7 @@
         <p class="cs-section__num">05</p>
         <h2 class="cs-section__title">Creating a squad with player readiness context</h2>
         <p class="cs-body">Mapped around the most critical workflow: a selector building a squad while relying on inputs from physio, trainer, and coach teams.</p>
-        <div style="overflow-x:auto; margin:1.5rem 0;">
+        <div class="cs-comp-table-wrap">
           <table class="bcb-journey-table">
             <thead>
               <tr>
@@ -4316,47 +4329,49 @@
         <p class="cs-section__num">07</p>
         <h2 class="cs-section__title">Aligning coaches, physios, trainers, selectors, admins, and engineering</h2>
         <p class="cs-body">The main challenge was not only designing screens. It was aligning different stakeholder mental models and turning them into one safe operating model.</p>
-        <table class="bcb-stakeholder-table">
-          <thead>
-            <tr>
-              <th>Stakeholder</th>
-              <th>Primary Need</th>
-              <th>Design Response</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Coaches</td>
-              <td>Speed and quick player context</td>
-              <td>Fast player search, readiness cards, squad overview</td>
-            </tr>
-            <tr>
-              <td>Physios</td>
-              <td>Accuracy and medical control</td>
-              <td>Physio-owned injury and recovery updates with restriction flags</td>
-            </tr>
-            <tr>
-              <td>Trainers</td>
-              <td>Fitness and physical readiness tracking</td>
-              <td>Fitness condition updates linked to player profile</td>
-            </tr>
-            <tr>
-              <td>Selectors</td>
-              <td>Confidence before selection</td>
-              <td>Availability and risk indicators inside squad builder</td>
-            </tr>
-            <tr>
-              <td>Admins</td>
-              <td>Governance and system control</td>
-              <td>Role, user, player, and squad management</td>
-            </tr>
-            <tr>
-              <td>Engineering</td>
-              <td>Clear logic and handoff</td>
-              <td>Annotated flows, validation rules, and state definitions</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="bcb-stakeholder-table">
+            <thead>
+              <tr>
+                <th>Stakeholder</th>
+                <th>Primary Need</th>
+                <th>Design Response</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Coaches</td>
+                <td>Speed and quick player context</td>
+                <td>Fast player search, readiness cards, squad overview</td>
+              </tr>
+              <tr>
+                <td>Physios</td>
+                <td>Accuracy and medical control</td>
+                <td>Physio-owned injury and recovery updates with restriction flags</td>
+              </tr>
+              <tr>
+                <td>Trainers</td>
+                <td>Fitness and physical readiness tracking</td>
+                <td>Fitness condition updates linked to player profile</td>
+              </tr>
+              <tr>
+                <td>Selectors</td>
+                <td>Confidence before selection</td>
+                <td>Availability and risk indicators inside squad builder</td>
+              </tr>
+              <tr>
+                <td>Admins</td>
+                <td>Governance and system control</td>
+                <td>Role, user, player, and squad management</td>
+              </tr>
+              <tr>
+                <td>Engineering</td>
+                <td>Clear logic and handoff</td>
+                <td>Annotated flows, validation rules, and state definitions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- 08 Architecture -->
@@ -4415,36 +4430,38 @@
         <p class="cs-section__num">09</p>
         <h2 class="cs-section__title">Structure before screens</h2>
         <p class="cs-body">The information architecture was designed around user intent, not department structure. Player profile became the centre of the system because every major workflow connects back to the player.</p>
-        <table class="bcb-ia-table">
-          <thead>
-            <tr>
-              <th>User intent</th>
-              <th>Design direction</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Coaches</td>
-              <td>Review player readiness, training status, workload, and squad options</td>
-            </tr>
-            <tr>
-              <td>Physios</td>
-              <td>Update injury condition, recovery progress, treatment notes, and restrictions</td>
-            </tr>
-            <tr>
-              <td>Trainers</td>
-              <td>Track fitness condition and physical readiness</td>
-            </tr>
-            <tr>
-              <td>Selectors / Team management</td>
-              <td>Create squads with availability and restriction visibility</td>
-            </tr>
-            <tr>
-              <td>Admins</td>
-              <td>Manage players, users, squads, roles, and system data</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="bcb-ia-table">
+            <thead>
+              <tr>
+                <th>User intent</th>
+                <th>Design direction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Coaches</td>
+                <td>Review player readiness, training status, workload, and squad options</td>
+              </tr>
+              <tr>
+                <td>Physios</td>
+                <td>Update injury condition, recovery progress, treatment notes, and restrictions</td>
+              </tr>
+              <tr>
+                <td>Trainers</td>
+                <td>Track fitness condition and physical readiness</td>
+              </tr>
+              <tr>
+                <td>Selectors / Team management</td>
+                <td>Create squads with availability and restriction visibility</td>
+              </tr>
+              <tr>
+                <td>Admins</td>
+                <td>Manage players, users, squads, roles, and system data</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p class="cs-body" style="margin-top:1.5rem;">Main navigation: Dashboard · Players · Bowling Load · Physio · Squads · Reports · User Management · Settings</p>
       </section>
 

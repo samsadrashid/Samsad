@@ -231,7 +231,7 @@
   }
   [data-theme="dark"] .pq-reflection { background: rgba(79,70,229,.1); }
   .pq-reflection::before {
-    content: '"'; position: absolute; top: -20px; left: 1.5rem;
+    content: '"'; position: absolute; top: .25rem; left: 1.5rem;
     font-size: 140px; font-weight: 800; color: rgba(79,70,229,.08);
     line-height: 1; pointer-events: none;
   }
@@ -304,6 +304,17 @@
     .pq-hero { aspect-ratio: 4/3; }
     .pq-outcome-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── Shared case-study table style ── */
+  .pq-table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 12px; border: 1px solid rgba(0,0,0,.07); }
+  [data-theme="dark"] .pq-table-wrap { border-color: rgba(255,255,255,.08); }
+  .pq-module-table { margin: 0; min-width: 640px; }
+  .pq-module-table thead th { font-size: .75rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--black); white-space: nowrap; }
+  [data-theme="dark"] .pq-module-table thead tr, [data-theme="dark"] .pq-module-table thead th { background: #1a1a1a; color: #fff; }
+  .pq-module-table tbody tr { border-bottom: 0; }
+  .pq-module-table td { border-top: 1px solid rgba(0,0,0,.06); }
+  [data-theme="dark"] .pq-module-table td { border-top-color: rgba(255,255,255,.06); }
+  .pq-module-table td:first-child { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -521,54 +532,56 @@
     <p class="cs-section__num">04</p>
     <h2 class="cs-section__title">Six modules, one through-line</h2>
     <p class="cs-body">Every feature is a different attack on the same problem: get the learner using words, not just recognising them.</p>
-    <table class="pq-module-table">
-      <thead>
-        <tr>
-          <th>Module</th>
-          <th>Core job</th>
-          <th>Key UX decision</th>
-          <th>Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Word Vault</td>
-          <td>Enter any word, select your profession, get 25 AI-generated sentences across 5 registers tuned to your professional context</td>
-          <td>Profession selector is required before generation — register context is structural, not optional</td>
-          <td><span class="pq-tag pq-tag--core">Core</span></td>
-        </tr>
-        <tr>
-          <td>Sentence Lab</td>
-          <td>Submit a paragraph, receive a score, plain-English error explanations, and a suggested rewrite with changes highlighted</td>
-          <td>AI prompted to explain errors as a tutor would — not as a grammar checker. Jargon-free by design</td>
-          <td><span class="pq-tag pq-tag--core">Core</span></td>
-        </tr>
-        <tr>
-          <td>IELTS Bands</td>
-          <td>Submit a sentence, get simultaneous Band 5/7/9 rewrites with per-column vocabulary and structure annotations</td>
-          <td>All three bands shown together — learners need the contrast to understand what "Band 9" means in practice</td>
-          <td><span class="pq-tag pq-tag--core">Core</span></td>
-        </tr>
-        <tr>
-          <td>Quiz Engine</td>
-          <td>Auto-generated vocabulary quizzes derived from the user's Word Vault history — tests contextual usage, not definition matching</td>
-          <td>Quizzes generate from the user's own saved words — every quiz is directly relevant to their personal vocabulary</td>
-          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
-        </tr>
-        <tr>
-          <td>Daily Words</td>
-          <td>One curated word per day with full Vault-style generation — seeded from the IELTS Academic Word List</td>
-          <td>Daily word is shown before the user reaches their saved vault — creates an entry habit separate from active study</td>
-          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
-        </tr>
-        <tr>
-          <td>Streak Engine</td>
-          <td>Tracks consecutive days of active learning — vault lookups, Sentence Lab submissions, or quiz completions count</td>
-          <td>Streak counts any productive action, not just logins — prevents the Duolingo failure mode of opening the app to tap one button and leave</td>
-          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="pq-table-wrap">
+      <table class="pq-module-table">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Core job</th>
+            <th>Key UX decision</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Word Vault</td>
+            <td>Enter any word, select your profession, get 25 AI-generated sentences across 5 registers tuned to your professional context</td>
+            <td>Profession selector is required before generation — register context is structural, not optional</td>
+            <td><span class="pq-tag pq-tag--core">Core</span></td>
+          </tr>
+          <tr>
+            <td>Sentence Lab</td>
+            <td>Submit a paragraph, receive a score, plain-English error explanations, and a suggested rewrite with changes highlighted</td>
+            <td>AI prompted to explain errors as a tutor would — not as a grammar checker. Jargon-free by design</td>
+            <td><span class="pq-tag pq-tag--core">Core</span></td>
+          </tr>
+          <tr>
+            <td>IELTS Bands</td>
+            <td>Submit a sentence, get simultaneous Band 5/7/9 rewrites with per-column vocabulary and structure annotations</td>
+            <td>All three bands shown together — learners need the contrast to understand what "Band 9" means in practice</td>
+            <td><span class="pq-tag pq-tag--core">Core</span></td>
+          </tr>
+          <tr>
+            <td>Quiz Engine</td>
+            <td>Auto-generated vocabulary quizzes derived from the user's Word Vault history — tests contextual usage, not definition matching</td>
+            <td>Quizzes generate from the user's own saved words — every quiz is directly relevant to their personal vocabulary</td>
+            <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+          </tr>
+          <tr>
+            <td>Daily Words</td>
+            <td>One curated word per day with full Vault-style generation — seeded from the IELTS Academic Word List</td>
+            <td>Daily word is shown before the user reaches their saved vault — creates an entry habit separate from active study</td>
+            <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+          </tr>
+          <tr>
+            <td>Streak Engine</td>
+            <td>Tracks consecutive days of active learning — vault lookups, Sentence Lab submissions, or quiz completions count</td>
+            <td>Streak counts any productive action, not just logins — prevents the Duolingo failure mode of opening the app to tap one button and leave</td>
+            <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <hr class="cs-divider">
