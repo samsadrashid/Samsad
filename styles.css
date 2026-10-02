@@ -1708,3 +1708,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hero { position: relative; }
 .hero > :not(.hero-drop) { position: relative; z-index: 1; }
 .hero-drop { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; }
+
+/* Room for all specialisation bricks */
+.skills-col:first-child .skills-box { min-height: 440px; }
+@media (max-width: 900px) { .skills-col:first-child .skills-box { min-height: 520px; } }
