@@ -29,30 +29,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ── Lenis smooth scroll ──
-  const lenis = new Lenis({
-    lerp: 0.08,
-    smoothWheel: true,
-    wheelMultiplier: 0.8,
-  });
-  window.lenisInstance = lenis;
+  // Animation libraries load from CDNs. If any is missing, or the visitor
+  // prefers reduced motion, fall back to native scrolling and plain reveals.
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+  var lenis = null;
 
-  // Native RAF loop — most reliable across Lenis versions
-  (function lenisLoop(time) {
-    lenis.raf(time);
-    requestAnimationFrame(lenisLoop);
-  }(performance.now()));
+  // ── Lenis smooth scroll ──
+  if (!reduceMotion && typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+      lerp: 0.08,
+      smoothWheel: true,
+      wheelMultiplier: 0.8,
+    });
+    window.lenisInstance = lenis;
+
+    // Native RAF loop — most reliable across Lenis versions
+    (function lenisLoop(time) {
+      lenis.raf(time);
+      requestAnimationFrame(lenisLoop);
+    }(performance.now()));
+  }
+
+  // Scroll listener that works with or without Lenis
+  function onScroll(fn) {
+    if (lenis) lenis.on('scroll', function (e) { fn(e.scroll); });
+    else window.addEventListener('scroll', function () { fn(window.scrollY); }, { passive: true });
+  }
 
   // GSAP ScrollTrigger sync
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', function () { ScrollTrigger.update(); });
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    if (lenis) lenis.on('scroll', function () { ScrollTrigger.update(); });
+  }
 
   // Anchor clicks go through Lenis
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var id = a.getAttribute('href');
-      var target = document.querySelector(id);
-      if (target) {
+      var target = id.length > 1 ? document.querySelector(id) : null;
+      if (target && lenis) {
         e.preventDefault();
         lenis.scrollTo(target, { offset: -80, duration: 1.4 });
       }
@@ -68,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var heroPhoto = document.querySelector('.hero__photo');
 
-  if (heroEls.length) {
+  if (hasGsap && !reduceMotion && heroEls.length) {
     gsap.from(heroEls, {
       opacity: 0,
       y: 28,
@@ -79,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  if (heroPhoto) {
+  if (hasGsap && !reduceMotion && heroPhoto) {
     gsap.from(heroPhoto, {
       opacity: 0,
       scale: 0.94,
@@ -92,13 +108,26 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Scroll reveal (keep CSS .revealed class — GSAP triggers it) ──
   var revealEls = document.querySelectorAll('.reveal');
   if (revealEls.length) {
-    revealEls.forEach(function (el) {
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 88%',
-        onEnter: function () { el.classList.add('revealed'); },
+    if (reduceMotion) {
+      revealEls.forEach(function (el) { el.classList.add('revealed'); });
+    } else if (hasGsap) {
+      revealEls.forEach(function (el) {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 88%',
+          onEnter: function () { el.classList.add('revealed'); },
+        });
       });
-    });
+    } else if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('revealed'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px' });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('revealed'); });
+    }
   }
 
   // ── Works accordion ──
@@ -131,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
       activateRow(idx);
     }
 
-    lenis.on('scroll', updateAccordion);
+    onScroll(updateAccordion);
     updateAccordion();
   }
 
@@ -160,8 +189,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Nav scroll-shrink (optional subtle shadow on scroll) ──
   var navInner = document.querySelector('.nav__inner');
   if (navInner) {
-    lenis.on('scroll', function (e) {
-      navInner.classList.toggle('nav__inner--scrolled', e.scroll > 40);
+    onScroll(function (y) {
+      navInner.classList.toggle('nav__inner--scrolled', y > 40);
     });
   }
 
