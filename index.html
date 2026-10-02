@@ -639,6 +639,7 @@
           ctx.save();
           ctx.translate(p.x, p.y); ctx.rotate(body.angle);
           drawRoundedRect(ctx, -meta.w/2, -boxCH/2, meta.w, boxCH, CARD_RADIUS, meta.color);
+          if (Math.cos(body.angle) < 0) ctx.rotate(Math.PI);
           ctx.fillStyle = '#fff'; ctx.font = boxFont;
           ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
           ctx.fillText(meta.label, 0, 0);
@@ -748,17 +749,17 @@
         Bodies.rectangle(left - 25, H / 2, 50, H * 4, { isStatic: true }),
         Bodies.rectangle(right + 25, H / 2, 50, H * 4, { isStatic: true })
       ];
-      if (useB) {
-        // The badge acts as a solid block: bricks can't climb into it
-        statics.push(Bodies.rectangle((badgeL + edgeR) / 2 + 25, badgeB / 2 - H, edgeR - badgeL + 50, badgeB + H * 2, { isStatic: true }));
-      }
+      // The badge is solid for bricks in the gap; bricks headed under it pass in front while falling
+      var BADGE_CAT = 0x0002;
+      statics.push(Bodies.rectangle((pr.left + pr.right) / 2 - hr.left, (pr.top + pr.bottom) / 2 - hr.top, pr.width, pr.height,
+        { isStatic: true, collisionFilter: { category: BADGE_CAT } }));
       Composite.add(heroEngine.world, statics);
 
       // Share bricks between the lanes by width; lane B bricks fall from behind the badge
       var widthA = laneA, widthB = useB ? edgeR - badgeL : 0;
       var order = cards.map(function (c, i) { return i; }).sort(function () { return Math.random() - 0.5; });
       var quotaB = useB ? Math.round(cards.length * widthB / (widthA + widthB)) : 0;
-      var laneOf = {}, capB = widthB * Math.max(1, Math.floor(laneBH / cards[0].ch) - 1) * 0.8, usedB = 0;
+      var laneOf = {}, capB = widthB * Math.max(1, Math.floor(laneBH / cards[0].ch) - 1) * 0.6, usedB = 0;
       order.forEach(function (ci) {
         var w = cards[ci].w;
         if (quotaB > 0 && w <= widthB - 16 && usedB + w <= capB) { laneOf[ci] = 'B'; quotaB--; usedB += w; } else laneOf[ci] = 'A';
@@ -770,9 +771,10 @@
           // Keep spawns clear of the invisible side walls so bricks don't prop up against nothing
           var inset = Math.min(48, Math.max(8, (hi - lo - card.w) / 4));
           var minX = lo + card.w / 2 + inset, maxX = hi - card.w / 2 - inset;
-          var y0 = inB ? badgeB + card.ch * 0.6 : -card.ch / 2 - Math.random() * 40;
+          var y0 = -card.ch / 2 - Math.random() * 40;
           var b = Bodies.rectangle(minX + Math.random() * Math.max(0, maxX - minX), y0, card.w, card.ch,
-            { restitution: 0.08, friction: 0.85, frictionAir: 0.01, density: 0.003 });
+            { restitution: 0.08, friction: 0.85, frictionAir: 0.01, density: 0.003,
+              collisionFilter: { category: 0x0001, mask: inB ? 0xFFFF & ~BADGE_CAT : 0xFFFF } });
           b._meta = card;
           Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.1);
           Composite.add(heroEngine.world, b);
@@ -790,6 +792,7 @@
           ctx.save();
           ctx.translate(b.position.x, b.position.y); ctx.rotate(b.angle);
           drawRoundedRect(ctx, -m.w / 2, -m.ch / 2, m.w, m.ch, CARD_RADIUS, m.color);
+          if (Math.cos(b.angle) < 0) ctx.rotate(Math.PI);
           ctx.fillStyle = '#fff'; ctx.font = m.font;
           ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
           ctx.fillText(m.label, 0, 0);
