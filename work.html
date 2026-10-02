@@ -1061,16 +1061,18 @@
     .ag-hub-center { background:var(--ag-pink); color:#fff; border-color:var(--ag-pink); padding:.75rem 1.25rem; box-shadow:0 4px 20px rgba(216,27,138,.3); z-index:1; }
     [data-theme="dark"] .ag-hub-center { background:var(--ag-pink); border-color:var(--ag-pink); }
     .ag-hub-center .ag-hub-node__sub { color:rgba(255,255,255,.75); }
-    .ag-platform-layout { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; margin:2rem 0; }
+    .ag-platform-layout { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; margin:2rem 0; background:#f3f3f5; border-radius:28px; padding:clamp(1.25rem,4vw,3.5rem); }
+    [data-theme="dark"] .ag-platform-layout { background:#1a1a1a; }
     .ag-platform-became { list-style:none; padding:0; margin:0; }
     .ag-platform-became li { font-size:.9rem; padding:.5rem 0; border-bottom:1px solid rgba(0,0,0,.06); }
     [data-theme="dark"] .ag-platform-became li { border-bottom-color:rgba(255,255,255,.07); }
-    .ag-flow-pills { display:flex; align-items:flex-start; margin:1.5rem 0 2rem; flex-wrap:wrap; gap:.25rem; }
+    .ag-flow-pills { display:flex; align-items:flex-start; justify-content:center; width:100%; margin:1.5rem 0 2.5rem; gap:.25rem; }
+    .ag-flow-pills .ag-flow-step { flex:0 0 auto; }
     .ag-flow-step { display:flex; flex-direction:column; align-items:center; gap:.5rem; }
     .ag-flow-pill { background:var(--ag-pink); color:#fff; border-radius:100px; padding:.5rem 1rem; font-size:.8rem; font-weight:700; white-space:nowrap; }
     .ag-flow-pill--num { width:44px; height:44px; padding:0; display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:800; border-radius:50%; flex-shrink:0; }
     .ag-flow-label { font-size:.7rem; text-align:center; color:var(--gray-body); max-width:90px; }
-    .ag-flow-connector { width:28px; height:2px; background:rgba(0,0,0,.12); align-self:center; flex-shrink:0; margin:0 .125rem; margin-bottom:1.5rem; }
+    .ag-flow-connector { flex:1 1 28px; min-width:16px; width:28px; height:2px; background:rgba(0,0,0,.12); align-self:center; flex-shrink:0; margin:0 .125rem; margin-bottom:1.5rem; }
     [data-theme="dark"] .ag-flow-connector { background:rgba(255,255,255,.15); }
     .ag-trust-note { border-left:3px solid var(--ag-pink); padding:.875rem 1.25rem; background:rgba(216,27,138,.04); border-radius:0 8px 8px 0; margin:2rem 0; font-size:.875rem; }
     .ag-bva-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0; }
@@ -1087,6 +1089,8 @@
       .ag-strat-cards { grid-template-columns:1fr; }
       .ag-decision-grid { grid-template-columns:1fr; }
       .ag-platform-layout { grid-template-columns:1fr; }
+      .ag-flow-pills { flex-wrap:wrap; gap:1rem 1.25rem; }
+      .ag-flow-connector { display:none; }
       .ag-learn-grid { grid-template-columns:1fr; }
       .ag-bva-grid { grid-template-columns:1fr; }
     }
@@ -2069,15 +2073,17 @@
             <span class="ag-strat-card__num">03</span>
           </div>
         </div>
-        <table class="cs-strat-table">
-          <thead><tr><th>Challenge</th><th>What I Found</th><th>What I Designed</th></tr></thead>
-          <tbody>
-            <tr><td>Passive dashboard</td><td>Users could see loan and savings info, but could not take action.</td><td>Amar Hishab with transfers, real-time balance, and transaction history.</td></tr>
-            <tr><td>No digital onboarding</td><td>Non-clients had to visit a branch to start.</td><td>Open exploration and digital membership request flow.</td></tr>
-            <tr><td>ERP complexity</td><td>Business dates could differ from user calendar dates.</td><td>Date mismatch safeguards before confirmation.</td></tr>
-            <tr><td>High trust requirement</td><td>Financial errors would damage confidence.</td><td>Error-first transaction states and recovery flows.</td></tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="cs-comp-table cs-strat-table">
+            <thead><tr><th>Challenge</th><th>What I Found</th><th>What I Designed</th></tr></thead>
+            <tbody>
+              <tr><td>Passive dashboard</td><td>Users could see loan and savings info, but could not take action.</td><td>Amar Hishab with transfers, real-time balance, and transaction history.</td></tr>
+              <tr><td>No digital onboarding</td><td>Non-clients had to visit a branch to start.</td><td>Open exploration and digital membership request flow.</td></tr>
+              <tr><td>ERP complexity</td><td>Business dates could differ from user calendar dates.</td><td>Date mismatch safeguards before confirmation.</td></tr>
+              <tr><td>High trust requirement</td><td>Financial errors would damage confidence.</td><td>Error-first transaction states and recovery flows.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- 04 Key Design Decisions -->
@@ -2187,7 +2193,7 @@
         <p class="cs-section__num">07</p>
         <h2 class="cs-section__title">Amar Hishab — Feature Deep Dive</h2>
         <p class="cs-body">Amar Hishab changed Agami from a passive dashboard into an active financial tool. The user just wanted to send money; the system had to make sure every dependency agreed.</p>
-        <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem">Transfer flow</h4>
+        <h4 style="font-size:.875rem;font-weight:700;margin:2rem 0 .875rem;text-align:center">Transfer flow</h4>
         <div class="ag-flow-pills">
           <div class="ag-flow-step"><div class="ag-flow-pill ag-flow-pill--num">1</div><span class="ag-flow-label">Enter amount</span></div>
           <div class="ag-flow-connector"></div>
@@ -2201,14 +2207,16 @@
           <div class="ag-flow-connector"></div>
           <div class="ag-flow-step"><div class="ag-flow-pill ag-flow-pill--num">6</div><span class="ag-flow-label">Complete</span></div>
         </div>
-        <table class="cs-strat-table">
-          <thead><tr><th>Design Decision</th><th>Why it mattered</th></tr></thead>
-          <tbody>
-            <tr><td>Show user date, not ERP date</td><td>Users understand calendar dates; backend business-date logic is only shown when risk appears.</td></tr>
-            <tr><td>Errors before submission</td><td>Insufficient balance, timeout, duplicate transfer, and mismatch are prevented before confirmation.</td></tr>
-            <tr><td>Real-time history</td><td>Immediate transaction visibility builds trust after action.</td></tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="cs-comp-table cs-strat-table">
+            <thead><tr><th>Design Decision</th><th>Why it mattered</th></tr></thead>
+            <tbody>
+              <tr><td>Show user date, not ERP date</td><td>Users understand calendar dates; backend business-date logic is only shown when risk appears.</td></tr>
+              <tr><td>Errors before submission</td><td>Insufficient balance, timeout, duplicate transfer, and mismatch are prevented before confirmation.</td></tr>
+              <tr><td>Real-time history</td><td>Immediate transaction visibility builds trust after action.</td></tr>
+            </tbody>
+          </table>
+        </div>
         <div class="ag-trust-note">
           Trust safeguard: If calendar_date != erp_business_date, Agami shows a mismatch modal and blocks confirmation until the user acknowledges.
         </div>
@@ -2258,14 +2266,16 @@
           <div class="ag-flow-connector"></div>
           <div class="ag-flow-step"><div class="ag-flow-pill">Result delivered</div></div>
         </div>
-        <table class="cs-strat-table">
-          <thead><tr><th>Error Type</th><th>Trigger</th><th>UX Response</th></tr></thead>
-          <tbody>
-            <tr><td>Insufficient balance</td><td>Balance lower than transfer amount</td><td>Block transfer and explain available balance.</td></tr>
-            <tr><td>Date mismatch</td><td>ERP business date differs from user date</td><td>Warning modal before confirmation.</td></tr>
-            <tr><td>ERP timeout</td><td>API response delay</td><td>Retry option and fallback message.</td></tr>
-          </tbody>
-        </table>
+        <div class="cs-comp-table-wrap">
+          <table class="cs-comp-table cs-strat-table">
+            <thead><tr><th>Error Type</th><th>Trigger</th><th>UX Response</th></tr></thead>
+            <tbody>
+              <tr><td>Insufficient balance</td><td>Balance lower than transfer amount</td><td>Block transfer and explain available balance.</td></tr>
+              <tr><td>Date mismatch</td><td>ERP business date differs from user date</td><td>Warning modal before confirmation.</td></tr>
+              <tr><td>ERP timeout</td><td>API response delay</td><td>Retry option and fallback message.</td></tr>
+            </tbody>
+          </table>
+        </div>
         <div class="ag-trust-note">
           Why this matters: The goal was to make backend complexity invisible until the user needed to make an informed decision.
         </div>
@@ -2301,14 +2311,16 @@
         <div class="ag-bva-grid">
           <div>
             <h4 style="font-size:.875rem;font-weight:700;margin:0 0 1rem">Before vs After</h4>
-            <table class="cs-strat-table">
-              <thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead>
-              <tbody>
-                <tr><td>Users</td><td>300K</td><td>1.2M</td></tr>
-                <tr><td>DAU</td><td>5K</td><td>38K</td></tr>
-                <tr><td>MAU</td><td>40K</td><td>180K</td></tr>
-              </tbody>
-            </table>
+            <div class="cs-comp-table-wrap">
+              <table class="cs-comp-table cs-strat-table">
+                <thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead>
+                <tbody>
+                  <tr><td>Users</td><td>300K</td><td>1.2M</td></tr>
+                  <tr><td>DAU</td><td>5K</td><td>38K</td></tr>
+                  <tr><td>MAU</td><td>40K</td><td>180K</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div>
             <h4 style="font-size:.875rem;font-weight:700;margin:0 0 1rem">Transformation signal</h4>
