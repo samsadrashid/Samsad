@@ -140,40 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ── Works accordion ──
-  var accordion = document.querySelector('.works-accordion');
-  var worksList = document.querySelector('.works-list');
-  var rows = Array.from(document.querySelectorAll('.works-row'));
-
-  if (accordion && worksList && rows.length) {
-    var STEP = 520;
-
-    function setAccordionHeight() {
-      accordion.style.height = (rows.length * STEP + worksList.offsetHeight) + 'px';
-    }
-
-    function activateRow(idx) {
-      rows.forEach(function (row, i) {
-        row.classList.toggle('active', i === idx);
-      });
-    }
-
-    activateRow(0);
-    setAccordionHeight();
-    window.addEventListener('resize', setAccordionHeight);
-
-    function updateAccordion() {
-      var navH = 68;
-      var rect = accordion.getBoundingClientRect();
-      var scrolled = Math.max(0, navH - rect.top);
-      var idx = Math.min(rows.length - 1, Math.floor(scrolled / STEP));
-      activateRow(idx);
-    }
-
-    onScroll(updateAccordion);
-    updateAccordion();
-  }
-
   // ── Insights: grid when ≤2, horizontal scroll when 3+ ──
   var insightsGrid = document.querySelector('.insights-grid');
   var insightsNav  = document.querySelector('.insights-nav');
