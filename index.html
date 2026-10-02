@@ -662,6 +662,94 @@
       });
       if (btn) btn.addEventListener('click', initBricks);
       initBricks();
+      initHeroDrop();
+    });
+
+    /* ── Hero experiment: skill bricks drop into the space between the
+       intro text and the photo badge, landing on the ticker. Replays on
+       every page load. Desktop only; skipped for reduced motion. ── */
+    var heroEngine, heroRaf, heroTimers = [], heroResizeT;
+    function initHeroDrop() {
+      var hero = document.querySelector('.hero');
+      var body = document.querySelector('.hero__body');
+      var photo = document.querySelector('.hero__photo');
+      if (!hero || !body || !photo || !window.Matter) return;
+
+      cancelAnimationFrame(heroRaf);
+      heroTimers.forEach(clearTimeout);
+      if (heroEngine) { Matter.World.clear(heroEngine.world); Matter.Engine.clear(heroEngine); heroEngine = null; }
+      var canvas = hero.querySelector('.hero-drop');
+      if (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (canvas) canvas.remove();
+        return;
+      }
+
+      var hr = hero.getBoundingClientRect();
+      var left = body.getBoundingClientRect().right - hr.left + 32;
+      var right = photo.getBoundingClientRect().left - hr.left - 32;
+      if (right - left < 260) { if (canvas) canvas.remove(); return; }
+
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.className = 'hero-drop';
+        canvas.setAttribute('aria-hidden', 'true');
+        hero.insertBefore(canvas, hero.firstChild);
+      }
+      var dpr = window.devicePixelRatio || 1;
+      var W = hr.width, H = hr.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      var ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = FONT;
+      var maxW = right - left - 16;
+      var cards = SKILLS.map(function (label, i) {
+        return { label: label, color: COLORS[i % COLORS.length], w: Math.min(maxW, Math.ceil(ctx.measureText(label).width) + 36) };
+      });
+
+      heroEngine = Matter.Engine.create({ gravity: { x: 0, y: 2 } });
+      heroEngine.positionIterations = 12;
+      heroEngine.velocityIterations = 10;
+      var Bodies = Matter.Bodies, Composite = Matter.Composite, Body = Matter.Body;
+      Composite.add(heroEngine.world, [
+        Bodies.rectangle((left + right) / 2, H + 25, W * 2, 50, { isStatic: true }),
+        Bodies.rectangle(left - 25, H / 2, 50, H * 4, { isStatic: true }),
+        Bodies.rectangle(right + 25, H / 2, 50, H * 4, { isStatic: true })
+      ]);
+
+      heroTimers = cards.map(function (card, i) {
+        return setTimeout(function () {
+          var minX = left + card.w / 2 + 6, maxX = right - card.w / 2 - 6;
+          var b = Bodies.rectangle(minX + Math.random() * Math.max(0, maxX - minX), -CARD_H - Math.random() * 60, card.w, CARD_H,
+            { restitution: 0.08, friction: 0.85, frictionAir: 0.01, density: 0.003 });
+          b._meta = card;
+          Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.1);
+          Composite.add(heroEngine.world, b);
+        }, 500 + i * 120);
+      });
+
+      var last = performance.now();
+      (function loop(now) {
+        var delta = Math.min(now - last, 32); last = now;
+        Matter.Engine.update(heroEngine, delta);
+        ctx.clearRect(0, 0, W, H);
+        Composite.allBodies(heroEngine.world).forEach(function (b) {
+          if (b.isStatic || !b._meta) return;
+          var m = b._meta;
+          ctx.save();
+          ctx.translate(b.position.x, b.position.y); ctx.rotate(b.angle);
+          drawRoundedRect(ctx, -m.w / 2, -CARD_H / 2, m.w, CARD_H, CARD_RADIUS, m.color);
+          ctx.fillStyle = '#fff'; ctx.font = FONT;
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(m.label, 0, 0);
+          ctx.restore();
+        });
+        heroRaf = requestAnimationFrame(loop);
+      })(last);
+    }
+    window.addEventListener('resize', function () {
+      clearTimeout(heroResizeT);
+      heroResizeT = setTimeout(initHeroDrop, 300);
     });
   })();
   </script>
