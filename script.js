@@ -21,38 +21,64 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Theme toggle ──
   const toggle = document.getElementById('themeToggle');
   if (toggle) {
+    const syncPressed = function () {
+      toggle.setAttribute('aria-pressed', document.documentElement.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
+    };
+    syncPressed();
     toggle.addEventListener('click', function () {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const next = isDark ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      syncPressed();
     });
   }
 
-  // ── Lenis smooth scroll ──
-  const lenis = new Lenis({
-    lerp: 0.08,
-    smoothWheel: true,
-    wheelMultiplier: 0.8,
-  });
-  window.lenisInstance = lenis;
+  // Decorative autoplay video stays still for reduced-motion visitors
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+  }
 
-  // Native RAF loop — most reliable across Lenis versions
-  (function lenisLoop(time) {
-    lenis.raf(time);
-    requestAnimationFrame(lenisLoop);
-  }(performance.now()));
+  // Animation libraries load from CDNs. If any is missing, or the visitor
+  // prefers reduced motion, fall back to native scrolling and plain reveals.
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+  var lenis = null;
+
+  // ── Lenis smooth scroll ──
+  if (!reduceMotion && typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+      lerp: 0.08,
+      smoothWheel: true,
+      wheelMultiplier: 0.8,
+    });
+    window.lenisInstance = lenis;
+
+    // Native RAF loop — most reliable across Lenis versions
+    (function lenisLoop(time) {
+      lenis.raf(time);
+      requestAnimationFrame(lenisLoop);
+    }(performance.now()));
+  }
+
+  // Scroll listener that works with or without Lenis
+  function onScroll(fn) {
+    if (lenis) lenis.on('scroll', function (e) { fn(e.scroll); });
+    else window.addEventListener('scroll', function () { fn(window.scrollY); }, { passive: true });
+  }
 
   // GSAP ScrollTrigger sync
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', function () { ScrollTrigger.update(); });
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    if (lenis) lenis.on('scroll', function () { ScrollTrigger.update(); });
+  }
 
   // Anchor clicks go through Lenis
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var id = a.getAttribute('href');
-      var target = document.querySelector(id);
-      if (target) {
+      var target = id.length > 1 ? document.querySelector(id) : null;
+      if (target && lenis) {
         e.preventDefault();
         lenis.scrollTo(target, { offset: -80, duration: 1.4 });
       }
@@ -68,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var heroPhoto = document.querySelector('.hero__photo');
 
-  if (heroEls.length) {
+  if (hasGsap && !reduceMotion && heroEls.length) {
     gsap.from(heroEls, {
       opacity: 0,
       y: 28,
@@ -79,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  if (heroPhoto) {
+  if (hasGsap && !reduceMotion && heroPhoto) {
     gsap.from(heroPhoto, {
       opacity: 0,
       scale: 0.94,
@@ -92,47 +118,26 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Scroll reveal (keep CSS .revealed class — GSAP triggers it) ──
   var revealEls = document.querySelectorAll('.reveal');
   if (revealEls.length) {
-    revealEls.forEach(function (el) {
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 88%',
-        onEnter: function () { el.classList.add('revealed'); },
+    if (reduceMotion) {
+      revealEls.forEach(function (el) { el.classList.add('revealed'); });
+    } else if (hasGsap) {
+      revealEls.forEach(function (el) {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 88%',
+          onEnter: function () { el.classList.add('revealed'); },
+        });
       });
-    });
-  }
-
-  // ── Works accordion ──
-  var accordion = document.querySelector('.works-accordion');
-  var worksList = document.querySelector('.works-list');
-  var rows = Array.from(document.querySelectorAll('.works-row'));
-
-  if (accordion && worksList && rows.length) {
-    var STEP = 520;
-
-    function setAccordionHeight() {
-      accordion.style.height = (rows.length * STEP + worksList.offsetHeight) + 'px';
+    } else if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('revealed'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px' });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('revealed'); });
     }
-
-    function activateRow(idx) {
-      rows.forEach(function (row, i) {
-        row.classList.toggle('active', i === idx);
-      });
-    }
-
-    activateRow(0);
-    setAccordionHeight();
-    window.addEventListener('resize', setAccordionHeight);
-
-    function updateAccordion() {
-      var navH = 68;
-      var rect = accordion.getBoundingClientRect();
-      var scrolled = Math.max(0, navH - rect.top);
-      var idx = Math.min(rows.length - 1, Math.floor(scrolled / STEP));
-      activateRow(idx);
-    }
-
-    lenis.on('scroll', updateAccordion);
-    updateAccordion();
   }
 
   // ── Insights: grid when ≤2, horizontal scroll when 3+ ──
@@ -160,8 +165,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Nav scroll-shrink (optional subtle shadow on scroll) ──
   var navInner = document.querySelector('.nav__inner');
   if (navInner) {
-    lenis.on('scroll', function (e) {
-      navInner.classList.toggle('nav__inner--scrolled', e.scroll > 40);
+    onScroll(function (y) {
+      navInner.classList.toggle('nav__inner--scrolled', y > 40);
     });
   }
 
