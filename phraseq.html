@@ -231,7 +231,7 @@
   }
   [data-theme="dark"] .pq-reflection { background: rgba(79,70,229,.1); }
   .pq-reflection::before {
-    content: '"'; position: absolute; top: -20px; left: 1.5rem;
+    content: '"'; position: absolute; top: .25rem; left: 1.5rem;
     font-size: 140px; font-weight: 800; color: rgba(79,70,229,.08);
     line-height: 1; pointer-events: none;
   }
@@ -304,6 +304,19 @@
     .pq-hero { aspect-ratio: 4/3; }
     .pq-outcome-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── Shared case-study table style ── */
+  .pq-table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 12px; border: 1px solid rgba(0,0,0,.07); }
+  [data-theme="dark"] .pq-table-wrap { border-color: rgba(255,255,255,.08); }
+  .pq-module-table { margin: 0; min-width: 640px; }
+  .pq-module-table thead th { font-size: .75rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--black); white-space: nowrap; }
+  [data-theme="dark"] .pq-module-table thead tr, [data-theme="dark"] .pq-module-table thead th { background: #1a1a1a; color: #fff; }
+  .pq-module-table tbody tr { border-bottom: 0; }
+  .pq-module-table td { border-top: 1px solid rgba(0,0,0,.06); }
+  [data-theme="dark"] .pq-module-table td { border-top-color: rgba(255,255,255,.06); }
+  .pq-module-table td:first-child { font-weight: 600; }
+
+  .pq-db-label, .pq-float-btn__label, .cs-eyebrow { font-size: .72rem; }
 </style>
 </head>
 <body>
@@ -327,7 +340,10 @@
 
 <!-- HERO -->
 <div class="pq-hero">
-  <div class="pq-hero-placeholder">Phraseq — cover image</div>
+  <figure class="cs-img-slot cs-img-slot--hero" style="--ratio:21/9">
+    <img src="images/phraseq-hero.png" alt="Phraseq cover image — app on laptop mockup" onload="this.parentNode.classList.add('is-loaded')" onerror="this.parentNode.classList.add('is-empty');this.remove()">
+    <figcaption class="cs-img-slot__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg><strong>Phraseq cover image — app on laptop mockup</strong><span>2520 × 1080 px</span><code>images/phraseq-hero.png</code></figcaption>
+  </figure>
 </div>
 
 <!-- CONTENT -->
@@ -373,7 +389,7 @@
 
   <!-- 02 Problem -->
   <section class="cs-section">
-    <p class="cs-section__num">02</p>
+    <p class="cs-section__num">02<span class="cs-section__chapter"> — Problem</span></p>
     <h2 class="cs-section__title">You can define the word.<br>You still can't use it.</h2>
     <p class="cs-body">Flashcard tools are optimised for recognition, not production. The gap between knowing a definition and deploying a word naturally in writing is where learners stall — and where every major vocabulary app stops helping.</p>
     <div class="pq-two-col">
@@ -409,7 +425,7 @@
 
   <!-- 03 Design Decisions -->
   <section class="cs-section">
-    <p class="cs-section__num">03</p>
+    <p class="cs-section__num">03<span class="cs-section__chapter"> — Design decisions</span></p>
     <h2 class="cs-section__title">Four calls that defined what Phraseq is</h2>
     <p class="cs-body">Each decision is explained through the tradeoff it resolved, what was designed, and what it produced.</p>
 
@@ -518,64 +534,80 @@
 
   <!-- 04 Features -->
   <section class="cs-section">
-    <p class="cs-section__num">04</p>
+    <p class="cs-section__num">04<span class="cs-section__chapter"> — Solution</span></p>
     <h2 class="cs-section__title">Six modules, one through-line</h2>
     <p class="cs-body">Every feature is a different attack on the same problem: get the learner using words, not just recognising them.</p>
-    <table class="pq-module-table">
-      <thead>
-        <tr>
-          <th>Module</th>
-          <th>Core job</th>
-          <th>Key UX decision</th>
-          <th>Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Word Vault</td>
-          <td>Enter any word, select your profession, get 25 AI-generated sentences across 5 registers tuned to your professional context</td>
-          <td>Profession selector is required before generation — register context is structural, not optional</td>
-          <td><span class="pq-tag pq-tag--core">Core</span></td>
-        </tr>
-        <tr>
-          <td>Sentence Lab</td>
-          <td>Submit a paragraph, receive a score, plain-English error explanations, and a suggested rewrite with changes highlighted</td>
-          <td>AI prompted to explain errors as a tutor would — not as a grammar checker. Jargon-free by design</td>
-          <td><span class="pq-tag pq-tag--core">Core</span></td>
-        </tr>
-        <tr>
-          <td>IELTS Bands</td>
-          <td>Submit a sentence, get simultaneous Band 5/7/9 rewrites with per-column vocabulary and structure annotations</td>
-          <td>All three bands shown together — learners need the contrast to understand what "Band 9" means in practice</td>
-          <td><span class="pq-tag pq-tag--core">Core</span></td>
-        </tr>
-        <tr>
-          <td>Quiz Engine</td>
-          <td>Auto-generated vocabulary quizzes derived from the user's Word Vault history — tests contextual usage, not definition matching</td>
-          <td>Quizzes generate from the user's own saved words — every quiz is directly relevant to their personal vocabulary</td>
-          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
-        </tr>
-        <tr>
-          <td>Daily Words</td>
-          <td>One curated word per day with full Vault-style generation — seeded from the IELTS Academic Word List</td>
-          <td>Daily word is shown before the user reaches their saved vault — creates an entry habit separate from active study</td>
-          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
-        </tr>
-        <tr>
-          <td>Streak Engine</td>
-          <td>Tracks consecutive days of active learning — vault lookups, Sentence Lab submissions, or quiz completions count</td>
-          <td>Streak counts any productive action, not just logins — prevents the Duolingo failure mode of opening the app to tap one button and leave</td>
-          <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="pq-table-wrap">
+      <table class="pq-module-table">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Core job</th>
+            <th>Key UX decision</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Word Vault</td>
+            <td>Enter any word, select your profession, get 25 AI-generated sentences across 5 registers tuned to your professional context</td>
+            <td>Profession selector is required before generation — register context is structural, not optional</td>
+            <td><span class="pq-tag pq-tag--core">Core</span></td>
+          </tr>
+          <tr>
+            <td>Sentence Lab</td>
+            <td>Submit a paragraph, receive a score, plain-English error explanations, and a suggested rewrite with changes highlighted</td>
+            <td>AI prompted to explain errors as a tutor would — not as a grammar checker. Jargon-free by design</td>
+            <td><span class="pq-tag pq-tag--core">Core</span></td>
+          </tr>
+          <tr>
+            <td>IELTS Bands</td>
+            <td>Submit a sentence, get simultaneous Band 5/7/9 rewrites with per-column vocabulary and structure annotations</td>
+            <td>All three bands shown together — learners need the contrast to understand what "Band 9" means in practice</td>
+            <td><span class="pq-tag pq-tag--core">Core</span></td>
+          </tr>
+          <tr>
+            <td>Quiz Engine</td>
+            <td>Auto-generated vocabulary quizzes derived from the user's Word Vault history — tests contextual usage, not definition matching</td>
+            <td>Quizzes generate from the user's own saved words — every quiz is directly relevant to their personal vocabulary</td>
+            <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+          </tr>
+          <tr>
+            <td>Daily Words</td>
+            <td>One curated word per day with full Vault-style generation — seeded from the IELTS Academic Word List</td>
+            <td>Daily word is shown before the user reaches their saved vault — creates an entry habit separate from active study</td>
+            <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+          </tr>
+          <tr>
+            <td>Streak Engine</td>
+            <td>Tracks consecutive days of active learning — vault lookups, Sentence Lab submissions, or quiz completions count</td>
+            <td>Streak counts any productive action, not just logins — prevents the Duolingo failure mode of opening the app to tap one button and leave</td>
+            <td><span class="pq-tag pq-tag--engage">Engagement</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cs-img-grid" style="--cols:3">
+      <figure class="cs-img-slot" style="--ratio:4/3">
+        <img src="images/phraseq-word-vault.png" alt="Word Vault — 5 × 5 sentences by register" onload="this.parentNode.classList.add('is-loaded')" onerror="this.parentNode.classList.add('is-empty');this.remove()">
+        <figcaption class="cs-img-slot__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg><strong>Word Vault — 5 × 5 sentences by register</strong><span>1200 × 900 px</span><code>images/phraseq-word-vault.png</code></figcaption>
+      </figure>
+      <figure class="cs-img-slot" style="--ratio:4/3">
+        <img src="images/phraseq-sentence-lab.png" alt="Sentence Lab — score and plain-English feedback" onload="this.parentNode.classList.add('is-loaded')" onerror="this.parentNode.classList.add('is-empty');this.remove()">
+        <figcaption class="cs-img-slot__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg><strong>Sentence Lab — score and plain-English feedback</strong><span>1200 × 900 px</span><code>images/phraseq-sentence-lab.png</code></figcaption>
+      </figure>
+      <figure class="cs-img-slot" style="--ratio:4/3">
+        <img src="images/phraseq-ielts-bands.png" alt="IELTS Bands — Band 5 / 7 / 9 side by side" onload="this.parentNode.classList.add('is-loaded')" onerror="this.parentNode.classList.add('is-empty');this.remove()">
+        <figcaption class="cs-img-slot__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg><strong>IELTS Bands — Band 5 / 7 / 9 side by side</strong><span>1200 × 900 px</span><code>images/phraseq-ielts-bands.png</code></figcaption>
+      </figure>
+    </div>
   </section>
 
   <hr class="cs-divider">
 
   <!-- 05 Tech Ownership -->
   <section class="cs-section">
-    <p class="cs-section__num">05</p>
+    <p class="cs-section__num">05<span class="cs-section__chapter"> — Build</span></p>
     <h2 class="cs-section__title">Strategy to deployment — no handoff</h2>
     <p class="cs-body">Every decision in this product is a design decision made visible through code. There was no engineering team to translate intent. What shipped is what I built.</p>
     <div class="pq-two-col">
@@ -606,7 +638,7 @@
 
   <!-- 06 Outcome -->
   <section class="cs-section">
-    <p class="cs-section__num">06</p>
+    <p class="cs-section__num">06<span class="cs-section__chapter"> — Outcome</span></p>
     <h2 class="cs-section__title">Live product. Shipped solo.</h2>
     <p class="cs-body">What Phraseq delivered — measured by product completeness, design quality, and the patterns it proved.</p>
     <div class="pq-outcome-grid">
@@ -641,7 +673,7 @@
 
   <!-- 07 Retrospective -->
   <section class="cs-section">
-    <p class="cs-section__num">07</p>
+    <p class="cs-section__num">07<span class="cs-section__chapter"> — Lessons</span></p>
     <h2 class="cs-section__title">What I would do differently</h2>
     <div class="pq-two-col">
       <div>
@@ -670,10 +702,10 @@
       <span class="pq-float-btn__name">KickCast</span>
     </div>
   </a>
-  <a href="work.html?modal=hms" class="pq-float-btn pq-float-btn--next">
+  <a href="work.html?modal=agami" class="pq-float-btn pq-float-btn--next">
     <div class="pq-float-btn__text">
       <span class="pq-float-btn__label">Next</span>
-      <span class="pq-float-btn__name">HMS</span>
+      <span class="pq-float-btn__name">Agami</span>
     </div>
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
